@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | SwiftCart</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+<body>  
+    <nav class="header">
+        <div class="logo"><i class="ti ti-garden-cart"></i> SwiftCart</div>
+        <ul class="navLinks">
+            <li onclick="getContentByCategory('CLOTHING')">Clothing</li>
+            <li onclick="getContentByCategory('ACCESSORIES')">Accessories</li>
+            <li onclick="getContentByCategory('HOME')">Home</li>
+            <li onclick="getContentByCategory('FOOTWEAR')">Footwear</li>
+        </ul>
+        <div class="right-side">
+            <div class="search-container">
+                <i class='ti ti-search' id="search-logo"></i>
+                <input type="text" placeholder="Search" class="search-input" id="search-input" oninput="searchContent()">
+            </div>
+            <div class="side-logo">
+                <span class="right-logo" id="cart" title="Cart"><i class="ti ti-shopping-bag"></i></span>
+                <span class="right-logo" id="wishlist" title="Wishlist"><i class="ti ti-heart"></i></span>
+                <span class="right-logo" title="Settings"><i class="ti ti-settings"></i></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <p class="eyebrow">Summer Collection 2025</p>
+                <h1 class="headline">Wear What Matters.</h1>
+                <p class="subtext">Thoughtfully made essentials — chosen for longevity, material quality, and understated elegance.</p>
+                <div>
+                    <button class="shop-btn">Shop All</button>
+                    <button class="new-btn">New Arrivals</button>   
+                </div>
+                
+            </div>
+            <div class="images-stack">
+                <div class="first-image">
+                    <img src="https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=600" alt="Clothing rack" id="image1">
+                    <div class="image-text">
+                        <span>Merino Wool Turtleneck</span>
+                    </div>
+                </div>
+                <div class="second-image">
+                    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600" alt="Structured Leather Tote" id="image2">
+                    <div class="upper-text">New</div>
+                    <div class="image-text">
+                        <span>Structured Leather Tote</span>
+                    </div>
+                </div>
+                <div class="product-rating">
+                    <div class="rate">
+                        <h3>2.4k</h3>
+                        <span>Reviews</span>
+                    </div>
+                    <div class="rate">
+                        <h3>4.8</h3>
+                        <span>Rating</span>
+                    </div>
+                    <div class="rate">
+                        <h3>120+</h3>
+                        <span>Products</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <header class="main-section">
+        <div>
+            <ul class="nav">
+                <li onclick="displayContent()">All</li>
+                <li onclick="getContentByCategory('CLOTHING')">Clothing</li>
+                <li onclick="getContentByCategory('ACCESSORIES')">Accessories</li>
+                <li onclick="getContentByCategory('HOME')">Home</li>
+                <li onclick="getContentByCategory('FOOTWEAR')">Footwear</li>
+            </ul>
+        </div>
+        <div class="numberItems">10 Items</div>
+    </header>
+
+    <main>
+         <div class="grid" id="productsGrid">
+        <!-- Backend will provide data for this -->
+        <!-- This is where the content div lives -->
+       </div>
+    
+        <div class="pagination">
+            <div class="arrow"><i class="ti ti-arrow-narrow-left"></i></div>
+            <div class="page active">1</div>
+            <div class="page">2</div>
+            <div class="page"><i class="ti ti-dots"></i></div>
+            <div class="page">67</div>
+            <div class="arrow"><i class="ti ti-arrow-narrow-right"></i></div>
+        </div>
+
+        <div class="support-msg"><i class="ti ti-messages"></i></div>
+
+        <div class="footer">
+            <div class="setter">
+                <div class="foot">
+                    <i class="ti ti-sparkle"></i>
+                    <h5>Free Shipping</h5>
+                    <span>On orders over $75</span>
+                </div>
+            </div>
+            <div class="setter">
+                <div class="foot">
+                    <i class="ti ti-arrow-back-up"></i>
+                    <h5>30-Day Return</h5>
+                    <span>No question asked</span>
+                </div>
+            </div>
+            <div class="setter">
+                <div class="foot">
+                    <i class="ti ti-eye-check"></i>
+                    <h5>Secure Checkout</h5>
+                    <span>Authenticated every request</span>
+                </div>
+            </div>
+            <div class="setter">
+                <div class="foot">
+                    <i class="ti ti-heart-handshake"></i>
+                    <h5>Quality First</h5>
+                    <span>Rigorously reviewed</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="cart-overlay side-overlay">
+        <div class="cart-panel side-panel">
+            <div class="side-header">
+                <div class="cart"><i class="ti ti-shopping-bag" id="overlay-cart"></i> Cart</div>
+                <div class="exit" id="exit-cart">X</div>
+            </div>
+            <!-- <div class="side-content">
+                <i class="ti ti-shopping-bag" id="content-logo"></i>
+                <h3>Your cart is empty</h3>
+                <p>Browse our collection and add something.</p>
+                <span id="continue">Continue Shopping</span>
+            </div> -->
+        </div>
+    </div>
+    <div class="wishlist-overlay side-overlay">
+        <div class="wishlist-panel side-panel">
+            <div class="side-header">
+                <div class="wishlist"><i class="bi bi-heart-fill" id="overlay-wishlist"></i> Wishlist</div>
+                <div class="exit" id="exit-wishlist">X</div>
+            </div>
+            <div class="side-content">
+                
+                
+                <!-- <i class="bi bi-heart" id="content-logo"></i>
+                <h3>No saved items yet</h3>
+                <p>Tap the heart on any product to save it here.</p> -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay">
+        <div class="main-modal">
+            <div>
+                <img src="/assets/images/photo-1495474472287-4d71bcdd2085.avif" id="image-modal" alt="">
+            </div>
+            <div class="dsc">
+                <div class="dsc-head">
+                    <div class="category">
+                        <span id="modal-category">Accessories</span>
+                    </div>
+                    <div class="exit" >
+                        <span  id="exit-modal">X</span>
+                    </div>
+                </div>
+                <div class="modal-content">
+                    <h1 id="productName">Ceramic Pour-Over Set (3pcs)</h1>
+                </div>
+                <div class="rating-modal">
+                    <div>⭐⭐⭐⭐⭐</div>
+                    <div>•</div>    
+                    <div class="sold">
+                        <span>213 reviews</span>
+                    </div>
+                </div>
+                <div class="productPrice">
+                    <span id="price">₱1,500</span>
+                </div>
+                <div class="product-dsc">
+                    <p id="modal-dsc">Loading..</p>
+                </div>
+                <div class="colors">
+                    <div>Color</div>
+                    <div class="color-container">
+                        <div class="color black"></div>
+                        <div class="color red"></div>
+                        <div class="color violet"></div>
+                    </div>
+                </div>
+                <div class="size">
+                    <div class="size-head">Size</div>
+                    <div class="size-container">
+                        <div class="sizes">M</div>
+                        <div class="sizes">L</div>
+                    </div>
+                </div>
+                <footer class="buy-btn">
+                    <div class="counter">
+                        <div class="minus"><i class="bi bi-dash"></i></div>
+                        <div class="number">1</div>
+                        <div class="plus"><i class="bi bi-plus"></i></div>
+                    </div>
+                    <div class="add-cart">
+                        <span>Add to cart - ₱1,500</span>
+                    </div>
+                    <div class="modal-favorite">
+                        <i class="ti ti-heart" id="modalFav"></i>
+                    </div>
+               </footer>
+            </div>
+        </div>
+    </div> 
+    <script src="/script/authGuard/authguard.js"></script>
+    <script src="/script/home.js" defer></script>
+</body>
+</html>

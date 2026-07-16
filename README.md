@@ -1,1 +1,0 @@
-SwiftCart is a responsive frontend e-commerce website built with HTML, CSS, and JavaScript. It features a modern UI with product browsing, shopping cart, and user interface components. This project is still a work in progress and is not yet connected to the Spring Boot backend. Backend integration, authentication, and database functionality will be added in future updates.
