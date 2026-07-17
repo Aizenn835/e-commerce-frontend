@@ -79,9 +79,16 @@ function closePanel(overlaySelector , panelSelector){
 document.getElementById("exit-cart").addEventListener("click" , () => {
     closePanel('.cart-overlay', '.cart-panel');
 });
-// document.getElementById("continue").addEventListener("click" , () => {
-//     closePanel('.cart-overlay', '.cart-panel'); 
-// });
+document.addEventListener("click", (event) => {
+    const continueBtn = event.target.closest("#continueWishlist");
+    if (!continueBtn) return;
+    closePanel('.wishlist-overlay', '.wishlist-panel');
+});
+document.addEventListener("click", (event) => {
+    const continueBtn = event.target.closest("#continueCart");
+    if (!continueBtn) return;
+     closePanel('.cart-overlay', '.cart-panel');
+});
 document.getElementById("exit-wishlist").addEventListener("click" , () => {
     closePanel('.wishlist-overlay', '.wishlist-panel');
 });
@@ -156,19 +163,87 @@ async function searchContent(){
 async function displayWishlist(){
     try{
         const response = await fetch(`${API_URL}/favorite/get-favorite` , {
-        headers:{
-                "Authorization": `Bearer ${token}`
-            }
+        headers:{"Authorization": `Bearer ${token}`}
         });
        if(!response.ok)throw new Error(`\n Status: ${response.status}`)
         const wishlist = await response.json();
-        console.log(wishlist);
+        if(wishlist.length === 0){
+            document.querySelector(".side-content").innerHTML = `
+            <div class="noContent">
+                <i class="bi bi-heart" id="content-logo"></i>
+                <h3>No saved items yet</h3>
+                <p>Tap the heart on any product to save it here.</p> 
+                <span id="continueWishlist">Browse Products</span>
+            </div>
+                `;
+                return;
+        }
         renderWishlist(wishlist);
     }catch(error){
         console.log(error);
     }
 }
-
+async function displayCart(){
+    try{
+        const response = await fetch(`${API_URL}/cart/all-cart` , {
+            headers:{"Authorization":`Bearer ${token}`}
+        })
+        if(!response.ok)throw new Error(`Error ${response.status}`);
+        const cart = await response.json();
+        if(cart.length === 0){
+            document.querySelector(".side-cnt").innerHTML = `
+            <div class = "noContent">
+            <i class="ti ti-shopping-bag" id="content-logo"></i>
+            <h3>Your cart is empty</h3>
+            <p>Browse our collection and add something.</p>
+            <span id="continueCart">Continue Shopping</span>
+            </div>
+            `;
+            return;
+        }
+        renderCart(cart);
+    }catch(error){
+        console.log(`Error ${error}`);
+    }
+}
+// render cart
+function renderCart(cart){
+    document.querySelector(".side-cnt").innerHTML = ``;
+    cart.forEach(product => {
+        document.querySelector(".side-cnt").innerHTML += ` 
+        <div class="cart-list" data-id="${product.productId}">
+                    <div>
+                        <img src="${API_URL + product.imgUrl}" alt="${product.productName}" id="cart-image">
+                    </div>
+                    <div class="cart-dsc">
+                        <div class="cart-side-head">
+                            <div>
+                                <span class="cart-product-name">${product.productName}</span>
+                            </div>
+                            <div class="exit-cart-side">
+                                <span>X</span>
+                            </div>
+                        </div>
+                        <div class="cart-size">
+                            <span>Size: </span>
+                            <span>400ml</span>
+                        </div>
+                        <div class="counter-price">
+                            <div class="cart-counter">
+                                <div class="minus-cart-side">-</div>
+                                <div class="number-cart-side" >${product.quantity}</div>
+                                <div class="plus-cart-side">+</div>
+                            </div>
+                            <div class="cart-price">
+                                <span class="price">${"₱" + product.price}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        `;
+    })
+    removeFromCart()
+}
 //render wishlist
 function renderWishlist(wishlist){
     document.querySelector(".side-content").innerHTML = "";
@@ -220,6 +295,31 @@ function attachRemoveListeners() {
                 if (response.status !== 204) await response.json();
 
                 parent.remove();
+                displayWishlist();
+            } catch (error) {
+                console.log(`Error: ${error}`);
+            }
+        });
+    });
+}
+
+function removeFromCart() {
+    document.querySelectorAll(".exit-cart-side").forEach(card => {
+        card.addEventListener("click", async () => {
+            const parent = card.closest(".cart-list");
+            const id = parent.dataset.id;
+
+            try {
+                const response = await fetch(`${API_URL}/cart/${id}`, {
+                    method: "DELETE",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error(`Status: ${response.status}`);
+                if (response.status !== 204) await response.json();
+
+                parent.remove();
+                displayCart();
             } catch (error) {
                 console.log(`Error: ${error}`);
             }
@@ -252,4 +352,5 @@ function renderContent(products){
 displayContent();
 searchContent();
 displayWishlist();
+displayCart();
 //add new product (will use later) 

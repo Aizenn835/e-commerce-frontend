@@ -566,6 +566,12 @@ box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.3);
 }
 
    /*--- cart --- */
+.side-cnt{
+    display:flex;
+    height: 100%;
+    flex-direction: column;
+    width: 100%;
+}
 #overlay-cart{
 font-size:1.25rem;
 margin:0.325rem;
@@ -574,13 +580,90 @@ margin:0.325rem;
 font-weight: 1000;
 color:rgb(51, 42, 42);  
 }
-#continue{
+#continueCart{
 margin-top: 1rem;
 text-decoration: underline;
 font-size:0.9375rem;
 cursor:default;
-color:rgb(22, 16, 112); 
+color:rgb(22, 16, 112);     
 user-select: none;
+cursor: pointer;
+}
+.cart-list{
+    display:flex;
+    margin-top:12px;
+    gap:20px;
+    align-items: center; 
+    overflow: hidden;
+    padding:10px 12px;
+    position: relative;
+}
+.cart-side-head{
+    display:flex;
+    justify-content:space-between ;
+    width: 130%;
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
+.exit-cart-side{
+    font-size:0.7285rem;
+    color:gray;
+    cursor: pointer;
+    margin-right:4rem; 
+    position: fixed;
+    left:90%;
+}
+.cart-counter{
+    display:flex;
+    gap:12px;
+    margin:0.7285rem;
+    border:1px solid rgb(167, 157, 157);
+    width: 40%;
+    padding:2px 30px;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    gap:12px;
+    cursor: pointer;
+}
+.cart-product-name{
+    font-size:0.7625rem;
+    font-weight: bold;
+}
+.cart-size{
+    font-size:0.7285em;
+    color:gray;
+}
+.minus-cart-side{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.plus-cart-side{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.counter-price{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width:120%;
+    height:auto;
+}
+.cart-price{
+    position: fixed;
+    right:10%;
+    font-weight: bold;
+    font-size:0.9285rem;
+}
+#cart-image{
+    width:7vh;
+    height:auto;
+    border-radius: 12px;
+    position:relative;
+    left:10%;
+    
 }
    /*--- wishlist --- */
 #overlay-wishlist{
@@ -591,6 +674,15 @@ margin:0.325rem;
 .wishlist{
 font-weight: 1000;
 color:rgb(51, 42, 42);
+}
+#continueWishlist{
+margin-top: 1rem;
+text-decoration: underline;
+font-size:0.9375rem;
+cursor:default;
+color:rgb(22, 16, 112);     
+user-select: none;
+cursor: pointer;
 }
 .exit:hover{background-color: #f3f3f1;}
 .side-content{
@@ -672,6 +764,27 @@ color:rgb(51, 42, 42);
 }
 .wishlist-dsc{
     padding-bottom: 10px;
+}
+.noContent{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+}
+#content-logo{
+    color:gray;
+    font-size:2.125rem;
+}
+.noContent h3{
+    font-size:0.9285rem;
+    color:rgb(37, 37, 37);
+}
+
+.noContent p{
+    font-size:0.7285rem;
+    color:gray;
+    margin-top:0.125rem;
 }
    /*--- exit --- */
 .exit{
