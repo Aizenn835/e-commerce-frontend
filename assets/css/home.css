@@ -638,11 +638,23 @@ cursor: pointer;
     display:flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
+    border-radius: 4px;
+    padding:2px;
+}
+.minus-cart-side:hover{
+    background-color: #c9c2c2;
 }
 .plus-cart-side{
     display:flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
+    border-radius: 4px;
+    padding:2px;
+}
+.plus-cart-side:hover{
+    background-color: #c9c2c2;
 }
 .counter-price{
     display:flex;
@@ -663,7 +675,7 @@ cursor: pointer;
     border-radius: 12px;
     position:relative;
     left:10%;
-    
+    object-fit: cover;
 }
    /*--- wishlist --- */
 #overlay-wishlist{
@@ -794,6 +806,7 @@ border-radius: 50px;
 padding:10px    ;
 }
 /* content modal */
+/* content modal */
 .modal-overlay{
     background: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -831,7 +844,7 @@ padding:10px    ;
     min-width: 0;
 }
 .main-modal img {
-    width: 110vh;
+    width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
@@ -997,6 +1010,11 @@ padding:10px    ;
     border-radius: 12px;
     cursor: pointer;
     user-select: none;
+    transition: transform 0.4s ease, background-color 0.4s ease; 
+}
+.add-cart:hover{
+    background-color: #1f2b42;
+    transform: scale(0.95);
 }
 .modal-favorite{    
     border:1px solid gray;
@@ -1020,6 +1038,25 @@ padding:10px    ;
 }
 .hero {
 min-height: 0vh;
+}
+}
+
+@media (max-width: 900px) {
+.main-modal {
+    flex-direction: column;
+    width: 90%;
+    height: 85%;
+    margin: 40px auto;
+}
+.image {
+    flex: 0 0 220px;
+}
+.main-modal img {
+    border-radius: 0;
+}
+.dsc {
+    overflow-y: auto;
+    padding-bottom: 100px;
 }
 }
 
@@ -1049,6 +1086,44 @@ min-height: 0vh;
 
 .grid {
     grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (max-width: 600px) {
+.main-modal {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+.modal-overlay {
+    padding: 0;
+}
+.image {
+    flex: 0 0 180px;
+}
+.buy-btn {
+    flex-wrap: wrap;
+    gap: 0.7285rem;
+    padding: 10px 12px 16px;
+}
+.add-cart {
+    width: 100%;
+    order: 3;
+}
+.counter {
+    width: auto;
+    flex: 1;
+}
+.modal-favorite {
+    width: auto;
+    padding: 8px 14px;
+}
+.color-container {
+    flex-wrap: wrap;
+}
+.size-container {
+    flex-wrap: wrap;
 }
 }
 
