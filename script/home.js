@@ -11,8 +11,12 @@ document.querySelectorAll(".nav li").forEach(item => {
     });
 });
 
+document.getElementById("logout").addEventListener("click", () => {
+    localStorage.removeItem("Token");
+    window.location.href="/login.html";
+})
 /* =========================================================
-   PANEL OPEN / CLOSE (cart, wishlist)
+   PANEL OPEN / CLOSE (cart, wishlist , settings)
 ========================================================= */
 
 function openPanel(overlaySelector, panelSelector) {
@@ -54,6 +58,15 @@ document.addEventListener("click", (event) => {
     closePanel('.cart-overlay', '.cart-panel');
 });
 
+document.getElementById("settings-id").addEventListener("click", (event) => {
+    event.stopPropagation();
+    document.querySelector(".settings-container").classList.toggle("settings-open");
+});
+document.addEventListener("click" , (event) => {
+    const settings = event.target.closest("settings-id");
+    if(settings) return;
+    document.querySelector(".settings-container").classList.remove("settings-open");
+})
 /* =========================================================
    PRODUCT MODAL
 ========================================================= */
