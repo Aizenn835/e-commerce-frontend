@@ -1,6 +1,57 @@
 const API_URL = "http://localhost:8080";
 
 /* =========================================================
+   FAVORITES STATE (shared between grid and modal)
+========================================================= */
+
+let favoritedIds = new Set();
+
+async function loadFavoritedIds() {
+    try {
+        const response = await fetch(`${API_URL}/favorite/get-favorite`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!response.ok) throw new Error(`Status: ${response.status}`);
+        const favorites = await response.json();
+        favoritedIds = new Set(favorites.map(fav => String(fav.productId ?? fav.id)));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function toggleFavorite(productId) {
+    try {
+        const response = await fetch(`${API_URL}/favorite/add-wishlist/${productId}`, {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!response.ok) throw new Error(`Status: ${response.status}`);
+    } catch (error) {
+        console.log(error);
+        return;
+    }
+
+    const idStr = String(productId);
+    if (favoritedIds.has(idStr)) {
+        favoritedIds.delete(idStr);
+    } else {
+        favoritedIds.add(idStr);
+    }
+
+    document.querySelectorAll(`.content[data-id="${idStr}"] .favorite`).forEach(el => {
+        el.classList.toggle("add-favorite", favoritedIds.has(idStr));
+    });
+
+    if (document.querySelector(".main-modal").dataset.id === idStr) {
+        document.getElementById("modalFav").classList.toggle("modal-fav", favoritedIds.has(idStr));
+    }
+
+    if (document.querySelector(".wishlist-panel").classList.contains("open-panel")) {
+        displayWishlist();
+    }
+}
+
+/* =========================================================
    FILTERS
 ========================================================= */
 
@@ -13,10 +64,11 @@ document.querySelectorAll(".nav li").forEach(item => {
 
 document.getElementById("logout").addEventListener("click", () => {
     localStorage.removeItem("Token");
-    window.location.href="/login.html";
-})
+    window.location.href = "/login.html";
+});
+
 /* =========================================================
-   PANEL OPEN / CLOSE (cart, wishlist , settings)
+   PANEL OPEN / CLOSE (cart, wishlist, settings)
 ========================================================= */
 
 function openPanel(overlaySelector, panelSelector) {
@@ -35,9 +87,9 @@ document.getElementById("cart").addEventListener("click", () => {
 });
 
 document.getElementById("wishlist").addEventListener("click", () => {
+    displayWishlist();
     openPanel('.wishlist-overlay', '.wishlist-panel');
 });
-
 document.getElementById("exit-cart").addEventListener("click", () => {
     closePanel('.cart-overlay', '.cart-panel');
 });
@@ -62,11 +114,13 @@ document.getElementById("settings-id").addEventListener("click", (event) => {
     event.stopPropagation();
     document.querySelector(".settings-container").classList.toggle("settings-open");
 });
-document.addEventListener("click" , (event) => {
-    const settings = event.target.closest("settings-id");
-    if(settings) return;
+
+document.addEventListener("click", (event) => {
+    const settings = event.target.closest("#settings-id");
+    if (settings) return;
     document.querySelector(".settings-container").classList.remove("settings-open");
-})
+});
+
 /* =========================================================
    PRODUCT MODAL
 ========================================================= */
@@ -92,6 +146,9 @@ async function modalData(id) {
     document.getElementById("productName").textContent = product.productName;
     document.getElementById("price").textContent = "₱" + product.price;
     document.getElementById("modal-dsc").textContent = product.productDescription;
+
+    const modalFav = document.getElementById("modalFav");
+    modalFav.classList.toggle("modal-fav", favoritedIds.has(String(id)));
 }
 
 document.getElementById("exit-modal").addEventListener("click", () => {
@@ -115,35 +172,36 @@ document.querySelector(".counter").addEventListener("click", (event) => {
 });
 
 document.querySelector(".modal-favorite").addEventListener("click", () => {
-    document.getElementById("modalFav").classList.toggle("modal-fav");
+    const productId = document.querySelector(".main-modal").dataset.id;
+    toggleFavorite(productId);
 });
 
-document.querySelector(".add-cart").addEventListener("click", async () => {
-    try {
-        const modal = document.querySelector(".main-modal");
-        const id = modal.dataset.id;
-        const count = Number(document.querySelector(".number").textContent);
-        const response = await fetch(`${API_URL}/cart/add-cart`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                productId: id,
-                quantity: count
-            })
-        });
-        if (!response.ok) throw new Error(`Status: ${response.status}`);
-        document.querySelector(".modal-overlay").classList.remove("open-modal");
-        document.querySelector(".cart-overlay").classList.add("open-overlay");
-        document.querySelector(".cart-panel").classList.add("open-panel");
-        displayCart();
-        console.log("Added to cart successfully");
-    } catch (error) {
-        console.log(error);
-    }
-});
+    document.querySelector(".add-cart").addEventListener("click", async () => {
+        try {
+            const modal = document.querySelector(".main-modal");
+            const id = modal.dataset.id;
+            const count = Number(document.querySelector(".number").textContent);
+            const response = await fetch(`${API_URL}/cart/add-cart`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    productId: id,
+                    quantity: count
+                })
+            });
+            if (!response.ok) throw new Error(`Status: ${response.status}`);
+            document.querySelector(".modal-overlay").classList.remove("open-modal");
+            document.querySelector(".cart-overlay").classList.add("open-overlay");
+            document.querySelector(".cart-panel").classList.add("open-panel");
+            displayCart();
+            console.log("Added to cart successfully");
+        } catch (error) {
+            console.log(error);
+        }
+    });
 
 /* =========================================================
    PRODUCT GRID
@@ -160,7 +218,7 @@ async function displayContent() {
         if (!response.ok) throw new Error(`Enable to fetch content data, Status: ${response.status}`);
 
         const content = await response.json();
-        renderContent(content); // add a handler that controls what user will see if the content is empty
+        renderContent(content);
     } catch (Error) {
         console.log(`Error: ${Error}`);
     }
@@ -215,11 +273,12 @@ async function searchContent() {
 function renderContent(products) {
     document.querySelector(".grid").innerHTML = "";
     products.forEach(content => {
+        const isFavorited = favoritedIds.has(String(content.id));
         document.querySelector(".grid").innerHTML += `
         <div class="content" data-id="${content.id}">
             <div class="image">
                 <img src="${API_URL + content.imgUrl}" alt="${content.productName}">
-                <div class="favorite"><i class="ti ti-heart" title="Add to favorite?"></i></div>
+                <div class="favorite ${isFavorited ? "add-favorite" : ""}"><i class="ti ti-heart" title="Add to favorite?"></i></div>
             </div>
             <div class="description">
                 <h5>${content.category}</h5>
@@ -238,7 +297,8 @@ document.querySelector(".grid").addEventListener("click", (event) => {
     const favoriteBtn = event.target.closest(".favorite");
     if (favoriteBtn) {
         event.stopPropagation();
-        favoriteBtn.classList.toggle("add-favorite");
+        const card = favoriteBtn.closest(".content");
+        toggleFavorite(card.dataset.id);
         return;
     }
     const card = event.target.closest(".content");
@@ -253,13 +313,12 @@ document.querySelector(".grid").addEventListener("click", (event) => {
    WISHLIST
 ========================================================= */
 
-// this needs to refresh if the user click add to favorite (get the id in renderWishlist)
 async function displayWishlist() {
     try {
         const response = await fetch(`${API_URL}/favorite/get-favorite`, {
             headers: { "Authorization": `Bearer ${token}` }
         });
-        if (!response.ok) throw new Error(`\n Status: ${response.status}`);
+        if (!response.ok) throw new Error(`Status: ${response.status}`);
         const wishlist = await response.json();
         if (wishlist.length === 0) {
             document.querySelector(".side-content").innerHTML = `
@@ -282,7 +341,7 @@ function renderWishlist(wishlist) {
     document.querySelector(".side-content").innerHTML = "";
     wishlist.forEach(product => {
         document.querySelector(".side-content").innerHTML += ` 
-                <div class="wishlist-list" data-id="${product.id}">
+                <div class="wishlist-list" data-id="${product.id}" data-product-id="${product.productId ?? product.id}">
                     <div>
                         <img src="${API_URL + product.imgUrl}" alt="${product.productName}" id="wishlist-image">
                     </div>
@@ -302,7 +361,7 @@ function renderWishlist(wishlist) {
                                     <span><i class="ti ti-trash"></i></span>
                                     <span class="remove-label">Remove</span>
                                 </div>
-                                <span id="add-cart"><i class="ti ti-shopping-bag"></i> Add</span>
+                                <span class="wishlist-add-cart" id="add-cart"><i class="ti ti-shopping-bag"></i> Add</span>
                             </div>
                         </div>
                     </div>
@@ -310,32 +369,49 @@ function renderWishlist(wishlist) {
          `;
     });
     attachRemoveListeners();
+    attachAddListeners();
 }
 
 function attachRemoveListeners() {
     document.querySelectorAll(".wishlist-remove-btn").forEach(card => {
         card.addEventListener("click", async () => {
             const parent = card.closest(".wishlist-list");
-            const id = parent.dataset.id;
+            const productId = parent.dataset.productId;
 
-            try {
-                const response = await fetch(`${API_URL}/favorite/${id}`, {
-                    method: "DELETE",
-                    headers: { "Authorization": `Bearer ${token}` }
-                });
+            await toggleFavorite(productId);
+            parent.remove();
 
-                if (!response.ok) throw new Error(`Status: ${response.status}`);
-                if (response.status !== 204) await response.json();
-
-                parent.remove();
+            if (document.querySelector(".side-content").children.length === 0) {
                 displayWishlist();
-            } catch (error) {
-                console.log(`Error: ${error}`);
             }
         });
     });
 }
+function attachAddListeners() {
+    document.querySelectorAll(".wishlist-add-cart").forEach(addBtn => {
+        addBtn.addEventListener("click", async () => {
+            console.log("Wishlist Add clicked");
 
+            const parent = addBtn.closest(".wishlist-list");
+            const id = parent.dataset.productId;
+
+            try {
+                const response = await fetch(`${API_URL}/cart/wishlist-add/${id}`, {
+                    method: 'POST',
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error(`Status: ${response.status}`);
+                if (response.status !== 204) await response.json();
+                closePanel('.wishlist-overlay', '.wishlist-panel');
+                openPanel('.cart-overlay', '.cart-panel');
+                await displayCart();
+                console.log("Added to cart from wishlist");
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    });
+}
 /* =========================================================
    CART
 ========================================================= */
@@ -431,7 +507,6 @@ document.querySelector(".side-cnt").addEventListener("click", async (event) => {
         console.log(error);
     }
 });
-
 function removeFromCart() {
     document.querySelectorAll(".exit-cart-side").forEach(card => {
         card.addEventListener("click", async () => {
@@ -459,9 +534,13 @@ function removeFromCart() {
    INIT
 ========================================================= */
 
-displayContent();
-searchContent();
-displayWishlist();
-displayCart();
+async function init() {
+    await loadFavoritedIds();
+    displayContent();
+    searchContent();
+    displayCart();
+}
+
+init();
 
 // add new product (will use later)
