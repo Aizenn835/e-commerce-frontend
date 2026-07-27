@@ -1,5 +1,22 @@
 const API_URL = "http://localhost:8080";
 
+
+function errorFunction(message){
+    const existingMessage = document.querySelector(".conflict-message");
+            if(existingMessage) existingMessage.remove();
+            
+            const conflictMessage = document.createElement("div");
+            conflictMessage.textContent = message;
+            conflictMessage.className = "conflict-message";
+
+            document.getElementById("emailInput").classList.add("wrong-credentials");
+            document.getElementById("passwordInput").classList.add("wrong-credentials");
+
+            const parent = document.querySelector(".email-container");
+            parent.appendChild(conflictMessage);
+}
+
+
 document.getElementById("submitLogin")?.addEventListener("click" , async () => {
 
 const emailInput = document.getElementById("emailInput").value;
@@ -19,18 +36,7 @@ const passwordInput = document.getElementById("passwordInput").value;
     /* better to create a function because this method is just duplicating in sign up
     and make a different response when a user is not found */
         if(!response.ok){ 
-            const existingMessage = document.querySelector(".conflict-message");
-            if(existingMessage) existingMessage.remove();
-            
-            const conflictMessage = document.createElement("div");
-            conflictMessage.textContent = "Wrong email or password";
-            conflictMessage.className = "conflict-message";
-
-            document.getElementById("emailInput").classList.add("wrong-credentials");
-            document.getElementById("passwordInput").classList.add("wrong-credentials");
-
-            const parent = document.querySelector(".email-container");
-            parent.appendChild(conflictMessage);
+            errorFunction("Wrong email or password");
             return;
         }
         const data = await response.json();
@@ -60,18 +66,7 @@ const usernameInput = document.getElementById("usernameInput").value;
     }); 
     
         if(response.status === 409){
-            const existingMessage = document.querySelector(".conflict-message");
-            if(existingMessage) existingMessage.remove();
-            
-            const conflictMessage = document.createElement("div");
-            conflictMessage.textContent = "This email is already taken!";
-            conflictMessage.className = "conflict-message";
-
-            document.getElementById("emailInput").classList.add("wrong-credentials");
-            document.getElementById("passwordInput").classList.add("wrong-credentials");
-
-            const parent = document.querySelector(".email-container");
-            parent.appendChild(conflictMessage);
+            errorFunction("This email is already taken!");
             return;
         }
         window.location.href = "/login.html";

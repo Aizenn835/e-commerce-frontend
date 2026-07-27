@@ -371,7 +371,6 @@ function renderWishlist(wishlist) {
     attachRemoveListeners();
     attachAddListeners();
 }
-
 function attachRemoveListeners() {
     document.querySelectorAll(".wishlist-remove-btn").forEach(card => {
         card.addEventListener("click", async () => {
@@ -489,7 +488,6 @@ document.querySelector(".side-cnt").addEventListener("click", async (event) => {
 
     if (minusBtn) quantity--;
     if (plusBtn) quantity++;
-
     if (quantity < 1) quantity = 0;
 
     try {
