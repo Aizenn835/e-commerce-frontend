@@ -154,8 +154,12 @@ body {
     cursor: pointer;
     width: 100%;
     max-width: 320px;
+    transition: transform 0.4s ease , background-color 0.3s ease;
 }
-
+.login-submit:hover{
+    transform: scale(0.95);
+    background-color:#273550;
+}
 .divider-side {
     display: flex;
     justify-content: center;
@@ -218,7 +222,17 @@ body {
     text-decoration: underline;
     cursor: pointer;
 }
-
+.email-container{
+    display:flex;
+    align-items: center;
+}
+.conflict-message{
+    color:#d92d20;
+    font-size: 0.725rem;
+    font-weight: 530;
+    margin-bottom: 0.2rem;
+    
+}
 @media (max-width: 768px) {
     .content {
         flex-direction: column;

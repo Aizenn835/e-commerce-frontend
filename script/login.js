@@ -1,6 +1,6 @@
 const API_URL = "http://localhost:8080";
 
-document.getElementById("submitBody").addEventListener("click" , async () => {
+document.getElementById("submitLogin")?.addEventListener("click" , async () => {
 
 const emailInput = document.getElementById("emailInput").value;
 const passwordInput = document.getElementById("passwordInput").value; 
@@ -16,19 +16,69 @@ const passwordInput = document.getElementById("passwordInput").value;
             password:passwordInput
         })
     }); 
-        if(!response.ok){
+    /* better to create a function because this method is just duplicating in sign up
+    and make a different response when a user is not found */
+        if(!response.ok){ 
+            const existingMessage = document.querySelector(".conflict-message");
+            if(existingMessage) existingMessage.remove();
+            
+            const conflictMessage = document.createElement("div");
+            conflictMessage.textContent = "Wrong email or password";
+            conflictMessage.className = "conflict-message";
+
             document.getElementById("emailInput").classList.add("wrong-credentials");
             document.getElementById("passwordInput").classList.add("wrong-credentials");
+
+            const parent = document.querySelector(".email-container");
+            parent.appendChild(conflictMessage);
             return;
         }
         const data = await response.json();
         localStorage.setItem("Token", data.token);
         window.location.href = "/pages/home.html"
-        // testing
-        console.log(data);
     }catch(error){
         console.log(`Error: ${error}`);
     } 
 });
+document.getElementById("submitSignUp")?.addEventListener("click" , async () => {
+
+const emailInput = document.getElementById("emailInput").value;
+const passwordInput = document.getElementById("passwordInput").value; 
+const usernameInput = document.getElementById("usernameInput").value;
+
+    try{
+        const response = await fetch(`${API_URL}/auth/sign-up` , {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email:emailInput,
+            username: usernameInput,
+            password:passwordInput
+        })
+    }); 
+    
+        if(response.status === 409){
+            const existingMessage = document.querySelector(".conflict-message");
+            if(existingMessage) existingMessage.remove();
+            
+            const conflictMessage = document.createElement("div");
+            conflictMessage.textContent = "This email is already taken!";
+            conflictMessage.className = "conflict-message";
+
+            document.getElementById("emailInput").classList.add("wrong-credentials");
+            document.getElementById("passwordInput").classList.add("wrong-credentials");
+
+            const parent = document.querySelector(".email-container");
+            parent.appendChild(conflictMessage);
+            return;
+        }
+        window.location.href = "/login.html";
+    }catch(error){
+        console.log(`Error: ${error}`);
+    } 
+});
+
 
 
