@@ -230,8 +230,7 @@ body {
     color:#d92d20;
     font-size: 0.725rem;
     font-weight: 530;
-    margin-bottom: 0.2rem;
-    
+    margin-left: 0.125rem;
 }
 @media (max-width: 768px) {
     .content {

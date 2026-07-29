@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Code | SwiftCart</title>
+    <link rel="stylesheet" href="assets/css/verify-code.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="back-arrow"><i class="ti ti-arrow-narrow-left"></i></div>
+            <div class="verify-code">
+                <div class="logo"><i class="ti ti-garden-cart"></i> SwiftCart</div>
+                <div class="header">
+                    <h2 class="main-text">Enter OTP code</h2>
+                    <span class="supporting-text">Check your email we've sent a one-time verification code to <b>juan123@gmail.com</b>. Enter the code below to verify your account</span>
+                </div>
+                <div class="login-form">
+                    <div class="form">
+                        <label class="code-label">Enter the code</label>
+                        <input type="text" placeholder="6-digit code" id="codeInput" autocomplete="off" maxlength="6" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="verify-submit" onclick="verifyCode()" id="verify-submit-container">
+                    <span id="verify-btn">Verify Code</span>
+                </div>
+                <div class="footer">
+                    <span>Didn't get a code?</span>
+                    <a href="forgot-password.html" class="sign-up">Resend</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/verify-code.js"></script>
+</body>
+</html>
+
