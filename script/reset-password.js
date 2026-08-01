@@ -19,7 +19,21 @@ async function resetPassword(){
         return;
     }
     try{
-        const response = await fetch(`${API_URL}/`) // not finish yet continue tomorrow
+        const response = await fetch(`${API_URL}/auth/reset-password` , {
+            method: 'PATCH',
+            headers:{"Content-Type" : "application/json"},
+            body: JSON.stringify({
+                email: email,
+                password: newPasswordInput
+            })
+        });
+        if(!response.ok){
+            alert("Failed to change password. Please try again later");
+            const errorData = await response.json();
+            console.log("Server says: " + errorData);
+            return;
+        }
+        window.location.href="login.html";
     }catch(error){
         console.log(error);
     }
