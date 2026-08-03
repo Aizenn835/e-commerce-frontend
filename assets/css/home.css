@@ -697,20 +697,21 @@ user-select: none;
 cursor: pointer;
 }
 .exit:hover{background-color: #f3f3f1;}
-.side-content{
-    display:flex;
-    height: 100%;
+.side-content {
+    display: flex;
     flex-direction: column;
+    height: 100vh;        
+    max-height: 100vh;    
+    overflow-y: auto;    
 }
-.wishlist-list{
-    display:flex;
-    padding:10px 12px;
-    gap:10px;
-    height:auto;
+.wishlist-list {
+    display: flex;
+    padding: 10px 12px;
+    gap: 10px;
     width: 100%;
-    border:1px solid rgb(214, 196, 196);
+    flex-shrink: 0;        
+    border: 1px solid rgb(214, 196, 196);
     margin-top: 12px;
-    overflow: hidden;
     align-items: center;
     position: relative;
     border-radius: 12px;

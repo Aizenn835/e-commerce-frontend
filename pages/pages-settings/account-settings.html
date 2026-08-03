@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/account-settings.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+<body>
+    <nav class="header">
+        <div class="logo"><i class="ti ti-garden-cart"></i> SwiftCart</div>
+        <ul class="navLinks">
+            <li onclick="getContentByCategory('CLOTHING')">Clothing</li>
+            <li onclick="getContentByCategory('ACCESSORIES')">Accessories</li>
+            <li onclick="getContentByCategory('HOME')">Home</li>
+            <li onclick="getContentByCategory('FOOTWEAR')">Footwear</li>
+        </ul>
+        <div class="right-side">
+            <div class="search-container">
+                <i class='ti ti-search' id="search-logo"></i>
+                <input type="text" placeholder="Search" class="search-input" id="search-input" oninput="searchContent()">
+            </div>
+            <div class="side-logo">
+                <span class="right-logo" id="cart" title="Cart"><i class="ti ti-shopping-bag"></i></span>
+                <span class="right-logo" id="wishlist" title="Wishlist"><i class="ti ti-heart"></i></span>
+                <span class="right-logo" id="settings-id" title="Settings"><i class="ti ti-settings"></i></span>
+            </div>
+        </div>
+    </nav>
+    <section class="hero">
+       <div class="back-arrow">
+         <span><i class="ti ti-arrow-narrow-left"></i> Back to store</span>
+       </div>
+       <div class="settings-head">
+         <div class="settings-logo"><i class="ti ti-settings"></i></div>
+         <div>
+            <h3 class="settings-name">Settings</h3>
+            <span class="supporting-text">Manage your account and preferences</span>
+         </div>
+       </div>
+
+       <div class="settings-choice">
+            <div class="self-account active">
+               <span><i class="ti ti-user" id="font"></i> Account</span>
+            </div>  
+             <div class="self-account">
+               <span><i class="ti ti-shield-cog" id="font"></i> Privacy & Security</span>
+            </div> 
+             <div class="self-account">
+               <span><i class="ti ti-help-hexagon" id="font"></i> Help & Support</span>
+            </div> 
+            <div class="self-account log-out">
+                <span><i class="ti ti-logout" id="font"></i> Log out</span>
+            </div>
+       </div>
+
+       <div class="user-info">
+            <div class="upper-container">
+                <span class="user-header">Profile Information</span>
+                <div class="user-details">
+                    <div class="user-pfp">E</div>
+                    <div class="user">
+                        <p class="user-name">Emma Larsen</p>
+                        <p class="user-email">emma.larsen@gmail.com</p>
+                        <span class="change-pfp">Change photo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="grid">
+                    <div class="group">
+                        <label> First Name</label>
+                        <input type="text" placeholder="Juan" style=" text-transform: capitalize;"> 
+                    </div> 
+                    <div class="group">
+                        <label> Last Name</label>
+                        <input type="text" placeholder="Dela Cruz" style=" text-transform: capitalize;"> 
+                    </div>
+                    <div class="group">
+                        <label> Email</label>
+                        <input type="text" placeholder="juan.delacruz@gmail.com">
+                    </div> 
+                    <div class="group">
+                        <label> Phone Number</label>
+                        <input type="text" placeholder="+63 9171234567">
+                    </div> 
+                </div>
+                 <div class="save-btn">
+                    <button>Save Changes</button>
+                 </div>
+            </div>
+       </div>
+
+       <div class="order-history">
+         <div class="order-header">
+            <span>Order History</span>
+         </div>
+         <div class="order-list">
+            <div class="order-container">
+                <div class="order-logo"><i class="ti ti-box"></i></div>
+            <div>
+                <p class="order-id">MDE-48291</p>
+                <span class="order-date">Jul 28, 2025 · 2 items</span>
+            </div>
+            </div>
+            <div>
+                <p class="product-price">₱412.00</p>
+                <span class="deliver">Delivered</span>
+            </div>
+         </div>
+         <div class="order-list">
+            <div class="order-container">
+                <div class="order-logo"> <i class="ti ti-box"></i></div>
+            <div>
+                <p class="order-id">MDE-39104</p>
+                <span class="order-date">Jul 28, 2025 · 10 items</span>
+            </div>
+            </div>
+            <div>
+                <p class="product-price">₱128.00</p>
+                <span class="deliver">Delivered</span>
+            </div>
+         </div>
+         <div class="order-list">
+            <div class="order-container">
+                <div class="order-logo" > <i class="ti ti-box"></i></div>
+            <div>
+                <p  class="order-id">MDE-27653</p>
+                <span class="order-date">Jul 28, 2025 · 5 items</span>
+            </div>
+            </div>
+            <div>
+                <p class="product-price">₱289.00</p>
+                <span class="deliver">Delivered</span>
+            </div>
+         </div>
+       </div>
+
+       <div class="supporting-info">
+         <div class="user-container">
+            <div class="user-head">
+                <i class="ti ti-location"></i>
+                <span>Saved Address</span>
+            </div>
+            <div class="user-address">
+                <span class="address">142 Birch Street, Apt 4B Brooklyn, NY 11201</span>
+            </div>
+            <div class="user-address-footer">
+                <a href="" class="add-info">+ Add Address</a>
+            </div>
+         </div>
+
+         <div class="user-container">
+            <div class="user-head">
+                <i class="ti ti-credit-card"></i>
+                <span>Payment Methods</span>
+            </div>
+            <div class="user-address">
+                <p class="expiration-text">Visa ending in 2030</p>
+                <span class="supporting-expiration">Expires 08 / 28</span>
+            </div>
+            <div class="user-address-footer">
+                <a href="" class="add-info card">+ Add Card</a>
+            </div>
+         </div>
+       </div>
+
+       <div class="notification-settings">
+         <div class="notification-header">
+            <i class="ti ti-bell"></i>
+            <span>Notification</span>
+         </div>
+         <div class="notification-choices">
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Order updates</p>
+                    <span class="settings-dsc">Shipping and delivery notifications</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Promotions & sales</p>
+                    <span class="settings-dsc">Exclusive deals and new arrivals</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Back in stock alerts</p>
+                    <span class="settings-dsc">Notify when wishlisted items restock</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Newsletter</p>
+                    <span class="settings-dsc">Weekly curated picks and stories</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+         </div>
+       </div>
+    </section>
+
+</body>
+</html>
