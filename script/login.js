@@ -51,7 +51,8 @@ document.getElementById("submitSignUp")?.addEventListener("click" , async () => 
 const emailInput = document.getElementById("emailInput").value;
 const passwordInput = document.getElementById("passwordInput").value; 
 const usernameInput = document.getElementById("usernameInput").value;
-
+const firstname = document.getElementById("firstNameInput").value;
+const lastname = document.getElementById("lastNameInput").value;
     try{
         const response = await fetch(`${API_URL}/auth/sign-up` , {
         method:"POST",
@@ -61,6 +62,8 @@ const usernameInput = document.getElementById("usernameInput").value;
         body: JSON.stringify({
             email:emailInput,
             username: usernameInput,
+            firstname: firstname,
+            lastname: lastname,
             password:passwordInput
         })
     }); 

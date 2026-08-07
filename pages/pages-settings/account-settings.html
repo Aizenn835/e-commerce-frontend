@@ -12,26 +12,10 @@
 <body>
     <nav class="header">
         <div class="logo"><i class="ti ti-garden-cart"></i> SwiftCart</div>
-        <ul class="navLinks">
-            <li onclick="getContentByCategory('CLOTHING')">Clothing</li>
-            <li onclick="getContentByCategory('ACCESSORIES')">Accessories</li>
-            <li onclick="getContentByCategory('HOME')">Home</li>
-            <li onclick="getContentByCategory('FOOTWEAR')">Footwear</li>
-        </ul>
-        <div class="right-side">
-            <div class="search-container">
-                <i class='ti ti-search' id="search-logo"></i>
-                <input type="text" placeholder="Search" class="search-input" id="search-input" oninput="searchContent()">
-            </div>
-            <div class="side-logo">
-                <span class="right-logo" id="cart" title="Cart"><i class="ti ti-shopping-bag"></i></span>
-                <span class="right-logo" id="wishlist" title="Wishlist"><i class="ti ti-heart"></i></span>
-                <span class="right-logo" id="settings-id" title="Settings"><i class="ti ti-settings"></i></span>
-            </div>
-        </div>
+        
     </nav>
     <section class="hero">
-       <div class="back-arrow">
+       <div class="back-arrow" id="back">
          <span><i class="ti ti-arrow-narrow-left"></i> Back to store</span>
        </div>
        <div class="settings-head">
@@ -53,7 +37,7 @@
                <span><i class="ti ti-help-hexagon" id="font"></i> Help & Support</span>
             </div> 
             <div class="self-account log-out">
-                <span><i class="ti ti-logout" id="font"></i> Log out</span>
+                <span ><i class="ti ti-logout"></i> Log out</span>
             </div>
        </div>
 
@@ -61,7 +45,7 @@
             <div class="upper-container">
                 <span class="user-header">Profile Information</span>
                 <div class="user-details">
-                    <div class="user-pfp">E</div>
+                    <div class="user-pfp"><i class="ti ti-user"></i></div>
                     <div class="user">
                         <p class="user-name">Emma Larsen</p>
                         <p class="user-email">emma.larsen@gmail.com</p>
@@ -73,47 +57,31 @@
                 <div class="grid">
                     <div class="group">
                         <label> First Name</label>
-                        <input type="text" placeholder="Juan" style=" text-transform: capitalize;"> 
+                        <input type="text" placeholder="Juan" style=" text-transform: capitalize;" id="firstNameInput" > 
                     </div> 
                     <div class="group">
                         <label> Last Name</label>
-                        <input type="text" placeholder="Dela Cruz" style=" text-transform: capitalize;"> 
+                        <input type="text" placeholder="Dela Cruz" style=" text-transform: capitalize;" id="lastNameInput"> 
                     </div>
                     <div class="group">
                         <label> Email</label>
-                        <input type="text" placeholder="juan.delacruz@gmail.com">
+                        <input type="text" placeholder="juan.delacruz@gmail.com" id="emailInput">
                     </div> 
                     <div class="group">
                         <label> Phone Number</label>
-                        <input type="text" placeholder="+63 9171234567">
+                        <input  type="text" placeholder="09171234567" inputmode="numeric"  pattern="[0-9]{12}" 
+                          minlength="12" maxlength="12" title="Please enter exactly 12 digits." required id="phoneNumberInput" >
                     </div> 
                 </div>
                  <div class="save-btn">
-                    <button>Save Changes</button>
+                    <button id="save-text">Save Changes</button>
                  </div>
             </div>
        </div>
 
        <div class="order-history">
-         <div class="order-header">
-            <span>Order History</span>
-         </div>
-         <div class="order-list">
-            <div class="order-container">
-                <div class="order-logo">
-                    <img src="/assets/images/photo-1510972527921-ce03766a1cf1.avif" alt="">
-                </div>
-            <div>
-                <p class="order-id">MDE-48291</p>
-                <span class="order-date">Jul 28, 2025 · 2 items</span>
-            </div>
-            </div>
-            <div>
-                <p class="product-price">₱412.00</p>
-                <span class="deliver">Delivered</span>
-            </div>
-         </div>
-         
+        
+         <!-- This is where the order history lives -->
        </div>
 
        <div class="supporting-info">

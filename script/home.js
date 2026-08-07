@@ -50,7 +50,9 @@ async function toggleFavorite(productId) {
         displayWishlist();
     }
 }
-
+document.getElementById("account-settings").addEventListener("click", () => {
+    window.location.href = "/pages/pages-settings/account-settings.html";
+})
 /* =========================================================
    FILTERS
 ========================================================= */
