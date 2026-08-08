@@ -533,7 +533,7 @@ box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
 transform: translateX(100%);
 transition: transform 0.40s ease;
 z-index: 3000;
-padding:24px;
+padding:24px ;
 overflow-y: auto;
 }
 .open-panel{
@@ -552,26 +552,36 @@ box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.3);
    /*--- cart --- */
 .side-cnt{
     display:flex;
-    height: 100%;
+    height: 70vh;
     flex-direction: column;
     width: 100%;
+    border-bottom:1px solid rgb(197, 190, 190); 
+    margin-bottom: 12px;
+    overflow-y: scroll;
+    border:1px solid black;
+    padding:12px;
 }
+.side-cnt.noProd{
+    height:100%;
+}
+
 #overlay-cart{
-font-size:1.25rem;
-margin:0.325rem;
+    font-size:1.25rem;
+    margin:0 0.325rem 0 0.325rem;
 }
 .cart{
-font-weight: 1000;
-color:rgb(51, 42, 42);  
+    font-weight: 1000;
+    color:rgb(51, 42, 42);  
 }
+
 #continueCart{
-margin-top: 1rem;
-text-decoration: underline;
-font-size:0.9375rem;
-cursor:default;
-color:rgb(22, 16, 112);     
-user-select: none;
-cursor: pointer;
+    margin-top: 1rem;
+    text-decoration: underline;
+    font-size:0.9375rem;
+    cursor:default;
+    color:rgb(22, 16, 112);     
+    user-select: none;
+    cursor: pointer;
 }
 .cart-list{
     display:flex;
@@ -595,7 +605,7 @@ cursor: pointer;
     cursor: pointer;
     margin-right:4rem; 
     position: fixed;
-    left:90%;
+    left:85%;
 }
 .cart-counter{
     display:flex;
@@ -649,7 +659,7 @@ cursor: pointer;
 }
 .cart-price{
     position: fixed;
-    right:10%;
+    right:15%;
     font-weight: bold;
     font-size:0.9285rem;
 }
@@ -661,6 +671,39 @@ cursor: pointer;
     left:10%;
     object-fit: cover;
 }
+.footer-text{
+    font-size:0.825rem;
+    color:rgb(126, 120, 120);
+}
+.footer-value{
+    font-size:0.825rem;
+    color:rgb(126, 120, 120);
+}
+.checkout{
+    display:none;
+}
+.checkout.show-checkout {
+    display: flex;
+    flex-direction: column;
+}
+.checkout-container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:5px;
+}
+.proceed-checkout{
+    background-color: #10203f;
+    text-align: center;
+    padding:10px 12px;
+    font-weight: 600;
+    color:white;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+
    /*--- wishlist --- */
 #overlay-wishlist{
 color:rgb(240, 47, 47);
@@ -680,13 +723,13 @@ color:rgb(22, 16, 112);
 user-select: none;
 cursor: pointer;
 }
+
 .exit:hover{background-color: #f3f3f1;}
 .side-content {
     display: flex;
     flex-direction: column;
-    height: 100vh;        
+    height: 100vh; /* change this later */       
     max-height: 100vh;    
-    overflow-y: auto;    
 }
 .wishlist-list {
     display: flex;
@@ -768,6 +811,7 @@ cursor: pointer;
     align-items: center;
     justify-content: center;
     height:100%;
+    
 }
 #content-logo{
     color:gray;
@@ -790,7 +834,7 @@ cursor: pointer;
 border-radius: 50px;
 padding:10px    ;
 }
-/* content modal */
+
 /* content modal */
 .modal-overlay{
     background: rgba(0, 0, 0, 0.5);

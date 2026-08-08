@@ -51,8 +51,7 @@ document.querySelector(".save-btn").addEventListener("click" , async () => {
          const updatedInfo = await response.json();
          if(updatedInfo.status === 409){
             alert("Something went wrong"); // fix this with modal;
-             document.getElementById("save-text").textContent = "Save Changes"
-    
+            document.getElementById("save-text").textContent = "Save Changes"
             return 
          }
          document.getElementById("save-text").textContent = "Save Changes!"

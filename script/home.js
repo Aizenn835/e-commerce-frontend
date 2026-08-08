@@ -273,7 +273,7 @@ async function searchContent() {
 }
 
 function renderContent(products) {
-    document.querySelector(".grid").innerHTML = "";
+    const prodGrid = document.querySelector(".grid").innerHTML = "";
     products.forEach(content => {
         const isFavorited = favoritedIds.has(String(content.id));
         document.querySelector(".grid").innerHTML += `
@@ -424,17 +424,22 @@ async function displayCart() {
         });
         if (!response.ok) throw new Error(`Error ${response.status}`);
         const cart = await response.json();
+
         if (cart.length === 0) {
             document.querySelector(".side-cnt").innerHTML = `
-            <div class = "noContent">
+            <div class="noContent">
                 <i class="ti ti-shopping-bag" id="content-logo"></i>
                 <h3>Your cart is empty</h3>
                 <p>Browse our collection and add something.</p>
                 <span id="continueCart">Continue Shopping</span>
             </div>
             `;
+            document.querySelector(".checkout").classList.remove("show-checkout");
+            document.querySelector(".side-cnt").classList.add("noProd");
             return;
         }
+
+        document.querySelector(".checkout").classList.add("show-checkout");
         renderCart(cart);
     } catch (error) {
         console.log(`Error ${error}`);
@@ -442,6 +447,7 @@ async function displayCart() {
 }
 
 function renderCart(cart) {
+    document.querySelector(".side-cnt").classList.remove("noProd");
     document.querySelector(".side-cnt").innerHTML = ``;
     cart.forEach(product => {
         document.querySelector(".side-cnt").innerHTML += ` 
