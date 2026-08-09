@@ -90,6 +90,7 @@ document.getElementById("cart").addEventListener("click", () => {
 
 document.getElementById("wishlist").addEventListener("click", () => {
     displayWishlist();
+    countWishlistItems();
     openPanel('.wishlist-overlay', '.wishlist-panel');
 });
 document.getElementById("exit-cart").addEventListener("click", () => {
@@ -331,6 +332,7 @@ async function displayWishlist() {
                 <span id="continueWishlist">Browse Products</span>
             </div>
                 `;
+            document.querySelector(".add-to-cart").classList.add("none");
             return;
         }
         renderWishlist(wishlist);
@@ -372,6 +374,7 @@ function renderWishlist(wishlist) {
     });
     attachRemoveListeners();
     attachAddListeners();
+    document.querySelector(".add-to-cart").classList.remove("none");
 }
 function attachRemoveListeners() {
     document.querySelectorAll(".wishlist-remove-btn").forEach(card => {
@@ -380,6 +383,7 @@ function attachRemoveListeners() {
             const productId = parent.dataset.productId;
 
             await toggleFavorite(productId);
+            countWishlistItems();
             parent.remove();
 
             if (document.querySelector(".side-content").children.length === 0) {
@@ -412,6 +416,37 @@ function attachAddListeners() {
             }
         });
     });
+}
+document.querySelector(".add-to-cart").addEventListener("click" , async () => {
+    try{
+        const response = await fetch(`${API_URL}/favorite/add-to-cart` , {
+            method: "POST",
+            headers:{"Authorization" : `Bearer ${token}`}
+        })
+        if(!response.ok){
+            throw new Error("Status: " + response.status);
+        }
+        displayCart();
+        closePanel('.wishlist-overlay', '.wishlist-panel');
+        openPanel('.cart-overlay', '.cart-panel');
+    }catch(error){
+        console.log(error)
+    }
+})
+
+async function countWishlistItems(){
+    try{
+        const response = await fetch(`${API_URL}/favorite/count-cart` ,  {
+            headers:{"Authorization" : `Bearer ${token}`}
+        })
+        if(!response.ok){
+            throw new Error("Status: " + response.status);
+        }
+        const itemCount = await response.json();
+        document.getElementById("wishlist-count").textContent = itemCount;
+    }catch(error){
+        console.log(error);
+    }
 }
 /* =========================================================
    CART
@@ -545,6 +580,7 @@ async function init() {
     displayContent();
     searchContent();
     displayCart();
+    countWishlistItems();
 }
 
 init();
