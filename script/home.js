@@ -483,6 +483,8 @@ async function displayCart() {
 
 function renderCart(cart) {
     document.querySelector(".side-cnt").classList.remove("noProd");
+    getTotalPrice();
+    getSubTotal();
     document.querySelector(".side-cnt").innerHTML = ``;
     cart.forEach(product => {
         document.querySelector(".side-cnt").innerHTML += ` 
@@ -571,6 +573,35 @@ function removeFromCart() {
     });
 }
 
+async function getTotalPrice(){
+    try{
+        const response = await fetch(`${API_URL}/cart/total-price` , {
+            headers:{"Authorization" : `Bearer ${token}`}
+        })
+        if(!response.ok){
+            throw new Error(`Status: ${response.status}`)
+        }
+        const total = await response.json();
+        document.getElementById("totalPrice").textContent = "₱" + total.totalPrice;
+    }catch(error){
+        console.log(error);
+    }
+}
+
+async function getSubTotal(){
+    try{
+        const response = await fetch(`${API_URL}/cart/sub-total` , {
+            headers:{"Authorization" : `Bearer ${token}`}
+        })
+        if(!response.ok){
+            throw new Error(`Status: ${response.status}`)
+        }
+        const total = await response.json();
+        document.getElementById("subTotal").textContent ="₱" + total.totalPrice;
+    }catch(error){
+        console.log(error);
+    }
+}
 /* =========================================================
    INIT
 ========================================================= */
