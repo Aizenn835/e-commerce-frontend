@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;     
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display:flex;
+    flex-direction: column;
+    padding-top: 80px; 
+}
+img {
+    max-width: 100%;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+.header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 6vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: white;
+    border-bottom: 1px solid rgb(179, 170, 170);
+    padding: 10px clamp(16px, 4vw, 40px);
+    gap: clamp(8px, 2vw, 20px);
+}
+.logo {
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: rgb(42, 57, 122);
+    font-size: clamp(18px, 3vw, 24px);
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    justify-content: center;
+    width: 100%;
+}
+.hero{
+    margin: 10px auto;
+    height: auto;
+    width: min(90%, 640px);
+    overflow: hidden;
+}
+.back-arrow{
+    font-size:0.8125rem;
+    color:gray;
+    cursor: default;
+}
+.back-arrow:hover{
+    color:#10203f;
+    cursor: pointer;
+}
+.settings-head{
+    margin-top: 1rem;
+    display:flex;
+    align-items: center;
+    gap:12px;
+}
+.settings-logo{
+    padding:10px 12px;
+    background: #10203f;
+    color:white;
+    border-radius: 0.7285rem;
+    font-size: 1.1875rem;
+}
+.settings-name{
+    font-size:1.25rem;
+}
+.supporting-text{
+    font-size:0.7685rem;
+    font-weight: 500;
+    color: gray;
+}
+.settings-choice{
+    margin-top:1.25rem;
+    background-color: rgb(248, 244, 244);
+    border-radius: 0.50rem;
+    height:auto;
+    display:flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+.self-account{
+    margin:0.25rem;
+    padding:10px 12px;
+    font-size:0.9285rem;
+    font-weight: 500;
+}
+.self-account:first-child{
+    margin-top:0.50rem;
+}
+#font{margin-right:0.525rem;}
+
+.active{
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 0.7285rem;
+}
+.log-out{
+    border-top: 1px solid rgb(221, 212, 212)    ;
+    color:red;
+    display:block;
+    padding-top: 15px;
+}
+.change-password{
+    border:1px solid rgb(221, 212, 212);
+    margin-top:1.25rem;
+    border-radius: 0.50rem;
+    width:100%;
+    overflow: hidden;
+}
+.field{width: 100%;}
+.change-password{
+    padding:15px 12px
+}
+.password-header i{
+    font-size:1.1875rem;
+    color:gray;
+}
+.grid{
+    display:flex;
+    flex-direction: column;
+    margin:20px 12px;
+}
+.grid label{
+    font-size:0.75rem;
+    color:gray;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5px;
+    letter-spacing: 0.4px  ;
+}
+.grid input{
+    padding:10px;
+    border-radius: 12px;
+    border:1px solid rgb(233, 224, 224);
+    outline:none;
+    width: 50%;
+}
+.save-changes{
+    background: #10203f;
+    padding:10px 12px;
+    width: 25%;
+    max-width: 30%; 
+    text-align: center; 
+    margin:20px 12px; 
+    border-radius: 12px;
+    cursor: pointer;
+}
+.save-changes span{
+    color:white;
+    font-size:0.875rem;
+    font-weight: 600    ;
+}
+
+/* Two Factor Authentication and 
+   Privacy Control */
+.notification-settings{
+    border:1px solid rgb(221, 212, 212);
+    margin-top:1.25rem;
+    border-radius: 0.50rem;
+    width:100%;
+    padding:15px 12px 10px 12px;
+    overflow: hidden;
+}
+.notification-header{
+    margin-bottom: 1.25rem;
+    font-weight:bold;
+    font-size:1.125rem; 
+}
+.notification-header i {
+    font-weight:20;
+    color:gray;
+    margin-right:5px;
+}
+.ntf-container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    margin-bottom:12px;
+    border-bottom: 1px solid rgb(221, 212, 212);
+    gap: 12px;
+}
+.ntf-container:last-child{
+    border-bottom: none;
+    margin-bottom:none;
+    padding-bottom: none;
+}
+.settings-name{
+    font-size:0.875rem;
+    font-weight: 600;
+}
+.settings-dsc{
+    font-size:0.75rem;
+    color:gray;
+}
+.switch-btn{
+    background-color: rgb(231, 227, 227);
+    width: 50px;
+    height: 24px;
+    border-radius: 999px;
+    position: relative;   
+    display: inline-block;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+}
+.circle{
+    background-color: white;   
+    width: 18px;                
+    height: 18px;                
+    border-radius: 50%;
+    position: absolute;          
+    top: 3px;                    
+    right: 3px;                  
+    transition: right 0.2s ease;  
+}
+.onCircle{
+    left:3px;
+}
+.onSwitchBtn{
+    background-color:#10203f;
+}

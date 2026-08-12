@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/account-privacy.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+<body>
+    <nav class="header">
+        <div class="logo"><i class="ti ti-garden-cart"></i> SwiftCart</div>
+        
+    </nav>
+    <section class="hero">
+       <div class="back-arrow" id="back">
+         <span><i class="ti ti-arrow-narrow-left"></i> Back to store</span>
+       </div>
+       <div class="settings-head">
+         <div class="settings-logo"><i class="ti ti-settings"></i></div>
+         <div>
+            <h3 class="settings-name">Settings</h3>
+            <span class="supporting-text">Manage your account and preferences</span>
+         </div>
+       </div>
+
+       <div class="settings-choice">
+            <div class="self-account" onclick="window.location.href='/pages/pages-settings/account-settings.html'">
+               <span><i class="ti ti-user" id="font"></i> Account</span>
+            </div>  
+             <div class="self-account active">
+               <span><i class="ti ti-shield-cog" id="font"></i> Privacy & Security</span>
+            </div> 
+             <div class="self-account">
+               <span><i class="ti ti-help-hexagon" id="font"></i> Help & Support</span>
+            </div> 
+            <div class="self-account log-out">
+                <span ><i class="ti ti-logout"></i> Log out</span>
+            </div>
+       </div>
+
+       <div class="change-password">
+             <div class="password-header">
+                <i class="ti ti-lock"></i>
+                <span style="font-size: 1rem; font-weight: 700;">Change Password</span>
+             </div>
+             <div class="field">
+                <div class="grid">
+                    <label>Current Password</label>
+                    <input type="password" id="currentPassword" placeholder="••••••••">
+                </div>
+                <div class="grid">
+                    <label>New Password</label>
+                    <input type="password"  id="newPassword" placeholder="••••••••">
+                </div>
+                 <div class="grid">
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confirmPassword" placeholder="••••••••">
+                </div>
+                <div class="save-changes">
+                    <span>Update Password</span>
+                </div>
+             </div>
+       </div>
+
+      <!--  Two Factor Authentication -->
+       <div class="notification-settings">
+         <div class="notification-header">
+            <i class="ti ti-device-mobile"></i>
+            <span>Two-Factor Authentication</span>
+         </div>
+         <div class="notification-choices">
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Authenticator app</p>
+                    <span class="settings-dsc">Use an app like Google Authenticator</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">SMS verification</p>
+                    <span class="settings-dsc">Send a code to +1 (555) 234-5678</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Email verification</p>
+                    <span class="settings-dsc">Send a code to emma.larsen@email.com</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+         </div>
+       </div>
+       <!-- Privacy Control -->
+        <div class="notification-settings">
+         <div class="notification-header">
+            <i class="ti ti-eye"></i>
+            <span>Privacy Controls</span>
+         </div>
+         <div class="notification-choices">
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Personalised recommendations</p>
+                    <span class="settings-dsc">Use browsing history to suggest products</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Analytics & performance</p>
+                    <span class="settings-dsc">Help us improve with anonymous usage data</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Marketing cookies</p>
+                    <span class="settings-dsc">Allow personalised ads across the web</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+             <div class="ntf-container">
+                <div>
+                    <p class="settings-name">Share data with partners</p>
+                    <span class="settings-dsc">Third-party personalisation services</span>
+                </div>
+                <div class="switch-btn">
+                    <div class="circle"></div>
+                </div>
+            </div>
+         </div>
+       </div>
+    </section>
+
+    <script src="/script/account-configuration/account-privacy.js"></script>
+</body>
+</html>
