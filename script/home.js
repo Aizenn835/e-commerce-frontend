@@ -53,6 +53,9 @@ async function toggleFavorite(productId) {
 document.getElementById("account-settings").addEventListener("click", () => {
     window.location.href = "/pages/pages-settings/account-settings.html";
 })
+document.getElementById("account-privacy").addEventListener("click" , () => {
+    window.location.href = "/pages/pages-settings/account-privacy.html"
+})
 /* =========================================================
    FILTERS
 ========================================================= */

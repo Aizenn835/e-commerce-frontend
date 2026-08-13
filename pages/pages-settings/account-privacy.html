@@ -12,10 +12,9 @@
 <body>
     <nav class="header">
         <div class="logo"><i class="ti ti-garden-cart"></i> SwiftCart</div>
-        
     </nav>
     <section class="hero">
-       <div class="back-arrow" id="back">
+       <div class="back-arrow" id="back" onclick="window.location.href='/pages/home.html'">
          <span><i class="ti ti-arrow-narrow-left"></i> Back to store</span>
        </div>
        <div class="settings-head">
@@ -37,7 +36,7 @@
                <span><i class="ti ti-help-hexagon" id="font"></i> Help & Support</span>
             </div> 
             <div class="self-account log-out">
-                <span ><i class="ti ti-logout"></i> Log out</span>
+                <span><i class="ti ti-logout"></i> Log out</span>
             </div>
        </div>
 
@@ -60,7 +59,7 @@
                     <input type="password" id="confirmPassword" placeholder="••••••••">
                 </div>
                 <div class="save-changes">
-                    <span>Update Password</span>
+                    <span id="updatedText">Update Password</span>
                 </div>
              </div>
        </div>
