@@ -605,6 +605,17 @@ async function getSubTotal(){
         console.log(error);
     }
 }
+document.querySelector("proceed-checkout").addEventListener("click" , async () => {
+    try{
+        const response = await fetch(`${API_URL}/cart/purchase` , {
+            method: 'POST',
+            headers: {"Authorization": `Bearer ${token}`}
+        })
+        
+    }catch(error){
+        console.log(error);
+    }
+});
 /* =========================================================
    INIT
 ========================================================= */

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="/assets/css/payment-information.css">
+</head>
+<body>
+     <nav class="header">
+        <div class="logo"><i class="ti ti-garden-cart"></i> SwiftCart</div>
+    </nav>
+     <section class="hero">
+        <div class="back-arrow" id="back" onclick="window.location.href='/pages/home.html'">
+            <span><i class="ti ti-arrow-narrow-left"></i> Back to store</span>
+        </div>
+        <div class="payment-method">
+            <h3>Payment Method</h3>
+            <div class="payment-container">
+                <div class="grid-container">
+                    <div class="field">
+                        <div class="upper-choices">
+                            <div><i class="ti ti-credit-card-hand"></i></div>
+                            <div style="accent-color:#204181;"><input type="radio" name="creditCard" id="credit-card"></div>
+                        </div>
+                        <div class="credit-cart-container">
+                            <p class="payment-provider">Credit / Debit Card</p> 
+                            <span class="choices">Visa , Mastercard , AMEX</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-container">
+                    <div class="field">
+                        <div class="upper-choices">
+                            <div class="brand-logo"><span>G</span></div>
+                            <div style="accent-color:#204181;"><input type="radio" name="creditCard" id="credit-card" ></div>
+                        </div>
+                        <div class="credit-cart-container">
+                            <p class="payment-provider">Gcash</p>
+                            <span class="choices">Pay via Gcash e-wallet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-container">
+                    <div class="field">
+                        <div class="upper-choices">
+                            <div class="brand-logo">PP</div>
+                            <div style="accent-color:#204181;"><input type="radio" name="creditCard" id="credit-card"></div>
+                        </div>
+                        <div class="credit-cart-container">
+                            <p class="payment-provider">PayPal</p>
+                            <span class="choices">Fast & secure checkout</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-container">
+                    <div class="field">
+                        <div class="upper-choices">
+                            <div><i class="ti ti-cash-move"></i></div>
+                            <div style="accent-color:#204181;"><input type="radio" name="creditCard" id="credit-card"></div>
+                        </div>
+                        <div class="credit-cart-container">
+                            <p class="payment-provider">Cash on delivery</p>
+                            <span class="choices">Pay when your order arrives</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="credit-card-fields">
+            <div class="group">
+                <div>
+                    <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">Card Holder Name</p>
+                    <input type="text" name="firstname" id="firstName" placeholder="Juan">
+                </div>
+            </div>
+            <div class="group">
+                <div>
+                    <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">Card Holder Name</p>
+                    <input type="text" name="cardnumber" id="cardNumber" placeholder="4242-4242-4242">
+                </div>
+            </div>
+            <div class="group cvv">
+                <div>
+                    <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">Expiry (MM / YY)</p>
+                    <input type="text" name="firstname" id="firstName" placeholder="08/18">
+                </div>
+                <div>
+                    <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">CVV</p>
+                    <input type="text" name="firstname" id="firstName" placeholder="●●●">
+                </div>
+            </div>
+
+            <div class="security-text">
+                <div class="checkmark"><i class="ti ti-checks"></i></div>
+                <div style="font-size:0.75rem; color:gray">
+                    Secured with 256-bit SSL encryption. We never store your card details.
+                </div>
+            </div>
+        </div>
+        
+     </section>
+</body>
+</html>

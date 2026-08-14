@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+html, body {
+    width: 100%;
+    overflow-x: hidden; 
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display:flex;
+    flex-direction: column;
+    padding-top: 80px; 
+}
+img {
+    max-width: 100%;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+.header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 6vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: white;
+    border-bottom: 1px solid rgb(179, 170, 170);
+    padding: 10px clamp(16px, 4vw, 40px);
+    gap: clamp(8px, 2vw, 20px);
+}
+.logo {
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: rgb(42, 57, 122);
+    font-size: clamp(18px, 3vw, 24px);
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    justify-content: center;
+    width: 100%;
+}
+.hero{
+    margin: 10px auto;
+    height: auto;
+    width: min(90%, 900px);
+    overflow: hidden;  
+}
+.back-arrow{
+    font-size:0.8125rem;
+    color:gray;
+    cursor: default;
+}
+.back-arrow:hover{
+    color:#10203f;
+    cursor: pointer;
+}
+/* Payment Method */
+.payment-method{
+    display:flex;
+    flex-direction: column;
+    margin:1rem;
+    gap:12px;
+}
+.payment-container{
+    display:grid;
+    grid-template-columns: repeat(2 , 1fr);
+    gap:12px;
+}
+.grid-container{
+    border:1px solid gray;
+    border-radius: 12px;
+    padding:12px;
+    cursor: pointer;
+}
+.upper-choices{
+    display:flex;
+    justify-content: space-between;
+}
+.payment-provider{
+    font-size:0.875rem;
+    font-weight: 500;
+}
+.choices{
+    color:gray;
+    font-size: 0.75rem;
+}
+/* brand logo */
+.brand-logo{
+    background-color: #0b52e0;
+    color: white;
+    padding: 4px;
+    min-width: 24px;
+    max-width: 50%;
+    text-align: center;
+    border-radius: 7px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Payment Fields */
+.credit-card-fields{
+    margin:1rem;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+.group input{
+    width: 100%;
+    padding:10px 12px;
+    border:1px solid rgb(230, 223, 223);
+    border-radius:12px;
+    outline:none;
+    font-size:0.75rem;
+}
+.cvv{
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+    gap:10px;
+}
+.security-text{
+    background-color: rgb(243, 240, 240);
+    padding:10px 12px;
+    display:flex;
+    border-radius: 12px;
+    gap:10px;
+    align-items: center;
+}
+.checkmark{
+    color: green;
+    background-color: rgb(203, 223, 203);
+    padding:6px;
+    border-radius: 70px;
+}
