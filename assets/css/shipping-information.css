@@ -215,3 +215,6 @@ a {
     justify-content: space-between;
     padding:10px 12px;
 }
+.selected{
+    border:2px solid #10203f
+}

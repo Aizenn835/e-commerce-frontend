@@ -20,11 +20,11 @@
         <div class="payment-method">
             <h3>Payment Method</h3>
             <div class="payment-container">
-                <div class="grid-container">
+                <div class="grid-container" data-method="card">
                     <div class="field">
                         <div class="upper-choices">
                             <div><i class="ti ti-credit-card-hand"></i></div>
-                            <div style="accent-color:#204181;"><input type="radio" name="creditCard" id="credit-card"></div>
+                            <div style="accent-color:#204181;"><input type="radio" name="paymentMethod" id="credit-card"></div>
                         </div>
                         <div class="credit-cart-container">
                             <p class="payment-provider">Credit / Debit Card</p> 
@@ -32,11 +32,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="grid-container">
+                <div class="grid-container" data-method="gcash">
                     <div class="field">
                         <div class="upper-choices">
                             <div class="brand-logo"><span>G</span></div>
-                            <div style="accent-color:#204181;"><input type="radio" name="creditCard" id="credit-card" ></div>
+                            <div style="accent-color:#204181;"><input type="radio" name="paymentMethod" id="gcash" ></div>
                         </div>
                         <div class="credit-cart-container">
                             <p class="payment-provider">Gcash</p>
@@ -44,11 +44,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="grid-container">
+                <div class="grid-container" data-method="paypal">
                     <div class="field">
                         <div class="upper-choices">
                             <div class="brand-logo">PP</div>
-                            <div style="accent-color:#204181;"><input type="radio" name="creditCard" id="credit-card"></div>
+                            <div style="accent-color:#204181;"><input type="radio" name="paymentMethod" id="paypal"></div>
                         </div>
                         <div class="credit-cart-container">
                             <p class="payment-provider">PayPal</p>
@@ -56,11 +56,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="grid-container">
+                <div class="grid-container" data-method="cash">
                     <div class="field">
                         <div class="upper-choices">
                             <div><i class="ti ti-cash-move"></i></div>
-                            <div style="accent-color:#204181;"><input type="radio" name="creditCard" id="credit-card"></div>
+                            <div style="accent-color:#204181;"><input type="radio" name="paymentMethod" id="cash"></div>
                         </div>
                         <div class="credit-cart-container">
                             <p class="payment-provider">Cash on delivery</p>
@@ -70,11 +70,11 @@
                 </div>
             </div>
         </div>
-        <div class="credit-card-fields">
+        <div class="payment-fields" id="card-fields" style="display:none">
             <div class="group">
                 <div>
                     <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">Card Holder Name</p>
-                    <input type="text" name="firstname" id="firstName" placeholder="Juan">
+                    <input type="text" name="firstname" id="firstName" placeholder="Juan Dela Cruz">
                 </div>
             </div>
             <div class="group">
@@ -86,22 +86,149 @@
             <div class="group cvv">
                 <div>
                     <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">Expiry (MM / YY)</p>
-                    <input type="text" name="firstname" id="firstName" placeholder="08/18">
+                    <input type="text" name="date" id="date" placeholder="08/18">
                 </div>
                 <div>
                     <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">CVV</p>
-                    <input type="text" name="firstname" id="firstName" placeholder="●●●">
+                    <input type="password" name="cvv" id="cvv" placeholder="●●●">
                 </div>
             </div>
 
-            <div class="security-text">
-                <div class="checkmark"><i class="ti ti-checks"></i></div>
+            <div class="security-text-card">
+                <div class="checkmark-card"><i class="ti ti-checks"></i></div>
                 <div style="font-size:0.75rem; color:gray">
                     Secured with 256-bit SSL encryption. We never store your card details.
                 </div>
             </div>
         </div>
-        
+
+        <div class="payment-fields" id="gcash-fields" style="display:none">
+            <div class="group">
+                <div>
+                    <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">Gcash Mobile Number</p>
+                    <input type="text" name="gcashNumber" id="gcashNumber" placeholder="ex .091234567891">
+                </div>
+            </div>
+            <div class="security-text-gcash">
+                <div class="checkmark-gcash"><i class="ti ti-info-circle"></i></i></div>
+                <div style="font-size:0.75rem; color:rgb(73, 73, 197)">
+                    You will receive a GCash payment request on your registered mobile number. Approve it to complete your order.
+                </div>
+            </div>
+        </div>
+        <div class="payment-fields" id="paypal-fields" style="display:none">
+            <div class="group">
+                <div>
+                    <p style="text-transform: uppercase; font-size: 0.75rem; font-weight:550; color:gray; margin-bottom: 5px;">PayPal Email Address</p>
+                    <input type="text" name="paypalNumber" id="paypalNumber" placeholder="juan@gmail.com">
+                </div>
+            </div>
+            <div class="security-text-gcash">
+                <div class="checkmark-paypal"><i class="ti ti-info-circle"></i></i></div>
+                <div style="font-size:0.75rem; color:rgb(73, 73, 197)">
+                   You will be redirected to PayPal to confirm your payment securely. You will be returned here once complete.
+                </div>
+            </div>
+        </div>
+        <div class="payment-fields" id="cash-fields" style="display:none">
+            <div class="group">
+                <div class="cash-fields">
+                    <div class="cash-delivery-info">
+                        <div class="logo-container"><i class="ti ti-box"></i></div>
+                        <div>
+                            <p class="order-info">Order placed</p>
+                            <span class="supporting-info">We prepare and ship your items</span>
+                        </div>
+                    </div>
+                    <div class="cash-delivery-info">
+                        <div class="logo-container"><i class="ti ti-truck-delivery"></i></div>
+                        <div>
+                            <p class="order-info">Out for delivery</p>
+                            <span class="supporting-info">Courier arrives at your address</span>
+                        </div>
+                    </div>
+                    <div class="cash-delivery-info">
+                        <div class="logo-container"><i class="ti ti-cash-move"></i></div>
+                        <div>
+                            <p class="order-info">Pay on arrival</p>
+                            <span class="supporting-info">Hand over ₱96.12 in cash</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="security-text-cash">
+                <div class="checkmark-cash"><i class="ti ti-alert-triangle"></i></div>
+                <div style="font-size:0.75rem; color:rgb(73, 73, 197)">
+                     Please prepare the exact amount of $96.12. Our courier cannot always provide change.
+                </div>
+            </div>
+        </div>
+
+        <div class="shipping-btn">
+                <div class="back-btn" onclick="window.location.href=`/pages/payment-settings/shipping-information.html`">
+                    <span>Back</span>
+                </div>
+                 <div class="continue-btn">
+                    <span>Place Order(Pay on Delivery)</span>
+                </div>
+        </div>
+
+        <div class="order-summary">
+            <div class="order-container">
+                <span id="order-header">Order Summary</span>
+                <div class="order-field">
+                   <div class="order-grid">
+                        <div class="order-information">
+                            <div class="product-info">
+                                <img src="/assets/images/photo-1520903920243-00d872a2d1c9.avif" alt="This is a product image" id="productImg">
+                            </div>
+                            <div class="product-container">
+                                <p class="info">Winter Scarf</p>
+                                <span class="supporting-info">Medium Size</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="product-price">₱125.00</span>
+                        </div>
+                    </div> 
+                    <div class="order-grid">
+                        <div class="order-information">
+                            <div class="product-info">
+                                <img src="/assets/images/photo-1495474472287-4d71bcdd2085.avif" alt="This is a product image" id="productImg">
+                            </div>
+                            <div class="product-container">
+                                <p class="info">Ceramic Coffee Mug</p>
+                                <span class="supporting-info">400 ml</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="product-price">₱200.00</span>
+                        </div>
+                    </div> 
+                </div>
+                <div class="total-summary">
+                        <div class="total-container">
+                            <div class="total-text">Subtotal</div>
+                            <div class="total-payment">₱334.00</div> 
+                        </div>
+                        <div class="total-container">
+                            <div class="total-text">Shipping</div>
+                            <div class="total-payment" style="color: green;">Free</div> 
+                        </div>
+                        <div class="total-container">
+                            <div class="total-text">Tax (8%)</div>
+                            <div class="total-payment">₱26.72</div> 
+                        </div>
+                </div>
+                <div class="total-price">
+                    <div><span style="font-weight: 600;">Total</span></div>
+                    <div style="font-weight: 600; font-size:0.925rem;">₱500.72</div>
+                </div>
+            </div>
+        </div>
+
      </section>
+
+     <script src="/script/payment-settings/payment-information.js"></script>
 </body>
 </html>

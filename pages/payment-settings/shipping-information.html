@@ -20,7 +20,7 @@
         <div class="shipping-method">
             <h3>Shipping Method</h3>
             <div class="shipping-choices">
-                <div class="container">
+                <div class="container shipping-option">
                     <div class="contain">
                         <div class="shipping-input">
                           <input type="radio" name="Shipping" id="standardShipping">
@@ -34,7 +34,7 @@
                         <span class="shipping-payment" style="color:green;">Free</span>
                     </div>
                 </div>
-                <div class="container">
+                <div class="container shipping-option">
                     <div class="contain">
                         <div class="shipping-input">
                           <input type="radio" name="Shipping" id="expressShipping">
@@ -48,7 +48,7 @@
                         <span class="shipping-payment">₱12.95</span>
                     </div>
                 </div>
-                <div class="container">
+                <div class="container shipping-option">
                     <div class="contain">
                         <div class="shipping-input">
                           <input type="radio" name="Shipping" id="priorityShipping">
@@ -64,10 +64,10 @@
                 </div>
             </div>
             <div class="shipping-btn">
-                <div class="back-btn">
+                <div class="back-btn" onclick="window.location.href=`/pages/payment-settings/shipping-information.html`">
                     <span>Back</span>
                 </div>
-                 <div class="continue-btn">
+                 <div class="continue-btn" onclick="window.location.href=`/pages/payment-settings/payment-information.html`">
                     <span>Continue to Payment</span>
                 </div>
             </div>
@@ -127,5 +127,7 @@
             </div>
         </div>
     </section>
+
+    <script src="/script/payment-settings/shipping-infomation.js"></script>
 </body>
 </html>
