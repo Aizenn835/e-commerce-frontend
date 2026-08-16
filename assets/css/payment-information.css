@@ -223,7 +223,16 @@ a {
 .logo-container i{
     color:rgb(44, 40, 40);
 }
-
+.info{
+    font-size:0.925rem;
+    font-weight: 600;
+    color:#09142b;
+}
+@media (max-width: 600px) {
+    .info {
+        max-width: 120px;
+    }
+}
 /* footer */
 .shipping-btn{
     display:flex;
@@ -254,6 +263,16 @@ a {
     font-weight: 600;
     cursor: pointer;
 }
+@media (max-width: 600px) {
+    .back-btn,
+    .continue-btn {
+        height: 64px;
+        box-sizing: border-box;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
 #order-header{
     font-weight: 700;
     font-size:1rem;
@@ -261,7 +280,6 @@ a {
 }
 .order-summary{
     width: 100%;
-    height:auto;
     padding:10px 12px;
     display:flex;
     justify-content: center;
@@ -274,8 +292,8 @@ a {
 }
 .order-field{
     margin-top:1rem;
-    border-bottom: 1px solid rgb(185, 172, 172);
     padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgb(185, 172, 172);
 }
 .order-grid{
     display:flex;
@@ -324,4 +342,14 @@ a {
     display:flex;
     justify-content: space-between;
     padding:10px 12px;
+}
+/* Transition */
+.payment-body{
+    transform: translateX(0%);
+    opacity:1;
+    transition: transform 0.6s ease , opacity 0.5s ease;
+}
+.continue-payment{
+    transform:translateX(-100%);
+    opacity:0;
 }

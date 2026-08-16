@@ -163,7 +163,7 @@ a {
 .save-changes{
     background: #10203f;
     padding:10px 12px;
-    width: 25%;
+    width: fit-content;
     max-width: 30%; 
     text-align: center; 
     margin:20px 12px; 

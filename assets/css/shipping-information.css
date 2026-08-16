@@ -109,6 +109,11 @@ a {
     font-weight: 600;
     color:#09142b;
 }
+@media (max-width: 600px) {
+    .info {
+        max-width: 120px;
+    }
+}
 .shipping-payment{
     font-size:0.825rem;
     font-weight: 600;
@@ -141,8 +146,19 @@ a {
     font-size:0.825rem;
     font-weight: 600;
     cursor: pointer;
+    overflow: hidden;
 }
 
+@media (max-width: 600px) {
+    .back-btn,
+    .continue-btn {
+        height: 64px;
+        box-sizing: border-box;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
 /* Order summary */
 #order-header{
     font-weight: 700;
@@ -166,6 +182,7 @@ a {
     margin-top:1rem;
     border-bottom: 1px solid rgb(185, 172, 172);
     padding-bottom: 0.75rem;
+    overflow-x: auto;
 }
 .order-grid{
     display:flex;
@@ -218,3 +235,14 @@ a {
 .selected{
     border:2px solid #10203f
 }
+/* Transition */
+.shipping-body{
+    transform: translateX(0%);
+    opacity:1;
+    transition: transform 0.6s ease , opacity 0.5s ease;
+}
+.continue-payment{
+    transform:translateX(100%);
+    opacity:0;
+}
+

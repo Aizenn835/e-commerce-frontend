@@ -17,6 +17,7 @@
         <div class="back-arrow" id="back" onclick="window.location.href='/pages/home.html'">
             <span><i class="ti ti-arrow-narrow-left"></i> Back to store</span>
         </div>
+       <div class="payment-body">
         <div class="payment-method">
             <h3>Payment Method</h3>
             <div class="payment-container">
@@ -165,7 +166,7 @@
         </div>
 
         <div class="shipping-btn">
-                <div class="back-btn" onclick="window.location.href=`/pages/payment-settings/shipping-information.html`">
+                <div class="back-btn" onclick="backShipping()">
                     <span>Back</span>
                 </div>
                  <div class="continue-btn">
@@ -177,58 +178,32 @@
             <div class="order-container">
                 <span id="order-header">Order Summary</span>
                 <div class="order-field">
-                   <div class="order-grid">
-                        <div class="order-information">
-                            <div class="product-info">
-                                <img src="/assets/images/photo-1520903920243-00d872a2d1c9.avif" alt="This is a product image" id="productImg">
-                            </div>
-                            <div class="product-container">
-                                <p class="info">Winter Scarf</p>
-                                <span class="supporting-info">Medium Size</span>
-                            </div>
-                        </div>
-                        <div>
-                            <span class="product-price">₱125.00</span>
-                        </div>
-                    </div> 
-                    <div class="order-grid">
-                        <div class="order-information">
-                            <div class="product-info">
-                                <img src="/assets/images/photo-1495474472287-4d71bcdd2085.avif" alt="This is a product image" id="productImg">
-                            </div>
-                            <div class="product-container">
-                                <p class="info">Ceramic Coffee Mug</p>
-                                <span class="supporting-info">400 ml</span>
-                            </div>
-                        </div>
-                        <div>
-                            <span class="product-price">₱200.00</span>
-                        </div>
-                    </div> 
+                   <!-- Order data goes here -->
                 </div>
                 <div class="total-summary">
                         <div class="total-container">
                             <div class="total-text">Subtotal</div>
-                            <div class="total-payment">₱334.00</div> 
+                            <div class="total-payment" id="subtotal-value" data-amount="334.00">₱334.00</div> 
                         </div>
                         <div class="total-container">
                             <div class="total-text">Shipping</div>
-                            <div class="total-payment" style="color: green;">Free</div> 
+                            <div class="total-payment" id="shipping-value" style="color: green;">Free</div> 
                         </div>
                         <div class="total-container">
                             <div class="total-text">Tax (8%)</div>
-                            <div class="total-payment">₱26.72</div> 
+                            <div class="total-payment" id="tax-value">₱26.72</div> 
                         </div>
                 </div>
                 <div class="total-price">
                     <div><span style="font-weight: 600;">Total</span></div>
-                    <div style="font-weight: 600; font-size:0.925rem;">₱500.72</div>
+                    <div style="font-weight: 600; font-size:0.925rem;" id="total-value">₱500.72</div>
                 </div>
             </div>
         </div>
-
+      </div>
      </section>
 
      <script src="/script/payment-settings/payment-information.js"></script>
+      <script src="/script/payment-settings/renderCartPayment-information.js"></script>
 </body>
 </html>

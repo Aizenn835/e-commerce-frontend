@@ -269,6 +269,7 @@ width: 100%;
     align-items: center;
     gap:0.50rem;
     flex-wrap: wrap;
+    border:1px solid black;
 }
 
 .order-logo img{
@@ -451,44 +452,3 @@ width: 100%;
     }
 }
 
-@media (max-width: 600px){
-body{
-    padding-top: 70px;
-}
-.supporting-info{
-    flex-direction: column;
-}
-.user-container{
-    min-height: auto;
-    flex-basis: auto;
-}
-.order-list{
-    justify-content: flex-start;
-}
-.settings-choice{
-    overflow-x: auto;
-    flex-direction: row;
-}
-.self-account{
-    white-space: nowrap;
-}
-.log-out{
-    border-top: none;
-    border-left: 1px solid rgb(221, 212, 212);
-    padding-top: 0.25rem;
-    padding-left: 15px;
-}
-}
-
-@media (max-width: 400px){
-.grid{
-    grid-template-columns: 1fr;
-}
-.settings-name{
-    font-size:1.05rem;  
-}
-.user-pfp{
-    padding:16px 18px;
-}
-
-}
