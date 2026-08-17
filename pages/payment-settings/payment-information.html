@@ -152,7 +152,7 @@
                         <div class="logo-container"><i class="ti ti-cash-move"></i></div>
                         <div>
                             <p class="order-info">Pay on arrival</p>
-                            <span class="supporting-info">Hand over ₱96.12 in cash</span>
+                            <span class="supporting-info">Hand over <b id="order-total">--</b> in cash</span>
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
             <div class="security-text-cash">
                 <div class="checkmark-cash"><i class="ti ti-alert-triangle"></i></div>
                 <div style="font-size:0.75rem; color:rgb(73, 73, 197)">
-                     Please prepare the exact amount of $96.12. Our courier cannot always provide change.
+                     Please prepare the exact amount of <b id="info-total">--</b>. Our courier cannot always provide change.
                 </div>
             </div>
         </div>
@@ -183,27 +183,27 @@
                 <div class="total-summary">
                         <div class="total-container">
                             <div class="total-text">Subtotal</div>
-                            <div class="total-payment" id="subtotal-value" data-amount="334.00">₱334.00</div> 
+                            <div class="total-payment" id="subtotal" >--</div> 
                         </div>
                         <div class="total-container">
                             <div class="total-text">Shipping</div>
-                            <div class="total-payment" id="shipping-value" style="color: green;">Free</div> 
+                            <div class="total-payment" id="shipping-value">--</div> 
                         </div>
                         <div class="total-container">
                             <div class="total-text">Tax (8%)</div>
-                            <div class="total-payment" id="tax-value">₱26.72</div> 
+                            <div class="total-payment" id="tax-value">--</div> 
                         </div>
                 </div>
                 <div class="total-price">
                     <div><span style="font-weight: 600;">Total</span></div>
-                    <div style="font-weight: 600; font-size:0.925rem;" id="total-value">₱500.72</div>
+                    <div style="font-weight: 600; font-size:0.925rem;" id="total-value">--</div>
                 </div>
             </div>
         </div>
       </div>
      </section>
 
-     <script src="/script/payment-settings/payment-information.js"></script>
       <script src="/script/payment-settings/renderCartPayment-information.js"></script>
+      <script src="/script/payment-settings/payment-information.js"></script>
 </body>
 </html>

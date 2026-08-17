@@ -69,6 +69,7 @@ document.querySelectorAll(".nav li").forEach(item => {
 
 document.getElementById("logout").addEventListener("click", () => {
     localStorage.removeItem("Token");
+    localStorage.removeItem("Shipping-Method");
     window.location.href = "/login.html";
 });
 
@@ -486,8 +487,8 @@ async function displayCart() {
 
 function renderCart(cart) {
     document.querySelector(".side-cnt").classList.remove("noProd");
-    getTotalPrice();
-    getSubTotal();
+    // put the new api endpoint here
+    getTotalSummary();
     document.querySelector(".side-cnt").innerHTML = ``;
     cart.forEach(product => {
         document.querySelector(".side-cnt").innerHTML += ` 
@@ -575,36 +576,32 @@ function removeFromCart() {
         });
     });
 }
+async function getTotalSummary(){
 
-async function getTotalPrice(){
     try{
-        const response = await fetch(`${API_URL}/cart/total-price` , {
-            headers:{"Authorization" : `Bearer ${token}`}
+        const response = await fetch(`${API_URL}/cart/summary?shippingMethod=standard%20shipping` , {
+            headers:{"Authorization" : `Bearer ${token}`,
+                     "Content-Type" : "application/json"}
         })
         if(!response.ok){
-            throw new Error(`Status: ${response.status}`)
+            throw new Error("Error" + response.status);
         }
-        const total = await response.json();
-        document.getElementById("totalPrice").textContent = "₱" + total.totalPrice;
+        const summary = await response.json();
+        document.getElementById("subTotal").textContent = "₱"+ summary.subTotal.toLocaleString();
+
+        const shippingFee = document.getElementById("shippingFee");
+        shippingFee.textContent = summary.shippingFee === 0.0 ? "Free" : "₱"+ summary.shippingFee;
+        shippingFee.style.color = summary.shippingFee === 0.0 ? "green" : "gray";
+
+    
+        document.getElementById("tax").textContent = "₱"+ summary.tax;
+        document.getElementById("totalPrice").textContent = "₱"+ summary.totalPrice.toLocaleString();
     }catch(error){
         console.log(error);
     }
 }
 
-async function getSubTotal(){
-    try{
-        const response = await fetch(`${API_URL}/cart/sub-total` , {
-            headers:{"Authorization" : `Bearer ${token}`}
-        })
-        if(!response.ok){
-            throw new Error(`Status: ${response.status}`)
-        }
-        const total = await response.json();
-        document.getElementById("subTotal").textContent ="₱" + total.totalPrice;
-    }catch(error){
-        console.log(error);
-    }
-}
+
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".proceed-checkout").addEventListener("click", () => {
         window.location.href = "/pages/payment-settings/shipping-information.html";

@@ -70,5 +70,6 @@ document.querySelector(".save-changes").addEventListener("click", async () => {
 // Log out 
 document.querySelector(".log-out").addEventListener("click" , () => {
     localStorage.removeItem("Token");
+    localStorage.removeItem("Shipping-Method");
     window.location.href = "/login.html";
 })

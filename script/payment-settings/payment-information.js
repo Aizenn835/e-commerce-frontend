@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:8080";
-const token = localStorage.getItem("Token");
+
 
 document.querySelectorAll(".grid-container").forEach(option => {
     option.addEventListener("click", () => {
@@ -24,21 +23,10 @@ function backShipping(){
     }, 500)
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const shippingCost = Number(localStorage.getItem("selectedShipping")) || 0;
-    updateOrderTotal(shippingCost);
-});
 
-function updateOrderTotal(shippingCost) {
-    const subtotal = Number(document.getElementById("subtotal-value").dataset.amount);
-    const tax = subtotal * 0.08;
-    const total = subtotal + shippingCost + tax;
+const shippingMethod = localStorage.getItem("Shipping-Method");
 
-    const shippingEl = document.getElementById("shipping-value");
-    shippingEl.textContent = shippingCost === 0 ? "Free" : `₱${shippingCost.toFixed(2)}`;
-    shippingEl.style.color = shippingCost === 0 ? "green" : "gray";
+getSummary(shippingMethod);
 
-    document.getElementById("tax-value").textContent = `₱${tax.toFixed(2)}`;
-    document.getElementById("total-value").textContent = `₱${total.toFixed(2)}`;
-}
+
 

@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:8080";
-const token = localStorage.getItem("Token");
+
 
 document.querySelectorAll(".shipping-option").forEach(option => {
     option.addEventListener("click", () => {
@@ -8,11 +7,6 @@ document.querySelectorAll(".shipping-option").forEach(option => {
 
         document.querySelectorAll(".shipping-option").forEach(opt => opt.classList.remove("selected"));
         option.classList.add("selected");
-
-        localStorage.setItem("selectedShipping", option.dataset.price);
-
-        const shippingCost = Number(option.dataset.price);
-        updateOrderTotal(shippingCost);
     });
 });
 
@@ -28,19 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function updateOrderTotal(shippingCost) {
-    const subtotal = Number(document.getElementById("subtotal").dataset.amount);
-    const tax = subtotal * 0.08;
 
-    const total = subtotal + shippingCost + tax;
 
-    const shippingFee = document.getElementById("shipping-value");
-    shippingFee.textContent = shippingCost === 0 ? "Free" : `₱${shippingCost.toFixed(2)}`;
-    shippingFee.style.color = shippingCost === 0 ? "green" : "gray";
-    
-    document.getElementById("tax-value").textContent = `₱${tax.toFixed(2)}`;
-    document.getElementById("total-value").textContent = `₱${total.toFixed(2)}`;
-}
 
 
 

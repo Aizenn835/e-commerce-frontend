@@ -1272,9 +1272,6 @@ min-height: 0vh;
     width: 100%;
     margin: 6px 0;
 }
-.grid {
-    grid-template-columns: 1fr;
-}
  
 .footer {
     text-align: center;
@@ -1285,7 +1282,6 @@ min-height: 0vh;
 }
 @media (max-width:400px){
 .search-container {
-    display: flex; 
-    max-width: 50%;
+    display: none;
 }
 }

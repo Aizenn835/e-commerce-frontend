@@ -21,10 +21,10 @@
         <div class="shipping-method">
             <h3>Shipping Method</h3>
             <div class="shipping-choices">
-                <div class="container shipping-option" data-price="0">
+                <div class="container shipping-option selected" data-shipping-fee="standard shipping">
                     <div class="contain">
                         <div class="shipping-input">
-                          <input type="radio" name="Shipping" id="standardShipping">
+                          <input type="radio" name="Shipping" checked >
                         </div>
                         <div class="shipping-container">
                             <p class="info">Standard Shipping</p>
@@ -35,10 +35,10 @@
                         <span class="shipping-payment" style="color:green;">Free</span>
                     </div>
                 </div>
-                <div class="container shipping-option" data-price="12.95">
+                <div class="container shipping-option" data-shipping-fee="express shipping">
                     <div class="contain">
                         <div class="shipping-input">
-                          <input type="radio" name="Shipping" id="expressShipping">
+                          <input type="radio" name="Shipping">
                         </div>
                         <div class="shipping-container">
                             <p class="info">Express Shipping</p>
@@ -49,10 +49,10 @@
                         <span class="shipping-payment">₱12.95</span>
                     </div>
                 </div>
-                <div class="container shipping-option" data-price="24.95">
+                <div class="container shipping-option" data-shipping-fee="priority overnight">
                     <div class="contain">
                         <div class="shipping-input">
-                          <input type="radio" name="Shipping" id="priorityShipping">
+                          <input type="radio" name="Shipping" >
                         </div>
                         <div class="shipping-container">
                             <p class="info">Priority Overnight</p>
@@ -83,28 +83,34 @@
                 <div class="total-summary">
                         <div class="total-container">
                             <div class="total-text">Subtotal</div>
-                            <div class="total-payment" id="subtotal" data-amount="334.00">₱334.00</div> 
+                            <div class="total-payment" id="subtotal">--</div> 
                         </div>
                         <div class="total-container">
                             <div class="total-text">Shipping</div>
-                            <div class="total-payment" id="shipping-value" style="color: green;">Free</div> 
+                            <div class="total-payment" id="shipping-value">--</div> 
                         </div>
                         <div class="total-container">
                             <div class="total-text">Tax (8%)</div>
-                            <div class="total-payment" id="tax-value">₱26.72</div> 
+                            <div class="total-payment" id="tax-value">--</div> 
                         </div>
                 </div>
                 <div class="total-price">
                     <div><span style="font-weight: 600;">Total</span></div>
-                    <div style="font-weight: 600; font-size:0.925rem;" id="total-value">₱500.72</div>
+                    <div style="font-weight: 600; font-size:0.925rem;" id="total-value">--</div>
                 </div>
+
+                <!-- This is here because renderCartPayment.js needs it! -->
+                <div id="info-total" style="display: none;">--</div>
+                <b id="order-total" style="display: none;">--</b>
             </div>
         </div>
       </div> 
     </section>
 
-    <script src="/script/payment-settings/shipping-infomation.js"></script>
+
     <script src="/script/payment-settings/renderCartPayment-information.js"></script>
+    <script src="/script/payment-settings/shipping-infomation.js"></script>
+   
 
 </body>
 </html>
