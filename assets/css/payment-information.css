@@ -14,6 +14,7 @@ body {
     display:flex;
     flex-direction: column;
     padding-top: 80px; 
+    position: absolute;
 }
 img {
     max-width: 100%;
@@ -352,4 +353,209 @@ a {
 .continue-payment{
     transform:translateX(-100%);
     opacity:0;
+}
+
+/* Order Overlay */
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    opacity: 1;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-modal{
+    position: fixed;
+    top:10%;
+    display:flex;
+    height: auto;
+    width: 100%;
+    max-width: 500px;
+    max-height: 80vh;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.head-order{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(4, 148, 4);
+    width: 100%;
+    height: 40%;
+    padding:20px;
+    border-radius: 12px 12px 0 0 ;
+    flex-shrink: 0;
+    
+}
+.head-order:first-child{
+    gap:10px;
+}
+.order-confirm-logo{
+    background-color: white;
+    width: auto;
+    padding:15px 20px;
+    text-align: center;
+    border-radius: 12px;
+}
+.order-confirm-logo i{
+    font-size: 2.25rem;
+    font-weight: 900;
+    color: green;  
+}
+.supporting-text{
+    font-size:0.75rem;
+    color:white;
+}
+.order-confirm{
+    color:white;
+}
+.footer-container{
+    background-color: rgb(252, 251, 251);
+    border-radius: 0 0 12px 12px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+    box-sizing: border-box;
+}
+.order-info-eye{
+    display:grid;
+    grid-template-columns: repeat(2 , 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding:10px 12px;
+}
+.info-container{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-start;
+    padding:10px 12px;
+    text-transform: uppercase;
+    background-color: rgb(238, 235, 235);
+    border-radius: 12px;
+    gap:5px;
+}
+.order-info{
+    color:rgb(66, 65, 65);
+    font-size:0.685rem;
+}
+.order-value{
+    font-weight: 600;
+    font-size:0.875rem;
+}
+/* order list */
+.order-list{
+    padding:10px 12px;
+    display:flex;
+    flex-direction: column;
+    gap:12px; 
+}
+.order-list-head{
+    align-self: flex-start;
+    text-transform: uppercase;
+    color:gray;
+    font-weight: 560;
+    font-size:0.75rem;
+    letter-spacing: 0.1em;
+}
+.product-container{
+    gap:12px;
+    justify-content: space-between;
+    align-items: center;
+}
+.inner-container{
+    display:flex;
+    gap:12px;
+    align-items: center;
+}
+.product-image{
+    width: 15%;
+    height: 100%;
+    object-fit: cover;
+}
+.product-image img{
+    border-radius: 12px;
+}
+.product-container{
+    display:flex;
+}
+.list-container{
+    border:1px solid rgb(238, 235, 235); 
+    padding:10px 12px;
+    border-radius: 12px;
+}
+.product-dsc{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.product-text{
+    font-size:1rem;
+    font-weight: 600;
+}
+.product-info{
+    font-size:0.75rem;
+    color:gray;
+    font-weight: 500;
+}
+.footer-message{
+    text-align: start;
+}
+.email-modal{
+    color:rgb(20, 76, 150)
+}
+/* modal footer buttons */
+.modal-btn{
+    display:flex;
+    gap:12px;
+    justify-content: center;
+    border-top:1px solid rgb(214, 209, 209);
+    padding:12px;
+}
+.buttons{
+    border-radius: 12px;
+    font-weight: 550;
+    font-size:0.9285rem;
+    cursor: pointer;
+}
+
+.continue-shopping{
+    border:1px solid rgb(202, 197, 197);
+    padding:10px 12px;
+    width: 50%;
+}
+.track-order{
+    background-color:#10203f;
+    padding:10px 12px;
+    width: 50%;
+    color:white;
+}
+@media (max-width: 900px) {
+    .track-order{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .product-text{
+        text-align:start;
+    }
+     .main-modal{
+        max-width: 400px;
+    }
+}
+@media (max-width:400px) {
+     .main-modal{
+        max-width: 350px;
+    }
 }
