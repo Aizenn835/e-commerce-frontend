@@ -21,11 +21,13 @@
         <div class="payment-method">
             <h3>Payment Method</h3>
             <div class="payment-container">
-                <div class="grid-container" data-method="card">
+                <div class="grid-container selected" data-method="card">
                     <div class="field">
                         <div class="upper-choices">
                             <div><i class="ti ti-credit-card-hand"></i></div>
-                            <div style="accent-color:#204181;"><input type="radio" name="paymentMethod" id="credit-card"></div>
+                            <div style="accent-color:#204181;">
+                                <input type="radio" name="paymentMethod" id="credit-card" checked >
+                            </div>
                         </div>
                         <div class="credit-cart-container">
                             <p class="payment-provider">Credit / Debit Card</p> 
@@ -202,10 +204,7 @@
         </div>
       </div>
      </section>
-     <link rel="stylesheet" href="order-modal.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
-
-<div class="modal-overlay">
+     <div class="modal-overlay">
         <div class="main-modal">
             <div class="head-order">
                 <div class="order-confirm-logo">
@@ -221,19 +220,19 @@
              <div class="order-info-eye">
                 <div class="info-container">
                     <span class="order-info">Order Number</span>
-                    <span class="order-value">MDE-4447</span>
+                    <span class="order-value" id="order-number">MDE-4447</span>
                 </div>
                 <div class="info-container">
                     <span class="order-info">est-delivery</span>
-                    <span class="order-value">10/15/2006</span>
+                    <span class="order-value" id="order-date">10/15/2006</span>
                 </div>
                 <div class="info-container">
                     <span class="order-info">Total Paid</span>
-                    <span class="order-value">₱96.12</span>
+                    <span class="order-value" id="order-total">₱96.12</span>
                 </div>
                 <div class="info-container">
                     <span class="order-info">Status</span>
-                    <span class="order-value">Processing</span>
+                    <span class="order-value" id="order-status">Processing</span>
                 </div>
             </div>
 
@@ -254,48 +253,7 @@
                         <div class="product-price">₱100.00</div>
                     </div>    
                 </div>
-                <div class="list-container">
-                    <div class="product-container">
-                       <div class="inner-container">
-                            <div class="product-image">
-                                <img src="/assets/images/photo-1510972527921-ce03766a1cf1.avif" alt="product image" id="productImage">
-                            </div>  
-                            <div class="product-dsc">
-                                <p class="product-text">Ceramic Pour-Over Set</p>
-                                <span class="product-info">Qty 1 • 400ml</span>
-                            </div>
-                        </div>
-                        <div class="product-price">₱100.00</div>
-                    </div>    
-                 </div>
-                 <div class="list-container">
-                    <div class="product-container">
-                       <div class="inner-container">
-                            <div class="product-image">
-                                <img src="/assets/images/photo-1542291026-7eec264c27ff.avif" alt="product image" id="productImage">
-                            </div>  
-                            <div class="product-dsc">
-                                <p class="product-text">Ceramic Pour-Over Set</p>
-                                <span class="product-info">Qty 1 • 400ml</span>
-                            </div>
-                        </div>
-                        <div class="product-price">₱100.00</div>
-                    </div>    
-                </div>
-                <div class="list-container">
-                    <div class="product-container">
-                       <div class="inner-container">
-                            <div class="product-image">
-                                <img src="/assets/images/photo-1542291026-7eec264c27ff.avif" alt="product image" id="productImage">
-                            </div>  
-                            <div class="product-dsc">
-                                <p class="product-text">Ceramic Pour-Over Set</p>
-                                <span class="product-info">Qty 1 • 400ml</span>
-                            </div>
-                        </div>
-                        <div class="product-price">₱100.00</div>
-                    </div>    
-                </div>
+
                 <div class="list-container">
                     <div class="product-container">
                        <div class="inner-container">
@@ -334,5 +292,6 @@
 
       <script src="/script/payment-settings/renderCartPayment-information.js"></script>
       <script src="/script/payment-settings/payment-information.js"></script>
+      
 </body>
 </html>

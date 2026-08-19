@@ -22,11 +22,23 @@ function backShipping(){
         window.location.href="/pages/payment-settings/shipping-information.html";
     }, 500)
 }
-
-
+// payment method summary
 const shippingMethod = localStorage.getItem("Shipping-Method");
-
 getSummary(shippingMethod);
 
-
+document.querySelector(".continue-btn").addEventListener("click" , () => {
+    document.querySelector(".modal-overlay").classList.add("open-modal");
+})
+// payment modal data
+async function modalData(){
+    try{
+        const response = await fetch(`${API_URL}/order/history` , {
+            headers:{"Authorization" : `Bearer ${token}`}
+        })
+        const order = await response.json();
+        document.getElementById("order-number").textContent = "HAHA"
+    }catch(error){
+        console.log(error);
+    }
+}
 

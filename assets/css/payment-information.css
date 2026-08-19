@@ -364,10 +364,16 @@ a {
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
     z-index: 1000;
-    opacity: 1;
     display:flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.open-modal{
+    opacity:1;
+    pointer-events: auto;
 }
 .main-modal{
     position: fixed;

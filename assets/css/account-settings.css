@@ -269,7 +269,6 @@ width: 100%;
     align-items: center;
     gap:0.50rem;
     flex-wrap: wrap;
-    border:1px solid black;
 }
 
 .order-logo img{

@@ -1,6 +1,10 @@
 const API_URL = "http://localhost:8080";
 const token = localStorage.getItem("Token");
 
+if(!token){
+    window.location.href="/login.html";
+}
+
 async function displayCart(){
     try {
         const response = await fetch(`${API_URL}/cart/all-cart`, {
@@ -9,19 +13,7 @@ async function displayCart(){
         if (!response.ok) throw new Error(`Error ${response.status}`);
         const cart = await response.json();
 
-        if (cart.length === 0) {
-            document.querySelector(".side-cnt").innerHTML = `
-            <div class="noContent">
-                <i class="ti ti-shopping-bag" id="content-logo"></i>
-                <h3>Your cart is empty</h3>
-                <p>Browse our collection and add something.</p>
-                <span id="continueCart">Continue Shopping</span>
-            </div>
-            `;
-            document.querySelector(".checkout").classList.remove("show-checkout");
-            document.querySelector(".side-cnt").classList.add("noProd");
-            return;
-        }
+        // put some error handling it like (Logo cart item is empty)
         renderCart(cart);
     } catch (error) {
         console.log(`Error ${error}`);
@@ -51,15 +43,20 @@ function renderCart(cart){
 document.querySelectorAll(".shipping-option").forEach(option => {
 
     option.addEventListener("click", () => {
-
-        const shippingMethod = option.dataset.shippingFee;
+        const shippingMethod = option.dataset.shippingFee ;
+        console.log("Selected: " , shippingMethod)
         getSummary(shippingMethod);
         localStorage.setItem("Shipping-Method" , shippingMethod);
     });
 
 });
 
-getSummary("standard shipping");
+const savedShippingMethod = localStorage.getItem("Shipping-Method") || "standard shipping";
+
+localStorage.setItem("Shipping-Method", savedShippingMethod);
+
+getSummary(savedShippingMethod);
+
 async function getSummary(shippingMethod){
     try{
         const response = await fetch(`${API_URL}/cart/summary?shippingMethod=${encodeURIComponent(shippingMethod)}` , {

@@ -77,7 +77,7 @@ function renderOrderHistory(order){
             <div class="order-list">
                 <div class="order-container">
                     <div class="order-logo">
-                        <img src="${API_URL + product.productImage}" alt="This is a photo">
+                        <img src="${API_URL + product.productImage}" alt="This is product photo">
                     </div>
                 <div>
                     <p class="order-id">${product.orderId}</p>
