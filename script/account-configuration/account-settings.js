@@ -81,7 +81,7 @@ function renderOrderHistory(order){
                     </div>
                 <div>
                     <p class="order-id">${product.orderId}</p>
-                    <span class="order-date">${product.orderTime} · ${product.quantity} ${(product.quantity >= 2) ? "items" : "item"} </span>
+                    <span class="order-date">${product.orderDate} · ${product.quantity} ${(product.quantity >= 2) ? "items" : "item"} </span>
                 </div>
                 </div>
                 <div>

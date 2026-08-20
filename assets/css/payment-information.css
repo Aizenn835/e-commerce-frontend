@@ -220,6 +220,7 @@ a {
 .supporting-info{
     font-size:0.75rem;
     color:gray;
+    align-self: flex-start;
 }
 .logo-container i{
     color:rgb(44, 40, 40);
@@ -452,7 +453,7 @@ a {
     border-radius: 12px;
     gap:5px;
 }
-.order-info{
+.order-modal-info{
     color:rgb(66, 65, 65);
     font-size:0.685rem;
 }
@@ -475,15 +476,17 @@ a {
     font-size:0.75rem;
     letter-spacing: 0.1em;
 }
-.product-container{
-    gap:12px;
-    justify-content: space-between;
+.product-modal-container{
+    display:flex;
     align-items: center;
+    justify-content: center;
+    gap:3px;
 }
 .inner-container{
     display:flex;
     gap:12px;
     align-items: center;
+ 
 }
 .product-image{
     width: 15%;
@@ -492,9 +495,6 @@ a {
 }
 .product-image img{
     border-radius: 12px;
-}
-.product-container{
-    display:flex;
 }
 .list-container{
     border:1px solid rgb(238, 235, 235); 
