@@ -147,16 +147,14 @@ width: 100%;
     overflow: hidden;
 }
 .user-pfp{
-    padding:18px 19px;
-    background: rgb(189, 184, 184);
-    color:white;
-    border-radius: 3rem;
-    font-size: 1.50rem;
-    width: 70px;
-    text-align: center;
-    flex-shrink: 0;
-    display:block;
-    justify-content: center;
+    width: 10%;
+    height: auto;
+}
+#userProfileImg{
+    border-radius: 50px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .user-details{
     display:flex;
@@ -448,6 +446,9 @@ width: 100%;
 @media (max-width: 900px){
     .hero{
         width: min(94%, 640px);
+    }
+    .user-pfp{
+        width:50px;
     }
 }
 

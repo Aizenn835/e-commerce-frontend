@@ -22,6 +22,9 @@ async function userInformation(){
         const profile = await response.json();
         document.querySelector(".user-name").textContent = profile.fullName;
         document.querySelector(".user-email").textContent = profile.email;
+        document.getElementById("userProfileImg").src = `${API_URL + profile.pfpUrl}`;
+       
+        
     }catch(error){
         console.log(`Error: ${error}`)
     }
@@ -141,6 +144,49 @@ switches.forEach(switchEl => {
         circle.classList.toggle("onCircle");
     });
 });
+// change image
+const changePfp = document.querySelector(".change-pfp");
+const pfpInput = document.getElementById("pfp-input");
+
+changePfp.addEventListener("click" , () => { 
+    pfpInput.click();
+})
+
+pfpInput.addEventListener("change" , async (e) => {
+    const file = e.target.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+        console.log("Preview reader" , e.target.result);
+    }
+    reader.readAsDataURL(file);
+    const success = await saveChangesPfp(file);
+    if(success){
+      location.reload();
+   }
+})
+async function saveChangesPfp(file){
+    const formData = new FormData();
+    formData.append("file" , file);
+    try{
+        const response = await fetch(`${API_URL}/settings/change-pfp` , {
+            method: "POST",
+            headers: {"Authorization" : `Bearer ${token}`},
+            body: formData      
+        })
+        if(!response.ok){
+            console.log("Update failed:" + response.status )
+            location.reload();
+            return false;
+        }
+        return true;
+    }catch(error){
+        console.log(error);
+    }
+}
 
 loadHistory();
 userInformation();  
