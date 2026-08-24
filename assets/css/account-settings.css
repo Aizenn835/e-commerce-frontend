@@ -357,7 +357,10 @@ width: 100%;
     color:gray;
     font-size:0.75rem;
 }
-.user-address-footer{margin-top:5px;}
+.user-address-footer{
+    padding-top:12px;
+}
+
 .add-info{
     font-size:0.75rem;
     font-weight: 500;
@@ -365,9 +368,9 @@ width: 100%;
     cursor: pointer;
     color:#0d2047;
     font-weight: 600;
+    margin-right:12px;
 }
 .add-info:hover{text-decoration: underline;}
-.card{margin-top:12px;}
 
 .notification-settings{
     border:1px solid rgb(221, 212, 212);
