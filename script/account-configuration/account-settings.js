@@ -187,6 +187,9 @@ async function saveChangesPfp(file){
         console.log(error);
     }
 }
+function openForm(){
+    document.querySelector(".field-address").classList.toggle("openForm");
+}
 
 loadHistory();
 userInformation();  

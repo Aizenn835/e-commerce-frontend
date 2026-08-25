@@ -60,19 +60,19 @@
                 <div class="grid">
                     <div class="group">
                         <label> First Name</label>
-                        <input type="text" placeholder="Juan" style=" text-transform: capitalize;" id="firstNameInput" > 
+                        <input class="group-input" type="text" placeholder="Juan" style=" text-transform: capitalize;" id="firstNameInput" > 
                     </div> 
                     <div class="group">
                         <label> Last Name</label>
-                        <input type="text" placeholder="Dela Cruz" style=" text-transform: capitalize;" id="lastNameInput"> 
+                        <input class="group-input" type="text" placeholder="Dela Cruz" style=" text-transform: capitalize;" id="lastNameInput"> 
                     </div>
                     <div class="group">
                         <label> Email</label>
-                        <input type="text" placeholder="juan.delacruz@gmail.com" id="emailInput">
+                        <input class="group-input" type="text" placeholder="juan.delacruz@gmail.com" id="emailInput">
                     </div> 
                     <div class="group">
                         <label> Phone Number</label>
-                        <input  type="text" placeholder="09171234567" inputmode="numeric"  pattern="[0-9]{12}" 
+                        <input  class="group-input" type="text" placeholder="09171234567" inputmode="numeric"  pattern="[0-9]{12}" 
                           minlength="12" maxlength="12" title="Please enter exactly 12 digits." required id="phoneNumberInput" >
                     </div> 
                 </div>
@@ -107,7 +107,7 @@
                 <span class="address">142 Birch Street, Apt 4B Brooklyn, NY 11201</span>
             </div>
             <div class="user-address-footer">
-                <a href="" class="add-info">Manage Addresses</a>
+                <button class="add-info">Manage Addresses</button>
             </div>
          </div>
 
@@ -121,7 +121,7 @@
                 <span class="supporting-expiration">Expires 08 / 28</span>
             </div>
             <div class="user-address-footer" style="margin-top: 5px;">
-                <a href="" class="add-info card">Manage Payment Methods</a>
+                <button class="add-info">Manage Payment Methods</button>
             </div>
          </div>
        </div>
@@ -168,6 +168,79 @@
                     <div class="circle"></div>
                 </div>
             </div>
+         </div>
+       </div>
+
+       <!-- Modal -->
+       <div class="modal-overlay">
+         <div class="main-modal">
+           <div class="address-head">
+             <h3>Manage Addresses</h3>
+           </div>
+           <div class="current-addresses">
+             <div class="address-container">
+                <div class="input">
+                    <input type="radio" name="defaultAddress" >
+                </div>
+                <div class="inner-address-container">
+                    <div class="user-default">
+                        <p class="user">Lei Justine Clemente</p>
+                        <span id="default">Default</span>
+                    </div>
+                    <p class="user-address">49 Enriquez St. Brgy Catmon Malolos,Bulacan</p>
+                </div>
+             </div>
+             <div class="address-container">
+                <div class="input">
+                    <input type="radio" name="defaultAddress">
+                </div>
+                <div class="inner-address-container">
+                    <div class="user-default">
+                        <p class="user">Juan Dela Cruz</p>
+                        <span id="default" style="display: none;">Default</span>
+                    </div>
+                    <p class="user-address">101 Chico St. Brgy Canalate Malolos,Bulacan</p>
+                </div>
+             </div>
+           </div>
+           
+           <div class="add-address" onclick="openForm()">
+             <p class="add-text">Add New Address</p>
+           </div>
+
+            <div class="field-address">
+        <div class="address-grid">
+            <div class="input-container">
+                <p class="input-info">Full Name</p>
+                <input class="input-text" type="text" id="fullName">
+            </div>
+            <div class="input-container">
+                <p class="input-info">Street Address</p>
+                <input class="input-text" type="text" id="streetAddress">
+            </div>
+            <div class="input-container">
+                <div class="address-input-container">
+                    <div class="inner-address">
+                        <p class="input-info">City</p>
+                        <input class="input-text" type="text" id="city">
+                    </div>
+                    <div class="inner-address">
+                        <p class="input-info">State</p>
+                        <input class="input-text" type="text" id="state">
+                    </div>
+                </div>
+            </div>
+            <div class="input-container">
+                <p class="input-info">ZIP Code</p>
+                <input class="input-text" type="text" id="zipCode">
+            </div>
+        </div>
+    </div>
+
+           <div class="address-modal-footer">
+             <button class="address-btn cancel">Cancel</button>
+             <button class="address-btn save">Save & Use This Address</button>
+           </div>
          </div>
        </div>
     </section>
