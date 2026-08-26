@@ -190,6 +190,73 @@ async function saveChangesPfp(file){
 function openForm(){
     document.querySelector(".field-address").classList.toggle("openForm");
 }
+// cancel and open modal btn
+document.querySelector(".add-info").addEventListener("click" , () => {
+    document.querySelector(".modal-overlay").classList.add("modal-add");
+})
+document.querySelector(".cancel").addEventListener("click" , () => {
+    document.querySelector(".modal-overlay").classList.remove("modal-add");
+})
+// inner container event listener
+document.querySelectorAll(".address-container").forEach(option => {
+    option.addEventListener("click" , () => {
+        const inputRadio = option.querySelector("input[type='radio']");
+        if(inputRadio) inputRadio.checked = true;
+        
+        document.querySelectorAll(".address-container").forEach(opt => {
+            opt.classList.remove("selected");
+
+            const defaultBadge = opt.querySelector(".default-badge");
+            if(defaultBadge) defaultBadge.style.display = "none";
+        });
+        option.classList.add("selected");
+        option.querySelector(".default-badge").style.display = "block";
+       
+    });     
+})
+// API Connection for Address
+document.querySelector(".save").addEventListener("click" ,async () => {
+    const fullname = document.getElementById("fullName").value;
+    const street = document.getElementById("streetAddress").value;
+    const city = document.getElementById("city").value;
+    const state = document.getElementById("state").value;
+    const zipCode = document.getElementById("zipCode").value;
+
+    const saving = document.querySelector(".save");
+    saving.textContent = "Saving...";
+    saving.disabled = true;
+    
+    try{
+        const response = await fetch(`${API_URL}/settings/add-address` , {
+            method: "POST",
+            headers: {"Authorization" : `Bearer ${token}`,
+                      "Content-Type" : "application/json"},
+            body:
+                JSON.stringify({
+                    fullName: fullname,
+                    street: street,
+                    city: city,
+                    state: state,
+                    zipCode : zipCode
+                })
+        });
+        if(!response.ok){
+            throw new Error("Status: " + response.status)
+        }
+        const success = await response.json();
+        document.querySelector(".save").textContent = success.message;
+
+        setTimeout(() => {
+            document.querySelector(".save").textContent = "Save & Use This Address";
+        }, 900)
+
+        document.querySelectorAll(".input-text").forEach(inpt => inpt.value = "")
+    }catch(error){
+        console.log(error);
+    }
+ })
+
+
 
 loadHistory();
 userInformation();  

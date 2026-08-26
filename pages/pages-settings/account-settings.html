@@ -178,14 +178,14 @@
              <h3>Manage Addresses</h3>
            </div>
            <div class="current-addresses">
-             <div class="address-container">
+             <div class="address-container selected">
                 <div class="input">
-                    <input type="radio" name="defaultAddress" >
+                    <input type="radio" name="defaultAddress" checked >
                 </div>
                 <div class="inner-address-container">
                     <div class="user-default">
                         <p class="user">Lei Justine Clemente</p>
-                        <span id="default">Default</span>
+                        <span class="default-badge">Default</span>
                     </div>
                     <p class="user-address">49 Enriquez St. Brgy Catmon Malolos,Bulacan</p>
                 </div>
@@ -197,7 +197,7 @@
                 <div class="inner-address-container">
                     <div class="user-default">
                         <p class="user">Juan Dela Cruz</p>
-                        <span id="default" style="display: none;">Default</span>
+                        <span class="default-badge">Default</span>
                     </div>
                     <p class="user-address">101 Chico St. Brgy Canalate Malolos,Bulacan</p>
                 </div>
@@ -238,8 +238,8 @@
     </div>
 
            <div class="address-modal-footer">
-             <button class="address-btn cancel">Cancel</button>
-             <button class="address-btn save">Save & Use This Address</button>
+             <button type="button" class="address-btn cancel">Cancel</button>
+             <button type="button" class="address-btn save">Save & Use This Address</button>
            </div>
          </div>
        </div>
