@@ -489,6 +489,24 @@ width: 100%;
 .current-addresses{
     display:flex;
     flex-direction: column;
+    height: auto;
+    max-height: 25vh;
+    overflow-y: auto;
+}
+.notfound{
+    width: auto;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:10px 12px;
+    color:gray;
+    gap:12px;
+}
+.notfound img{
+    display:flex;
+    width: 30%;
+    justify-self: center;
 }
 .address-container{
     margin:12px;
@@ -527,6 +545,7 @@ width: 100%;
     background-color: #bdc8dd;
     border-radius: 5px;
     padding:0.1875rem;
+    display:none;
 }
 .remove-badge{
     display:none;
@@ -627,6 +646,7 @@ width: 100%;
 .selected{
     border:1px solid #10203f;
 }
+
 
 /* Wrong credentials input */
 .wrong-credentials {

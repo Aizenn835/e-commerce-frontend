@@ -104,7 +104,7 @@
                 <span>Saved Address</span>
             </div>
             <div class="user-address">
-                <span class="address">142 Birch Street, Apt 4B Brooklyn, NY 11201</span>
+                <p class="address">142 Birch Street, Apt 4B Brooklyn, NY 11201</p>
             </div>
             <div class="user-address-footer">
                 <button class="add-info">Manage Addresses</button>
@@ -118,7 +118,7 @@
             </div>
             <div class="user-address">
                 <p class="expiration-text">Visa ending in 4012</p>
-                <span class="supporting-expiration">Expires 08 / 28</span>
+                <p class="supporting-expiration">Expires 08 / 28</p>
             </div>
             <div class="user-address-footer" style="margin-top: 5px;">
                 <button class="add-info">Manage Payment Methods</button>
@@ -178,30 +178,12 @@
              <h3>Manage Addresses</h3>
            </div>
            <div class="current-addresses">
-             <div class="address-container selected">
-                <div class="input">
-                    <input type="radio" name="defaultAddress" checked >
-                </div>
-                <div class="inner-address-container">
-                    <div class="user-default">
-                        <p class="user">Lei Justine Clemente</p>
-                        <span class="default-badge">Default</span>
-                    </div>
-                    <p class="user-address">49 Enriquez St. Brgy Catmon Malolos,Bulacan</p>
-                </div>
-             </div>
-             <div class="address-container">
-                <div class="input">
-                    <input type="radio" name="defaultAddress">
-                </div>
-                <div class="inner-address-container">
-                    <div class="user-default">
-                        <p class="user">Juan Dela Cruz</p>
-                        <span class="default-badge">Default</span>
-                    </div>
-                    <p class="user-address">101 Chico St. Brgy Canalate Malolos,Bulacan</p>
-                </div>
-             </div>
+            <!-- This is where the address data lives -->
+            <div class="notfound">
+                <img src="/assets/images/undraw_address_4imv.svg" alt="No address handler">
+                <h3 class="main-text">Where should we ship your items?</h3>
+                <p class="supporting-text">Save your favorite shipping addresses to make ordering effortless.</p>
+            </div>
            </div>
            
            <div class="add-address" onclick="openForm()">

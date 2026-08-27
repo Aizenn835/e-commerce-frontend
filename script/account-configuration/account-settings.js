@@ -193,12 +193,14 @@ function openForm(){
 // cancel and open modal btn
 document.querySelector(".add-info").addEventListener("click" , () => {
     document.querySelector(".modal-overlay").classList.add("modal-add");
+    getAddress();
 })
 document.querySelector(".cancel").addEventListener("click" , () => {
     document.querySelector(".modal-overlay").classList.remove("modal-add");
 })
 // inner container event listener
-document.querySelectorAll(".address-container").forEach(option => {
+function attachListener(){
+    document.querySelectorAll(".address-container").forEach(option => {
     option.addEventListener("click" , () => {
         const inputRadio = option.querySelector("input[type='radio']");
         if(inputRadio) inputRadio.checked = true;
@@ -213,7 +215,22 @@ document.querySelectorAll(".address-container").forEach(option => {
         option.querySelector(".default-badge").style.display = "block";
        
     });     
-})
+ })
+}
+// Input validation
+function validateAddressForm(fullname, street, city, state, zipCode) {
+    
+    if (
+        fullname.trim() === "" ||
+        street.trim() === "" ||
+        city.trim() === "" ||
+        state.trim() === "" ||
+        zipCode.trim() === ""
+    ) {
+        return false; 
+    }
+    return true;
+}
 // API Connection for Address
 document.querySelector(".save").addEventListener("click" ,async () => {
     const fullname = document.getElementById("fullName").value;
@@ -221,6 +238,11 @@ document.querySelector(".save").addEventListener("click" ,async () => {
     const city = document.getElementById("city").value;
     const state = document.getElementById("state").value;
     const zipCode = document.getElementById("zipCode").value;
+
+    if(!validateAddressForm(fullname , street , city , state , zipCode)){
+        alert("Input is empty");
+        return;
+    }
 
     const saving = document.querySelector(".save");
     saving.textContent = "Saving...";
@@ -240,6 +262,13 @@ document.querySelector(".save").addEventListener("click" ,async () => {
                     zipCode : zipCode
                 })
         });
+        if(response.status === 409){
+            alert("Address already existed!");
+            const saveBtn =  document.querySelector(".save");
+            saveBtn.textContent = "Save & Use This Address";
+            saveBtn.disabled = false;
+            return;
+        }
         if(!response.ok){
             throw new Error("Status: " + response.status)
         }
@@ -247,15 +276,65 @@ document.querySelector(".save").addEventListener("click" ,async () => {
         document.querySelector(".save").textContent = success.message;
 
         setTimeout(() => {
-            document.querySelector(".save").textContent = "Save & Use This Address";
+            const saveBtn =  document.querySelector(".save");
+            saveBtn.textContent = "Save & Use This Address";
+            saveBtn.disabled = false;
+            getAddress();
         }, 900)
 
         document.querySelectorAll(".input-text").forEach(inpt => inpt.value = "")
     }catch(error){
         console.log(error);
     }
- })
+})
+async function getAddress(){
+    try{
+        const response = await fetch(`${API_URL}/settings/view-address` , {
+            headers:{"Authorization" : `Bearer ${token}`}
+        })
+        if(!response.ok){
+            throw new Error("Status: " + response.status);
+        }
+        const userAddress = await response.json();
+        const container =  document.querySelector(".current-addresses");
 
+        if(userAddress.length === 0){
+            container.innerHTML = `
+             <div class="notfound">
+                <img src="/assets/images/undraw_address_4imv.svg" alt="No address handler">
+                <h3 class="main-text">Where should we ship your items?</h3>
+                <p class="supporting-text">Save your favorite shipping addresses to make ordering effortless.</p>
+             </div>`
+             return;
+        }
+            showAvailableAddress(userAddress);
+        
+
+    }catch(error){
+        console.log(error);
+    }
+}
+// View address 
+function showAvailableAddress(userAddress){
+    document.querySelector(".current-addresses").innerHTML = " ";
+    userAddress.forEach(address => {
+        document.querySelector(".current-addresses").innerHTML += `
+          <div class="address-container">
+                <div class="input">
+                    <input type="radio" name="defaultAddress" checked >
+                </div>
+                <div class="inner-address-container">
+                    <div class="user-default">
+                        <p class="user">${address.fullName}</p>
+                        <span class="default-badge">Default</span>
+                    </div>
+                    <p class="user-address">${address.address}</p>
+                </div>
+           </div>
+        `
+    })
+    attachListener();
+}
 
 
 loadHistory();
