@@ -104,7 +104,7 @@
                 <span>Saved Address</span>
             </div>
             <div class="user-address">
-                <p class="address">142 Birch Street, Apt 4B Brooklyn, NY 11201</p>
+                <p class="address">--</p>
             </div>
             <div class="user-address-footer">
                 <button class="add-info">Manage Addresses</button>
@@ -193,35 +193,41 @@
             <div class="field-address">
         <div class="address-grid">
             <div class="input-container">
-                <p class="input-info">Full Name</p>
+                <p class="input-info">Full Name <span class="required-input">*</span></p>
                 <input class="input-text" type="text" id="fullName">
             </div>
             <div class="input-container">
-                <p class="input-info">Street Address</p>
+                <p class="input-info">Street Address <span class="required-input">*</span></p>
                 <input class="input-text" type="text" id="streetAddress">
             </div>
             <div class="input-container">
                 <div class="address-input-container">
                     <div class="inner-address">
-                        <p class="input-info">City</p>
+                        <p class="input-info">City <span class="required-input">*</span></p>
                         <input class="input-text" type="text" id="city">
                     </div>
                     <div class="inner-address">
-                        <p class="input-info">State</p>
+                        <p class="input-info">State <span class="required-input">*</span></p>
                         <input class="input-text" type="text" id="state">
                     </div>
                 </div>
             </div>
             <div class="input-container">
-                <p class="input-info">ZIP Code</p>
+                <p class="input-info">ZIP Code <span class="required-input">*</span></p>
                 <input class="input-text" type="text" id="zipCode">
+            </div>
+            <div class="footer">
+                <div class="checkbox">
+                    <input type="checkbox" id="footer-checkbox">
+                </div>
+                <p id="supporting-footer">Use this as default address</p>
             </div>
         </div>
     </div>
 
            <div class="address-modal-footer">
              <button type="button" class="address-btn cancel">Cancel</button>
-             <button type="button" class="address-btn save">Save & Use This Address</button>
+             <button type="button" class="address-btn save">Save</button>
            </div>
          </div>
        </div>

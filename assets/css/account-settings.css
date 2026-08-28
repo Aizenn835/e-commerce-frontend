@@ -643,6 +643,22 @@ width: 100%;
     border-color: #10203f;
     outline: none;
 }
+.footer{
+    display:flex;
+    align-items: center;
+    gap:10px; 
+}
+#supporting-footer{
+    font-size:0.825rem;
+    font-weight: 500;
+    color:#10203f;
+}
+#footer-checkbox{accent-color: #284f9d;}
+.required-input{
+    color:red;
+    font-size:0.825rem;
+    font-weight: bold;
+}
 .selected{
     border:1px solid #10203f;
 }

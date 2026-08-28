@@ -207,13 +207,8 @@ function attachListener(){
         
         document.querySelectorAll(".address-container").forEach(opt => {
             opt.classList.remove("selected");
-
-            const defaultBadge = opt.querySelector(".default-badge");
-            if(defaultBadge) defaultBadge.style.display = "none";
         });
         option.classList.add("selected");
-        option.querySelector(".default-badge").style.display = "block";
-       
     });     
  })
 }
@@ -238,7 +233,10 @@ document.querySelector(".save").addEventListener("click" ,async () => {
     const city = document.getElementById("city").value;
     const state = document.getElementById("state").value;
     const zipCode = document.getElementById("zipCode").value;
+    const checkbox = document.getElementById("footer-checkbox");
 
+    const isChecked = checkbox.checked ? true : false;
+    
     if(!validateAddressForm(fullname , street , city , state , zipCode)){
         alert("Input is empty");
         return;
@@ -259,13 +257,14 @@ document.querySelector(".save").addEventListener("click" ,async () => {
                     street: street,
                     city: city,
                     state: state,
-                    zipCode : zipCode
+                    zipCode : zipCode,
+                    isDefault : isChecked
                 })
         });
         if(response.status === 409){
             alert("Address already existed!");
             const saveBtn =  document.querySelector(".save");
-            saveBtn.textContent = "Save & Use This Address";
+            saveBtn.textContent = "Save";
             saveBtn.disabled = false;
             return;
         }
@@ -277,7 +276,7 @@ document.querySelector(".save").addEventListener("click" ,async () => {
 
         setTimeout(() => {
             const saveBtn =  document.querySelector(".save");
-            saveBtn.textContent = "Save & Use This Address";
+            saveBtn.textContent = "Save";
             saveBtn.disabled = false;
             getAddress();
         }, 900)
@@ -308,6 +307,7 @@ async function getAddress(){
              return;
         }
             showAvailableAddress(userAddress);
+            currentDefaultAddress();
         
 
     }catch(error){
@@ -317,16 +317,16 @@ async function getAddress(){
 // View address 
 function showAvailableAddress(userAddress){
     document.querySelector(".current-addresses").innerHTML = " ";
-    userAddress.forEach(address => {
+    userAddress.forEach((address , index) => {
         document.querySelector(".current-addresses").innerHTML += `
-          <div class="address-container">
+          <div class="address-container" data-index=${index}>
                 <div class="input">
                     <input type="radio" name="defaultAddress" checked >
                 </div>
                 <div class="inner-address-container">
                     <div class="user-default">
                         <p class="user">${address.fullName}</p>
-                        <span class="default-badge">Default</span>
+                        <span class="default-badge" style="display: ${address.isDefault ? "block" : "none"}" >Default</span>
                     </div>
                     <p class="user-address">${address.address}</p>
                 </div>
@@ -335,7 +335,20 @@ function showAvailableAddress(userAddress){
     })
     attachListener();
 }
+// show current address
+async function currentDefaultAddress(){
+    try{
+        const response = await fetch(`${API_URL}/settings/default-address` , {
+            headers:{"Authorization" : `Bearer ${token}`}
+        })
+        const address = await response.json();
+        document.querySelector(".address").textContent = address.address;
+    }catch(error){
+        console.log(error);
+    }
+}
 
 
+currentDefaultAddress();
 loadHistory();
 userInformation();  
