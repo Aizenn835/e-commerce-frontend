@@ -455,15 +455,17 @@ width: 100%;
     justify-content: center;
     pointer-events: none; /* change this later */
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease , transform 0.5s ease;
 }
 .modal-add{
+    transform: scale(1);
     opacity: 1;
     pointer-events: auto;
 }
 .main-modal{
     position: fixed;
-    top:17%;
+    top:10%;
     display:flex;
     height: auto;
     width: 100%;
@@ -480,7 +482,17 @@ width: 100%;
     border-bottom: 1px solid rgb(207, 202, 202);
     padding:15px 17px;
     display: flex;
-    justify-self: flex-start;
+    justify-content: space-between; 
+}
+.exit{
+    font-size:0.9285rem;
+    font-weight:700;
+    cursor: pointer;
+    padding:8px 10px;
+    border-radius: 50px;
+}
+.exit:hover{
+    background-color: rgb(202, 198, 198);
 }
 .address-head h3{
     font-size:1rem;
@@ -490,6 +502,7 @@ width: 100%;
     display:flex;
     flex-direction: column;
     height: auto;
+
     max-height: 25vh;
     overflow-y: auto;
 }
@@ -509,7 +522,7 @@ width: 100%;
     justify-self: center;
 }
 .address-container{
-    margin:12px;
+    margin:12px 12px 5px 12px;
     padding:10px 12px;
     display:flex;
     align-items: center;
@@ -518,6 +531,50 @@ width: 100%;
     border-radius: 12px;
     border:1px solid rgb(219, 214, 214);
     cursor: pointer;
+    position: relative;
+}
+.edit-address{
+    width: 40%;
+    max-width: 200px;
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.edit{
+    width: auto;
+    min-width: 70px;
+    font-size:0.75rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    border:1px solid #10203f;
+    color:#10203f;
+    padding:5px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    font-weight: 600;
+}
+.edit i{
+    color:#10203f;
+    font-weight: 550;
+}
+.edit:hover{
+    background-color: rgb(249, 241, 241);
+    border:1px solid rgb(187, 187, 225);
+}
+.remove{
+    display:flex;
+    align-items: center;
+    font-size:0.7285rem;
+    border: 1px solid rgb(239, 222, 222);
+    padding:6px;
+    border-radius: 12px;
+    text-align: center;
+    color:red;
+}
+.remove:hover{
+    background-color: rgb(239, 221, 221);
 }
 .input{
     accent-color: #10203f;

@@ -198,10 +198,20 @@ document.querySelector(".add-info").addEventListener("click" , () => {
 document.querySelector(".cancel").addEventListener("click" , () => {
     document.querySelector(".modal-overlay").classList.remove("modal-add");
 })
+document.querySelector(".exit").addEventListener("click" , () => {
+    document.querySelector(".modal-overlay").classList.remove("modal-add");
+})
+
+
 // inner container event listener
 function attachListener(){
     document.querySelectorAll(".address-container").forEach(option => {
-    option.addEventListener("click" , () => {
+    option.addEventListener("click" , (e) => {
+        
+        if(e.target.closest(".edit-address")){
+            return;
+        }
+        
         const inputRadio = option.querySelector("input[type='radio']");
         if(inputRadio) inputRadio.checked = true;
         
@@ -211,6 +221,13 @@ function attachListener(){
         option.classList.add("selected");
     });     
  })
+}
+
+function editBtn(){
+    document.querySelector(".btn-edit").addEventListener("click" , (e) => {
+        const edit = document.querySelector(".edit");
+        const target = e.target(edit);
+    });
 }
 // Input validation
 function validateAddressForm(fullname, street, city, state, zipCode) {
@@ -306,10 +323,8 @@ async function getAddress(){
              </div>`
              return;
         }
-            showAvailableAddress(userAddress);
             currentDefaultAddress();
-        
-
+            showAvailableAddress(userAddress);
     }catch(error){
         console.log(error);
     }
@@ -317,35 +332,73 @@ async function getAddress(){
 // View address 
 function showAvailableAddress(userAddress){
     document.querySelector(".current-addresses").innerHTML = " ";
-    userAddress.forEach((address , index) => {
+    userAddress.forEach((address) => {
         document.querySelector(".current-addresses").innerHTML += `
-          <div class="address-container" data-index=${index}>
+          <div class="address-container" data-index=${address.id}>
                 <div class="input">
                     <input type="radio" name="defaultAddress" checked >
                 </div>
                 <div class="inner-address-container">
                     <div class="user-default">
                         <p class="user">${address.fullName}</p>
-                        <span class="default-badge" style="display: ${address.isDefault ? "block" : "none"}" >Default</span>
+                        <span class="default-badge" style="display:${address.isDefault ? "block" : "none"}">Default</span>
                     </div>
                     <p class="user-address">${address.address}</p>
+                </div>
+                <div class="edit-address">
+                    <div class="edit"> 
+                        <i class="ti ti-edit"></i> 
+                        <p class="btn-edit">Edit</p>
+                    </div>
+                    <div class="remove">Remove</div>
                 </div>
            </div>
         `
     })
     attachListener();
+    deleteListener();
 }
 // show current address
+// handle the error when there is no current address save 
+// throw exception Address not found? etc..
 async function currentDefaultAddress(){
     try{
         const response = await fetch(`${API_URL}/settings/default-address` , {
             headers:{"Authorization" : `Bearer ${token}`}
         })
-        const address = await response.json();
-        document.querySelector(".address").textContent = address.address;
+        if (response.status === 404) {
+            document.querySelector(".address").textContent = "No default address";
+        }else{
+            const address = await response.json();
+            document.querySelector(".address").textContent = address.address;
+        }
+       
     }catch(error){
         console.log(error);
     }
+}
+// delete address
+function deleteListener(){
+    document.querySelectorAll(".address-container").forEach(opt => {
+        opt.addEventListener("click" , async (e) => {
+            const id = opt.dataset.index;
+            // test the id
+            console.log(id);
+
+            if(!e.target.closest(".remove")){ return; }
+
+            try{
+                await fetch(`${API_URL}/settings/${id}`, {
+                    method: "DELETE",
+                    headers: {"Authorization" : `Bearer ${token}`}
+                });
+                 getAddress();
+                 currentDefaultAddress();
+            }catch(error){
+                console.log(error);
+            }
+        });
+    })
 }
 
 
