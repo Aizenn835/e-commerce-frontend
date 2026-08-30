@@ -104,7 +104,7 @@
                 <span>Saved Address</span>
             </div>
             <div class="user-address">
-                <p class="address">--</p>
+                <p class="address">No default address</p>
             </div>
             <div class="user-address-footer">
                 <button class="add-info">Manage Addresses</button>
@@ -175,9 +175,14 @@
        <div class="modal-overlay">
          <div class="main-modal">
            <div class="address-head">
-             <h3>Manage Addresses</h3>
+            <div class="head-back">
+                <span class="edit-back"><i class="ti ti-arrow-narrow-left"></i></span>
+                <h3 class="head-text"> Manage Addresses </h3>
+            </div>
              <span class="exit">X</span>
            </div>
+
+        <div class="hero-container"> 
            <div class="current-addresses">
             <!-- This is where the address data lives -->
             
@@ -194,40 +199,74 @@
            </div>
 
             <div class="field-address">
-        <div class="address-grid">
-            <div class="input-container">
-                <p class="input-info">Full Name <span class="required-input">*</span></p>
-                <input class="input-text" type="text" id="fullName">
+                <div class="address-grid">
+                    <div class="input-container">
+                        <p class="input-info">Full Name <span class="required-input">*</span></p>
+                        <input class="input-text" type="text" id="fullName" placeholder="e.g Juan Dela Cruz">
+                    </div>
+                    <div class="input-container">
+                        <p class="input-info">Street Address <span class="required-input">*</span></p>
+                        <input class="input-text" type="text" id="streetAddress" placeholder="e.g., 145 Maharlika Highway, Brgy. San Pablo">
+                    </div>
+                    <!-- Make this a drop down later -->
+                    <div class="input-container">
+                        <div class="address-input-container">
+                            <div class="inner-address">
+                                <p class="input-info">City <span class="required-input">*</span></p>
+                                <input class="input-text" type="text" id="city" placeholder="e.g Malolos City">
+                            </div>
+                            <div class="inner-address">
+                                <p class="input-info">State <span class="required-input">*</span></p>
+                                <input class="input-text" type="text" id="state" placeholder="e.g Bulacan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <p class="input-info">ZIP Code <span class="required-input">*</span></p>
+                        <input class="input-text" type="text" id="zipCode" placeholder="e.g 3000">
+                    </div>
+                    <div class="footer">
+                        <div class="checkbox">
+                            <input type="checkbox" id="footer-checkbox">
+                        </div>
+                        <p class="supporting-footer">Set as default address</p>
+                    </div>
+                </div>
             </div>
+        </div>  
+
+        <div class="edit-modal">
             <div class="input-container">
-                <p class="input-info">Street Address <span class="required-input">*</span></p>
-                <input class="input-text" type="text" id="streetAddress">
+                <p class="input-info">Full Name</p>
+                <input class="input-text" type="text" id="fullNameEdit" placeholder="e.g Juan Dela Cruz">
+            </div>
+            <div class="input-container"> 
+                <p class="input-info">Street Address</p>
+                <input class="input-text" type="text" id="editStreet" placeholder="e.g., 145 Maharlika Highway, Brgy. San Pablo">
             </div>
             <div class="input-container">
                 <div class="address-input-container">
                     <div class="inner-address">
-                        <p class="input-info">City <span class="required-input">*</span></p>
-                        <input class="input-text" type="text" id="city">
+                        <p class="input-info">City</p>
+                        <input class="input-text" type="text" id="cityEdit" placeholder="e.g Malolos City">
                     </div>
                     <div class="inner-address">
-                        <p class="input-info">State <span class="required-input">*</span></p>
-                        <input class="input-text" type="text" id="state">
+                        <p class="input-info">State </p>
+                        <input class="input-text" type="text" id="stateEdit" placeholder="e.g Bulacan">
                     </div>
                 </div>
             </div>
             <div class="input-container">
-                <p class="input-info">ZIP Code <span class="required-input">*</span></p>
-                <input class="input-text" type="text" id="zipCode">
+                <p class="input-info">ZIP Code</p>
+                <input class="input-text" type="text" id="zipCodeEdit" placeholder="e.g 3000">
             </div>
             <div class="footer">
                 <div class="checkbox">
-                    <input type="checkbox" id="footer-checkbox">
+                    <input type="checkbox" id="edit-checkbox">
                 </div>
-                <p id="supporting-footer">Use this as default address</p>
+                <p class="supporting-footer">Set as default address</p>
             </div>
         </div>
-    </div>
-
            <div class="address-modal-footer">
              <button type="button" class="address-btn cancel">Cancel</button>
              <button type="button" class="address-btn save">Save</button>

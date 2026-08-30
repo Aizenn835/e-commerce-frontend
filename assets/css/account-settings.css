@@ -478,11 +478,18 @@ width: 100%;
     border-radius: 12px;
     overflow: hidden;
 }
+
 .address-head{
     border-bottom: 1px solid rgb(207, 202, 202);
     padding:15px 17px;
     display: flex;
     justify-content: space-between; 
+    align-items: center;
+}
+.head-back{
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 .exit{
     font-size:0.9285rem;
@@ -705,7 +712,7 @@ width: 100%;
     align-items: center;
     gap:10px; 
 }
-#supporting-footer{
+.supporting-footer{
     font-size:0.825rem;
     font-weight: 500;
     color:#10203f;
@@ -719,7 +726,41 @@ width: 100%;
 .selected{
     border:1px solid #10203f;
 }
+/* Go to edit transition */
+.hero-container{
+    transform: translateX(0);
+    opacity: 1;
+    display:block;
+}
+.remove-hero{
+    transform: translateX(100%);
+    opacity:0;
+    display:none;
+}
 
+/* Edit modal */
+.edit-modal{
+    margin:12px;
+    display:none;
+    flex-direction: column;
+    gap:8px;
+}
+.show-edit{
+    display:flex;
+}
+.edit-back{
+    margin-right: 10px;
+    background-color: rgb(225, 219, 219);
+    padding:5px;
+    border-radius: 12px;
+    cursor: pointer; 
+}
+.edit-back:hover{
+    background-color: rgb(253, 243, 243);
+}
+#edit-checkbox{
+    accent-color: #284f9d;
+}
 
 /* Wrong credentials input */
 .wrong-credentials {

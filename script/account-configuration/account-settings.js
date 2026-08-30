@@ -190,9 +190,10 @@ async function saveChangesPfp(file){
 function openForm(){
     document.querySelector(".field-address").classList.toggle("openForm");
 }
-// cancel and open modal btn
+// cancel go to edit , open modal btn 
 document.querySelector(".add-info").addEventListener("click" , () => {
     document.querySelector(".modal-overlay").classList.add("modal-add");
+    document.querySelector(".edit-back").style.display = "none";
     getAddress();
 })
 document.querySelector(".cancel").addEventListener("click" , () => {
@@ -223,12 +224,7 @@ function attachListener(){
  })
 }
 
-function editBtn(){
-    document.querySelector(".btn-edit").addEventListener("click" , (e) => {
-        const edit = document.querySelector(".edit");
-        const target = e.target(edit);
-    });
-}
+
 // Input validation
 function validateAddressForm(fullname, street, city, state, zipCode) {
     
@@ -244,6 +240,7 @@ function validateAddressForm(fullname, street, city, state, zipCode) {
     return true;
 }
 // API Connection for Address
+// The input radio always (checked/input=radio) the last child fix this.
 document.querySelector(".save").addEventListener("click" ,async () => {
     const fullname = document.getElementById("fullName").value;
     const street = document.getElementById("streetAddress").value;
@@ -330,6 +327,7 @@ async function getAddress(){
     }
 }
 // View address 
+// The input radio always (checked/input=radio) the last child fix this.
 function showAvailableAddress(userAddress){
     document.querySelector(".current-addresses").innerHTML = " ";
     userAddress.forEach((address) => {
@@ -356,6 +354,7 @@ function showAvailableAddress(userAddress){
         `
     })
     attachListener();
+    editListener();
     deleteListener();
 }
 // show current address
@@ -378,14 +377,16 @@ async function currentDefaultAddress(){
     }
 }
 // delete address
+// if there is only one address left make it the default one.
 function deleteListener(){
     document.querySelectorAll(".address-container").forEach(opt => {
         opt.addEventListener("click" , async (e) => {
             const id = opt.dataset.index;
             // test the id
-            console.log(id);
 
-            if(!e.target.closest(".remove")){ return; }
+            if(!e.target.closest(".remove")){
+                return;
+            }
 
             try{
                 await fetch(`${API_URL}/settings/${id}`, {
@@ -400,6 +401,52 @@ function deleteListener(){
         });
     })
 }
+//go to edit modal
+function helper(){
+    document.querySelector(".hero-container").classList.add("remove-hero");
+    document.querySelector(".edit-modal").classList.add("show-edit");
+    document.querySelector(".head-text").textContent = "Edit Address";
+    document.querySelector(".edit-back").style.display = "flex";
+}
+async function placeholderEditModal(id){
+    try{
+        const response = await fetch(`${API_URL}/settings/${id}` , {
+            headers: {"Authorization" : `Bearer ${token}`}
+        });
+        if(!response.ok){
+            throw new Error(response.status);
+        }
+        const data = await response.json();
+        document.getElementById("fullNameEdit").value = data.fullName;
+        document.getElementById("editStreet").value = data.street;
+        document.getElementById("cityEdit").value = data.city;
+        document.getElementById("stateEdit").value = data.state;
+        document.getElementById("zipCodeEdit").value = data.zipCode;
+
+    }catch(error){
+        console.log(error);
+    }
+}
+function editListener(){
+    document.querySelectorAll(".address-container").forEach((edit) => {
+        edit.addEventListener("click" , (e) => {
+            const id = edit.dataset.index;
+
+            if(!e.target.closest(".edit")){
+               return;
+            }
+            helper();
+            placeholderEditModal(id);
+        })
+    })
+}
+// edit arrow listener
+document.querySelector(".edit-back").addEventListener("click" , () => {
+    document.querySelector(".hero-container").classList.remove("remove-hero");
+    document.querySelector(".edit-modal").classList.remove("show-edit");
+    document.querySelector(".edit-back").style.display = "none";
+});
+
 
 
 currentDefaultAddress();
