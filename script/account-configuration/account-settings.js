@@ -191,15 +191,22 @@ function openForm(){
     document.querySelector(".field-address").classList.toggle("openForm");
 }
 // cancel go to edit , open modal btn 
+function reloadModal(){
+    document.querySelector(".hero-container").classList.remove("remove-hero");
+    document.querySelector(".edit-modal").classList.remove("show-edit");
+}
+
 document.querySelector(".add-info").addEventListener("click" , () => {
     document.querySelector(".modal-overlay").classList.add("modal-add");
     document.querySelector(".edit-back").style.display = "none";
     getAddress();
 })
 document.querySelector(".cancel").addEventListener("click" , () => {
+    reloadModal();
     document.querySelector(".modal-overlay").classList.remove("modal-add");
 })
 document.querySelector(".exit").addEventListener("click" , () => {
+    reloadModal()
     document.querySelector(".modal-overlay").classList.remove("modal-add");
 })
 
@@ -240,14 +247,21 @@ function validateAddressForm(fullname, street, city, state, zipCode) {
     return true;
 }
 // API Connection for Address
-// The input radio always (checked/input=radio) the last child fix this.
-document.querySelector(".save").addEventListener("click" ,async () => {
-    const fullname = document.getElementById("fullName").value;
-    const street = document.getElementById("streetAddress").value;
-    const city = document.getElementById("city").value;
-    const state = document.getElementById("state").value;
-    const zipCode = document.getElementById("zipCode").value;
-    const checkbox = document.getElementById("footer-checkbox");
+// The input radio always checked the last child fix this. (let addressId = null;)
+
+let addressId = null;
+
+document.querySelector(".save").addEventListener("click" , async () => {
+    const isEdit = addressId != null;
+    //testing
+    console.log(isEdit);
+
+    const fullname = document.getElementById(isEdit ? "fullNameEdit" : "fullName").value;
+    const street = document.getElementById(isEdit ? "editStreet" :"streetAddress").value;
+    const city = document.getElementById(isEdit ? "cityEdit" : "city").value;
+    const state = document.getElementById(isEdit ? "stateEdit" : "state").value;
+    const zipCode = document.getElementById(isEdit ? "zipCodeEdit" : "zipCode").value;
+    const checkbox = document.getElementById(isEdit ? "edit-checkbox" : "footer-checkbox");
 
     const isChecked = checkbox.checked ? true : false;
     
@@ -259,10 +273,14 @@ document.querySelector(".save").addEventListener("click" ,async () => {
     const saving = document.querySelector(".save");
     saving.textContent = "Saving...";
     saving.disabled = true;
+
+    const url = `${API_URL + '/settings' +  (isEdit ? ("/" + addressId) : "/add-address") }`;
+    const method = isEdit ? "PUT" : "POST";
+    console.log(url);
     
     try{
-        const response = await fetch(`${API_URL}/settings/add-address` , {
-            method: "POST",
+        const response = await fetch(url , {
+            method: method,
             headers: {"Authorization" : `Bearer ${token}`,
                       "Content-Type" : "application/json"},
             body:
@@ -327,7 +345,7 @@ async function getAddress(){
     }
 }
 // View address 
-// The input radio always (checked/input=radio) the last child fix this.
+// The input radio always checked the last child fix this.
 function showAvailableAddress(userAddress){
     document.querySelector(".current-addresses").innerHTML = " ";
     userAddress.forEach((address) => {
@@ -382,7 +400,6 @@ function deleteListener(){
     document.querySelectorAll(".address-container").forEach(opt => {
         opt.addEventListener("click" , async (e) => {
             const id = opt.dataset.index;
-            // test the id
 
             if(!e.target.closest(".remove")){
                 return;
@@ -402,6 +419,7 @@ function deleteListener(){
     })
 }
 //go to edit modal
+
 function helper(){
     document.querySelector(".hero-container").classList.add("remove-hero");
     document.querySelector(".edit-modal").classList.add("show-edit");
@@ -430,23 +448,40 @@ async function placeholderEditModal(id){
 function editListener(){
     document.querySelectorAll(".address-container").forEach((edit) => {
         edit.addEventListener("click" , (e) => {
-            const id = edit.dataset.index;
+
+            addressId = edit.dataset.index;
 
             if(!e.target.closest(".edit")){
                return;
             }
             helper();
-            placeholderEditModal(id);
+            placeholderEditModal(addressId);
         })
     })
 }
-// edit arrow listener
+// edit arrow listener and save in edit
 document.querySelector(".edit-back").addEventListener("click" , () => {
     document.querySelector(".hero-container").classList.remove("remove-hero");
     document.querySelector(".edit-modal").classList.remove("show-edit");
     document.querySelector(".edit-back").style.display = "none";
 });
 
+// event listener for payment modal
+document.querySelectorAll(".payment-container").forEach(opt => {
+    opt.addEventListener("click" , (e) => {     
+        if(e.target.closest(".edit-payment")){
+            return;
+        }
+
+        const inputRadio = opt.querySelector("input[type='radio']");
+        inputRadio.checked = true;
+
+        document.querySelectorAll(".payment-container").forEach(select => 
+            select.classList.remove("selected-payment"));
+
+            opt.classList.add("selected-payment");
+    })
+})
 
 
 currentDefaultAddress();

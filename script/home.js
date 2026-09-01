@@ -151,7 +151,7 @@ async function modalData(id) {
     document.getElementById("image-modal").src = API_URL + product.imgUrl;
     document.getElementById("modal-category").textContent = product.category;
     document.getElementById("productName").textContent = product.productName;
-    document.getElementById("price").textContent = "₱" + product.price;
+    document.getElementById("price").textContent = "₱" + product.price.toLocaleString();
     document.getElementById("modal-dsc").textContent = product.productDescription;
 
     const modalFav = document.getElementById("modalFav");
@@ -278,7 +278,7 @@ async function searchContent() {
 }
 
 function renderContent(products) {
-    const prodGrid = document.querySelector(".grid").innerHTML = "";
+    document.querySelector(".grid").innerHTML = "";
     products.forEach(content => {
         const isFavorited = favoritedIds.has(String(content.id));
         document.querySelector(".grid").innerHTML += `
@@ -291,7 +291,7 @@ function renderContent(products) {
                 <h5>${content.category}</h5>
                 <p>${content.productName}</p>
                 <div class="lower-description">
-                    <div><h4>₱${content.price}</h4></div>
+                    <div><h4>₱${content.price.toLocaleString()}</h4></div>
                     <div class="rating">⭐ 5.0</div>
                 </div>
             </div>
@@ -362,14 +362,14 @@ function renderWishlist(wishlist) {
                         </div>
                         <div class="lower-wishlist">
                             <div>
-                                <span class="wishlist-price">${"₱" + product.price}</span>
+                                <span class="wishlist-price">${"₱" + product.price.toLocaleString()}</span>
                             </div>
                             <div class="wishlist-add">
+                                <span class="wishlist-add-cart" id="add-cart"><i class="ti ti-shopping-bag"></i> Add</span>
                                 <div class="wishlist-remove-btn">
                                     <span><i class="ti ti-trash"></i></span>
                                     <span class="remove-label">Remove</span>
                                 </div>
-                                <span class="wishlist-add-cart" id="add-cart"><i class="ti ti-shopping-bag"></i> Add</span>
                             </div>
                         </div>
                     </div>
@@ -487,7 +487,6 @@ async function displayCart() {
 
 function renderCart(cart) {
     document.querySelector(".side-cnt").classList.remove("noProd");
-    // put the new api endpoint here
     getTotalSummary();
     document.querySelector(".side-cnt").innerHTML = ``;
     cart.forEach(product => {
@@ -516,7 +515,7 @@ function renderCart(cart) {
                                 <div class="plus-cart-side">+</div>
                             </div>
                             <div class="cart-price">
-                                <span class="price">${"₱" + product.price}</span>
+                                <span class="price">${"₱" + product.price.toLocaleString()}</span>
                             </div>
                         </div>
                     </div>

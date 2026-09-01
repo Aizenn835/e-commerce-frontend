@@ -256,6 +256,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Make a drop down selection where the user can pick (office , house , etc..) -->
             <div class="input-container">
                 <p class="input-info">ZIP Code</p>
                 <input class="input-text" type="text" id="zipCodeEdit" placeholder="e.g 3000">
@@ -273,6 +274,124 @@
            </div>
          </div>
        </div>
+       <!-- Modal for payment -->
+        <div class="modal-overlay-payment">
+            <div class="main-modal-payment">
+              <div class="payment-head">
+                <div class="payment-back">
+                    <span class="payment-arrow"><i class="ti ti-arrow-narrow-left"></i></span>
+                    <h3 class="payment-text"> Manage Payment Method </h3>
+                </div>
+                <span class="exit-payment">X</span>
+              </div>
+              
+             <div class="hero-payment">
+                <div class="current-payment">
+
+                    <div class="payment-container">
+                        <input type="radio" name="paymentInput">
+                        <div class="logo-container visa">
+                            <p class="logo-name">Visa</p>
+                        </div>
+                        <div class="information-container">
+                            <div class="payment-info-container">
+                                <div class="inner-info-container">
+                                    <h4 class="card-name">Visa</h4>
+                                    <span class="default-payment">Default</span>
+                                </div>
+                                <p class="payment-card-info"> •••• 4242 | Expires 08/28 </p>
+                            </div>
+                            <div class="edit-payment">
+                                <div class="edit-payment-container">
+                                    <i class="ti ti-edit"></i> 
+                                    <p class="edit-payment-method">Edit</p>
+                                </div>
+                                <p class="remove-payment-method">Remove</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-container ">
+                        <input type="radio" name="paymentInput">
+                        <div class="logo-container master-card">
+                            <p class="logo-name">Mc</p>
+                        </div>
+                        <div class="information-container">
+                            <div class="payment-info-container">
+                                <div class="inner-info-container">
+                                    <h4 class="card-name">Master Card</h4>
+                                    <span class="default-payment" style="display:none">Default</span>
+                                </div>
+                                <p class="payment-card-info"> •••• 9134 | Expires 03/27 </p>
+                            </div>
+                            <div class="edit-payment">
+                                <div class="edit-payment-container">
+                                    <i class="ti ti-edit"></i> 
+                                    <p class="edit-payment-method">Edit</p>
+                                </div>
+                                <p class="remove-payment-method">Remove</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-container">
+                        <input type="radio" name="paymentInput">
+                        <div class="logo-container g-cash">
+                            <p class="logo-name">G</p>
+                        </div>
+                        <div class="information-container">
+                            <div class="payment-info-container">
+                                <div class="inner-info-container">
+                                    <h4 class="card-name">Gcash</h4>
+                                    <span class="default-payment" style="display:none">Default</span>
+                                </div>
+                                <p class="payment-card-info"> 0917 234 5678 </p>
+                            </div>
+                            <div class="edit-payment">
+                                <div class="edit-payment-container">
+                                    <i class="ti ti-edit"></i> 
+                                    <p class="edit-payment-method">Edit</p>
+                                </div>
+                                <p class="remove-payment-method">Remove</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-container">
+                        <input type="radio" name="paymentInput">
+                        <div class="logo-container paypal">
+                            <p class="logo-name">PP</p>
+                        </div>
+                        <div class="information-container">
+                            <div class="payment-info-container">
+                                <div class="inner-info-container">
+                                    <h4 class="card-name">Paypal</h4>
+                                    <span class="default-payment" style="display:none">Default</span>
+                                </div>
+                                <p class="payment-card-info"> emma@paypal.com </p>
+                            </div>
+                            <div class="edit-payment">
+                                <div class="edit-payment-container">
+                                    <i class="ti ti-edit"></i> 
+                                    <p class="edit-payment-method">Edit</p>
+                                </div>
+                                <p class="remove-payment-method">Remove</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="hero-payment-modal">
+                    <h5 class="hero-payment-header">Add New Method</h5>
+                    <ul class="payment-choices">
+                        <li class="visa-container box">Visa</li>
+                        <li class="mc-container box">MC</li>
+                        <li class="gcash-container box">Gcash</li>
+                        <li class="paypal-container box">Paypal</li>
+                    </ul>
+                </div>
+             </div>
+            </div>
+        </div>
+
     </section>
 
     

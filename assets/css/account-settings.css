@@ -509,7 +509,6 @@ width: 100%;
     display:flex;
     flex-direction: column;
     height: auto;
-
     max-height: 25vh;
     overflow-y: auto;
 }
@@ -726,6 +725,7 @@ width: 100%;
 .selected{
     border:1px solid #10203f;
 }
+
 /* Go to edit transition */
 .hero-container{
     transform: translateX(0);
@@ -761,6 +761,251 @@ width: 100%;
 #edit-checkbox{
     accent-color: #284f9d;
 }
+/* Add payment css */
+.modal-overlay-payment{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity 0.3s ease , transform 0.5s ease;
+}
+.main-modal-payment{
+    position: fixed;
+    top:10%;
+    display:flex;
+    height: auto;
+    width: 100%;
+    max-width: 500px;
+    max-height: 80vh;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.payment-head{
+    border-bottom: 1px solid rgb(207, 202, 202);
+    padding:15px 17px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+.payment-back{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+}
+.payment-arrow{
+    padding:5px;
+    border-radius: 12px;
+    cursor: pointer; 
+}
+.payment-text{
+    font-size:1rem;
+    font-weight: 600;
+}
+
+.payment-arrow:hover{
+    background-color: rgb(241, 235, 235);
+}
+.exit-payment{
+    font-size:0.85rem;
+    font-weight:700;
+    cursor: pointer;
+    padding:8px 10px;
+    border-radius: 50px;
+}
+.exit-payment:hover{
+    background-color: rgb(202, 198, 198);
+}
+
+.payment-container{
+    margin:12px 12px 5px 12px;
+    padding:10px 12px;
+    display:flex;
+    align-items: center;
+    flex-direction: center;
+    gap:12px;
+    border-radius: 12px;
+    border:1px solid rgb(219, 214, 214);
+    cursor: pointer;
+    position: relative;
+}
+
+.payment-container{
+    display:flex;
+    align-items: center;
+}
+  /* Logo for each payment provider */
+.visa{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #10203f;
+    border-radius: 12px;
+    padding:5px;
+    height: 40px;
+    width: 40px;
+    text-transform: uppercase;
+}
+.master-card{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(234, 32, 32);
+    border-radius: 12px;
+    padding:5px;
+    height: 40px;
+    width: 40px;
+    text-transform: uppercase;
+}
+.g-cash{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(6, 88, 182);
+    border-radius: 12px;
+    padding:5px;
+    height: 40px;
+    width: 40px;
+    text-transform: uppercase;
+}
+.paypal{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(22, 42, 196);
+    border-radius: 12px;
+    padding:5px;
+    height: 40px;
+    width: 40px;
+    text-transform: uppercase;
+}
+.logo-name{
+    color:white;
+    font-size:0.75rem;
+    font-weight: 600;
+}
+
+/* ----------------------- */
+.information-container{
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.payment-info-container{
+    display:flex;
+    flex-direction: column;
+    gap:3px;
+}
+.inner-info-container{
+    display:flex;
+    gap:8px;
+    align-items: center;
+}
+.card-name{
+    font-size:0.9285rem;
+}
+.default-payment{
+    font-size:0.565rem;
+    font-weight: 800;
+    color:#10203f;
+    background-color: rgb(225, 220, 220);
+    border-radius: 5px;
+    padding:0.1875rem;   
+}
+.payment-card-info{
+    font-size:0.6875rem;
+    color:gray;
+}
+.edit-payment{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:12px; 
+}
+.edit-payment-container{
+    width: auto;
+    min-width: 70px;
+    font-size:0.75rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    border:1px solid #10203f;
+    color:#10203f;
+    padding:5px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    font-weight: 600;
+}
+.edit-payment-container i{
+    color:#10203f;
+    font-weight: 550;
+}
+.edit-payment-container:hover{
+    background-color: rgb(249, 241, 241);
+    border:1px solid rgb(187, 187, 225);
+}
+.remove-payment-method{
+    display:flex;
+    align-items: center;
+    font-size:0.7285rem;
+    border: 1px solid rgb(239, 222, 222);
+    padding:6px;
+    border-radius: 12px;
+    text-align: center;
+    color:red;
+}
+.remove-payment-method:hover{
+    background-color: rgb(239, 221, 221);
+}
+.selected-payment{
+    border:1px solid #10203f;
+}
+input[type="radio"] {
+  accent-color: #10203f; /* Replace with any color hex, rgb, or name */
+}
+  /* Hero payment modal */
+.hero-payment-modal{
+    margin:12px;
+    padding-top:12px;
+    border-top: 1px solid rgb(223, 217, 217);
+}  
+.hero-payment-header{
+    justify-self: flex-start;
+    font-size:0.75rem;
+}
+.payment-choices{
+    list-style: none; 
+    padding: 0;      
+    margin-top: 10px;
+    display: flex;    
+    gap: 10px; 
+    justify-content: center; 
+}
+.box{
+    border:1px solid rgb(177, 174, 174);
+    padding:8px 10px;
+    width: 20%;
+    border-radius: 12px;
+    font-size:0.625rem;
+    color:rgb(88, 86, 86);
+    font-weight: 650;
+    cursor: pointer;
+}
+
 
 /* Wrong credentials input */
 .wrong-credentials {
