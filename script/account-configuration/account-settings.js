@@ -190,7 +190,7 @@ async function saveChangesPfp(file){
 function openForm(){
     document.querySelector(".field-address").classList.toggle("openForm");
 }
-// cancel go to edit , open modal btn 
+// cancel go to edit , open modal btn (address  , payment)
 function reloadModal(){
     document.querySelector(".hero-container").classList.remove("remove-hero");
     document.querySelector(".edit-modal").classList.remove("show-edit");
@@ -208,6 +208,14 @@ document.querySelector(".cancel").addEventListener("click" , () => {
 document.querySelector(".exit").addEventListener("click" , () => {
     reloadModal()
     document.querySelector(".modal-overlay").classList.remove("modal-add");
+})
+
+
+document.querySelector(".payments").addEventListener("click" , () => {
+    document.querySelector(".modal-overlay-payment").classList.add("open-payment-modal");
+})
+document.querySelector(".exit-payment").addEventListener("click" , () => {
+    document.querySelector(".modal-overlay-payment").classList.remove("open-payment-modal");
 })
 
 
@@ -480,6 +488,26 @@ document.querySelectorAll(".payment-container").forEach(opt => {
             select.classList.remove("selected-payment"));
 
             opt.classList.add("selected-payment");
+    })
+})
+// event listener for card form
+document.querySelectorAll(".card").forEach(option => {
+    option.addEventListener("click" , () => {
+        
+        document.querySelectorAll(".card").forEach(select =>
+             select.classList.remove("payment-selected")); 
+
+        option.classList.add("payment-selected");
+
+
+        const cardId = option.dataset.card;
+        document.querySelectorAll(".inner-form").forEach(form => {
+            form.style.display = "none"
+        });
+        const openForm = cardId + "-field";
+        console.log(openForm);
+        
+        document.getElementById(openForm).style.display = "flex";
     })
 })
 

@@ -351,7 +351,7 @@ width: 100%;
 }
 .expiration-text{
     color:gray;
-    font-size:0.875rem;
+    font-size:0.7685rem;
 }
 .supporting-expiration{
     color:gray;
@@ -775,8 +775,13 @@ width: 100%;
     justify-content: center;
     pointer-events: none;
     opacity: 0;
-    transform: scale(1);
+    transform: scale(0.95);
     transition: opacity 0.3s ease , transform 0.5s ease;
+}
+.open-payment-modal{
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
 }
 .main-modal-payment{
     position: fixed;
@@ -986,6 +991,7 @@ input[type="radio"] {
 .hero-payment-header{
     justify-self: flex-start;
     font-size:0.75rem;
+    font-weight: 550;
 }
 .payment-choices{
     list-style: none; 
@@ -995,7 +1001,7 @@ input[type="radio"] {
     gap: 10px; 
     justify-content: center; 
 }
-.box{
+.card{
     border:1px solid rgb(177, 174, 174);
     padding:8px 10px;
     width: 20%;
@@ -1004,9 +1010,80 @@ input[type="radio"] {
     color:rgb(88, 86, 86);
     font-weight: 650;
     cursor: pointer;
+    user-select: none;
+}
+.payment-selected{
+    border:1.84px solid #10203f;
+}
+/* forms */
+.outer-form{
+    margin:12px;
+    display:flex;
+    flex-direction: column;
+}
+.inner-form{
+    width:100%;
+    height: auto;
+    flex-direction: column;
+    gap:12px;
+    display:none;
+}
+.card-payment-container{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    gap:5px;
+}
+.payment-form-container{
+    display:flex;
+    gap:5px;
+}
+.card-text{
+    align-self: flex-start;
+    font-size:0.625rem;
+    text-transform: uppercase;
+    color:gray;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+}
+.card-payment-input{
+    padding:8px 10px;
+    border-radius: 12px;
+    border:1px solid gray;
+    font-size:0.6875rem;
+}
+.card-payment-input:focus{
+    border:1px solid #10203f;
+    outline: none;
+}
+.lower-footer-payment{
+    border-top: 1px solid rgb(210, 205, 205);
+    margin-top:12px;
 }
 
-
+.lower-footer-payment{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.payment-btn{
+    margin-top:12px;
+    padding:12px 10px;
+    width: 40%;
+    border-radius: 12px;
+}
+.cancel-payment{
+    background-color: white;
+    border:1px solid gray;
+    font-weight: 545;
+}
+.save-payment{
+    background-color: #10203f;
+    border:none;
+    color:white;
+    font-weight: 500;
+}
 /* Wrong credentials input */
 .wrong-credentials {
     border: 1px solid #d92d20 !important;

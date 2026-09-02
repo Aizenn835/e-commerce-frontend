@@ -117,11 +117,11 @@
                 <span>Payment Methods</span>
             </div>
             <div class="user-address">
-                <p class="expiration-text">Visa ending in 4012</p>
-                <p class="supporting-expiration">Expires 08 / 28</p>
+                <p class="expiration-text">No Default Payment Method</p>
+                <p class="supporting-expiration">--</p>
             </div>
             <div class="user-address-footer" style="margin-top: 5px;">
-                <button class="add-info">Manage Payment Methods</button>
+                <button class="add-info payments">Manage Payment Methods</button>
             </div>
          </div>
        </div>
@@ -382,11 +382,74 @@
                 <div class="hero-payment-modal">
                     <h5 class="hero-payment-header">Add New Method</h5>
                     <ul class="payment-choices">
-                        <li class="visa-container box">Visa</li>
-                        <li class="mc-container box">MC</li>
-                        <li class="gcash-container box">Gcash</li>
-                        <li class="paypal-container box">Paypal</li>
+                        <li class="visa-container card payment-selected" data-card="visa">Visa</li>
+                        <li class="mc-container card" data-card="mc">MC</li>
+                        <li class="gcash-container card" data-card="gcash">Gcash</li>
+                        <li class="paypal-container card" data-card="paypal">Paypal</li>
                     </ul>
+                </div>
+
+                <div class="outer-form">
+                    <div class="inner-form visa-card" id="visa-field">
+                        <div class="card-payment-container">
+                            <p class="card-text">CardHolder Name</p>
+                            <input type="text" class="card-payment-input" placeholder="e.g Juan Dela Cruz">
+                        </div>
+                        <div class="card-payment-container">
+                            <p class="card-text">Card Number</p>
+                            <input type="text" class="card-payment-input" placeholder="4242-4242-4242" >
+                        </div>
+                        <div class="payment-form-container">
+                            <div class="card-payment-container">
+                                <p class="card-text">Expiry (MM / YY)</p>
+                                <input type="text" class="card-payment-input" placeholder="08/18">
+                            </div>
+                            <div class="card-payment-container">
+                                <p class="card-text">Cvv</p>
+                                <input type="text" class="card-payment-input" placeholder="●●●">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inner-form mc-card" id="mc-field">
+                        <div class="card-payment-container">
+                            <p class="card-text">CardHolder Name</p>
+                            <input type="text" class="card-payment-input" placeholder="e.g Juan Dela Cruz">
+                        </div>
+                        <div class="card-payment-container">
+                            <p class="card-text">Card Number</p>
+                            <input type="text" class="card-payment-input" placeholder="4242-4242-4242" >
+                        </div>
+                        <div class="payment-form-container">
+                            <div class="card-payment-container">
+                                <p class="card-text">Expiry (MM / YY)</p>
+                                <input type="text" class="card-payment-input" placeholder="08/18">
+                            </div>
+                            <div class="card-payment-container">
+                                <p class="card-text">Cvv</p>
+                                <input type="text" class="card-payment-input" placeholder="●●●">
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <div class="inner-form gcash" id="gcash-field">
+                        <div class="card-payment-container">
+                            <p class="card-text">GCash Mobile Number</p>
+                            <input type="text" class="card-payment-input" placeholder="09XX XXX XXXX">
+                        </div>
+                    </div>
+
+                    <div class="inner-form pay-pal" id="paypal-field">
+                        <div class="card-payment-container">
+                            <p class="card-text">PayPal Email</p>
+                            <input type="text" class="card-payment-input" placeholder="you@paypal.com">
+                        </div>
+                    </div>
+
+                    <div class="lower-footer-payment">
+                        <button class="payment-btn cancel-payment" id="cancel-payment">Cancel</button>
+                        <button class="payment-btn save-payment" id="save-payment">Save</button>
+                    </div>
                 </div>
              </div>
             </div>
