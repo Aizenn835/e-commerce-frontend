@@ -187,7 +187,7 @@
             <!-- This is where the address data lives -->
             
            
-            <div class="notfound">
+            <div class="notfound-payment">
                 <img src="/assets/images/undraw_address_4imv.svg" alt="No address handler">
                 <h3 class="main-text">Where should we ship your items?</h3>
                 <p class="supporting-text">Save your favorite shipping addresses to make ordering effortless.</p>
@@ -287,105 +287,21 @@
               
              <div class="hero-payment">
                 <div class="current-payment">
-
-                    <div class="payment-container">
-                        <input type="radio" name="paymentInput">
-                        <div class="logo-container visa">
-                            <p class="logo-name">Visa</p>
-                        </div>
-                        <div class="information-container">
-                            <div class="payment-info-container">
-                                <div class="inner-info-container">
-                                    <h4 class="card-name">Visa</h4>
-                                    <span class="default-payment">Default</span>
-                                </div>
-                                <p class="payment-card-info"> •••• 4242 | Expires 08/28 </p>
-                            </div>
-                            <div class="edit-payment">
-                                <div class="edit-payment-container">
-                                    <i class="ti ti-edit"></i> 
-                                    <p class="edit-payment-method">Edit</p>
-                                </div>
-                                <p class="remove-payment-method">Remove</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="payment-container ">
-                        <input type="radio" name="paymentInput">
-                        <div class="logo-container master-card">
-                            <p class="logo-name">Mc</p>
-                        </div>
-                        <div class="information-container">
-                            <div class="payment-info-container">
-                                <div class="inner-info-container">
-                                    <h4 class="card-name">Master Card</h4>
-                                    <span class="default-payment" style="display:none">Default</span>
-                                </div>
-                                <p class="payment-card-info"> •••• 9134 | Expires 03/27 </p>
-                            </div>
-                            <div class="edit-payment">
-                                <div class="edit-payment-container">
-                                    <i class="ti ti-edit"></i> 
-                                    <p class="edit-payment-method">Edit</p>
-                                </div>
-                                <p class="remove-payment-method">Remove</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="payment-container">
-                        <input type="radio" name="paymentInput">
-                        <div class="logo-container g-cash">
-                            <p class="logo-name">G</p>
-                        </div>
-                        <div class="information-container">
-                            <div class="payment-info-container">
-                                <div class="inner-info-container">
-                                    <h4 class="card-name">Gcash</h4>
-                                    <span class="default-payment" style="display:none">Default</span>
-                                </div>
-                                <p class="payment-card-info"> 0917 234 5678 </p>
-                            </div>
-                            <div class="edit-payment">
-                                <div class="edit-payment-container">
-                                    <i class="ti ti-edit"></i> 
-                                    <p class="edit-payment-method">Edit</p>
-                                </div>
-                                <p class="remove-payment-method">Remove</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="payment-container">
-                        <input type="radio" name="paymentInput">
-                        <div class="logo-container paypal">
-                            <p class="logo-name">PP</p>
-                        </div>
-                        <div class="information-container">
-                            <div class="payment-info-container">
-                                <div class="inner-info-container">
-                                    <h4 class="card-name">Paypal</h4>
-                                    <span class="default-payment" style="display:none">Default</span>
-                                </div>
-                                <p class="payment-card-info"> emma@paypal.com </p>
-                            </div>
-                            <div class="edit-payment">
-                                <div class="edit-payment-container">
-                                    <i class="ti ti-edit"></i> 
-                                    <p class="edit-payment-method">Edit</p>
-                                </div>
-                                <p class="remove-payment-method">Remove</p>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- This is where the payment method list lives -->
+                     <div class="notfound">
+                        <img src="/assets/images/undraw_enter-payment-info_k1yw.svg" alt="No address handler">
+                        <h3 class="main-text">How would you like to pay?</h3>
+                        <p class="supporting-text">Save your preferred payment methods to make checkout effortless.</p>
+                   </div>`
                 </div>
 
                 <div class="hero-payment-modal">
                     <h5 class="hero-payment-header">Add New Method</h5>
                     <ul class="payment-choices">
-                        <li class="visa-container card payment-selected" data-card="visa">Visa</li>
-                        <li class="mc-container card" data-card="mc">MC</li>
-                        <li class="gcash-container card" data-card="gcash">Gcash</li>
-                        <li class="paypal-container card" data-card="paypal">Paypal</li>
+                        <li class="visa-container card" data-card="visa" data-type="CARD" id="visa">Visa</li>
+                        <li class="mc-container card" data-card="mc" data-type="CARD" id="mc">MC</li>
+                        <li class="gcash-container card" data-card="gcash" data-type="EWALLET" id="gcash">Gcash</li>
+                        <li class="paypal-container card" data-card="paypal" data-type="EWALLET" id="payPal">Paypal</li>
                     </ul>
                 </div>
 
@@ -393,20 +309,20 @@
                     <div class="inner-form visa-card" id="visa-field">
                         <div class="card-payment-container">
                             <p class="card-text">CardHolder Name</p>
-                            <input type="text" class="card-payment-input" placeholder="e.g Juan Dela Cruz">
+                            <input type="text" class="card-payment-input" placeholder="e.g Juan Dela Cruz" id="visaCardHolderName">
                         </div>
                         <div class="card-payment-container">
                             <p class="card-text">Card Number</p>
-                            <input type="text" class="card-payment-input" placeholder="4242-4242-4242" >
+                            <input type="text" class="card-payment-input" placeholder="4242-4242-4242" id="visaCardNumber">
                         </div>
                         <div class="payment-form-container">
                             <div class="card-payment-container">
                                 <p class="card-text">Expiry (MM / YY)</p>
-                                <input type="text" class="card-payment-input" placeholder="08/18">
+                                <input type="text" class="card-payment-input" placeholder="08/18" id="visaCardExpiry">
                             </div>
                             <div class="card-payment-container">
                                 <p class="card-text">Cvv</p>
-                                <input type="text" class="card-payment-input" placeholder="●●●">
+                                <input type="text" class="card-payment-input" placeholder="●●●" id="visaCardCvv">
                             </div>
                         </div>
                     </div>
@@ -414,20 +330,20 @@
                     <div class="inner-form mc-card" id="mc-field">
                         <div class="card-payment-container">
                             <p class="card-text">CardHolder Name</p>
-                            <input type="text" class="card-payment-input" placeholder="e.g Juan Dela Cruz">
+                            <input type="text" class="card-payment-input" placeholder="e.g Juan Dela Cruz" id="mcCardHolderName">
                         </div>
                         <div class="card-payment-container">
                             <p class="card-text">Card Number</p>
-                            <input type="text" class="card-payment-input" placeholder="4242-4242-4242" >
+                            <input type="text" class="card-payment-input" placeholder="4242-4242-4242" id="mcCardNumber">
                         </div>
                         <div class="payment-form-container">
                             <div class="card-payment-container">
                                 <p class="card-text">Expiry (MM / YY)</p>
-                                <input type="text" class="card-payment-input" placeholder="08/18">
+                                <input type="text" class="card-payment-input" placeholder="08/18" id="mcCardExpiry">
                             </div>
                             <div class="card-payment-container">
                                 <p class="card-text">Cvv</p>
-                                <input type="text" class="card-payment-input" placeholder="●●●">
+                                <input type="text" class="card-payment-input" placeholder="●●●" id="mcCardCvv">
                             </div>
                         </div>
                     </div>
@@ -435,17 +351,23 @@
                     <div class="inner-form gcash" id="gcash-field">
                         <div class="card-payment-container">
                             <p class="card-text">GCash Mobile Number</p>
-                            <input type="text" class="card-payment-input" placeholder="09XX XXX XXXX">
+                            <input type="text" class="card-payment-input" placeholder="09XX XXX XXXX" id="gcashNumber">
                         </div>
                     </div>
 
                     <div class="inner-form pay-pal" id="paypal-field">
                         <div class="card-payment-container">
                             <p class="card-text">PayPal Email</p>
-                            <input type="text" class="card-payment-input" placeholder="you@paypal.com">
+                            <input type="text" class="card-payment-input" placeholder="you@paypal.com" id="paypalEmail">
                         </div>
                     </div>
 
+                    <div class="footer-payment">
+                        <div class="checkbox-payment">
+                            <input type="checkbox" id="payment-checkbox">
+                        </div>
+                        <p class="supporting-footer">Set as default address</p>
+                    </div>
                     <div class="lower-footer-payment">
                         <button class="payment-btn cancel-payment" id="cancel-payment">Cancel</button>
                         <button class="payment-btn save-payment" id="save-payment">Save</button>

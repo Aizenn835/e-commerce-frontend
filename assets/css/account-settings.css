@@ -834,7 +834,10 @@ width: 100%;
 .exit-payment:hover{
     background-color: rgb(202, 198, 198);
 }
-
+.current-payment{
+    max-height: 25vh;
+    overflow-y: auto;
+}
 .payment-container{
     margin:12px 12px 5px 12px;
     padding:10px 12px;
@@ -933,6 +936,8 @@ width: 100%;
 .payment-card-info{
     font-size:0.6875rem;
     color:gray;
+    display:flex;
+    justify-self: flex-start;
 }
 .edit-payment{
     display:flex;
@@ -1083,6 +1088,31 @@ input[type="radio"] {
     border:none;
     color:white;
     font-weight: 500;
+}
+#payment-checkbox{
+    accent-color: #284f9d;
+}
+.footer-payment{
+    display:none;
+    align-items: center;
+    gap:10px; 
+    margin-top: 12px;
+}
+.notfound-payment{
+    width: auto;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:10px 12px;
+    color:gray;
+    gap:12px;
+
+}
+.notfound-payment img{
+    display:flex;
+    width: 20%;
+    justify-self: center;
 }
 /* Wrong credentials input */
 .wrong-credentials {

@@ -213,6 +213,7 @@ document.querySelector(".exit").addEventListener("click" , () => {
 
 document.querySelector(".payments").addEventListener("click" , () => {
     document.querySelector(".modal-overlay-payment").classList.add("open-payment-modal");
+    fetchPaymentMethod();
 })
 document.querySelector(".exit-payment").addEventListener("click" , () => {
     document.querySelector(".modal-overlay-payment").classList.remove("open-payment-modal");
@@ -261,9 +262,7 @@ let addressId = null;
 
 document.querySelector(".save").addEventListener("click" , async () => {
     const isEdit = addressId != null;
-    //testing
-    console.log(isEdit);
-
+    
     const fullname = document.getElementById(isEdit ? "fullNameEdit" : "fullName").value;
     const street = document.getElementById(isEdit ? "editStreet" :"streetAddress").value;
     const city = document.getElementById(isEdit ? "cityEdit" : "city").value;
@@ -403,7 +402,7 @@ async function currentDefaultAddress(){
     }
 }
 // delete address
-// if there is only one address left make it the default one.
+// if there is only one address left make it the default one
 function deleteListener(){
     document.querySelectorAll(".address-container").forEach(opt => {
         opt.addEventListener("click" , async (e) => {
@@ -426,8 +425,8 @@ function deleteListener(){
         });
     })
 }
-//go to edit modal
 
+//go to edit modal
 function helper(){
     document.querySelector(".hero-container").classList.add("remove-hero");
     document.querySelector(".edit-modal").classList.add("show-edit");
@@ -475,7 +474,8 @@ document.querySelector(".edit-back").addEventListener("click" , () => {
 });
 
 // event listener for payment modal
-document.querySelectorAll(".payment-container").forEach(opt => {
+function addSelectedListenerPayment(){
+    document.querySelectorAll(".payment-container").forEach(opt => {
     opt.addEventListener("click" , (e) => {     
         if(e.target.closest(".edit-payment")){
             return;
@@ -490,28 +490,164 @@ document.querySelectorAll(".payment-container").forEach(opt => {
             opt.classList.add("selected-payment");
     })
 })
+}
 // event listener for card form
 document.querySelectorAll(".card").forEach(option => {
-    option.addEventListener("click" , () => {
-        
-        document.querySelectorAll(".card").forEach(select =>
-             select.classList.remove("payment-selected")); 
+option.addEventListener("click" , () => {
+    
+    document.querySelectorAll(".card").forEach(select =>
+        select.classList.remove("payment-selected")); 
 
-        option.classList.add("payment-selected");
+    option.classList.add("payment-selected");
 
 
-        const cardId = option.dataset.card;
-        document.querySelectorAll(".inner-form").forEach(form => {
-            form.style.display = "none"
-        });
-        const openForm = cardId + "-field";
-        console.log(openForm);
-        
-        document.getElementById(openForm).style.display = "flex";
-    })
+    const cardId = option.dataset.card;
+    document.querySelectorAll(".inner-form").forEach(form => {
+        form.style.display = "none"
+    });
+    const openForm = cardId + "-field";
+    
+    document.getElementById(openForm).style.display = "flex";
+    document.querySelector(".footer-payment").style.display = "flex";
+    
+ })
 })
 
+// API Connection for Payment methods 
+let selectedType = "CARD";
+document.getElementById("visa").addEventListener("click" , () => selectedType = "VISA");
+document.getElementById("mc").addEventListener("click" , () => selectedType = "MC");
+document.getElementById("gcash").addEventListener("click" , () => selectedType = "GCASH");
+document.getElementById("payPal").addEventListener("click" , () => selectedType = "PAYPAL");
 
+document.getElementById("save-payment").addEventListener("click" , async () => {
+    let payload; 
+
+    const checkBox = document.getElementById("payment-checkbox");
+    const isDefault = checkBox.checked ? true : false;   
+    
+    const saveBtn = document.getElementById("save-payment");
+    saveBtn.textContent = "Saving..";
+    saveBtn.disabled = true;
+
+    if(selectedType === "VISA" || selectedType === "MC"){
+        
+        payload = {
+            "isDefault" : isDefault,
+            "cardBrand" : selectedType ,
+            "paymentType" : "CARD",
+            "cardHolderName" : document.getElementById(selectedType === "VISA" ? "visaCardHolderName" : "mcCardHolderName")
+            .value,
+            "cardLastFourDigits" : document.getElementById(selectedType === "VISA" ? "visaCardNumber" : "mcCardNumber")
+                                  .value,
+            "month" : parseInt(document.getElementById(selectedType === "VISA" ? "visaCardExpiry" : "mcCardExpiry")
+                     .value.split("/")[0]),
+            "year" : parseInt(document.getElementById(selectedType === "VISA" ? "visaCardExpiry" : "mcCardExpiry")
+                     .value.split("/")[1])
+        };
+
+    }else if(selectedType === "GCASH" || selectedType === "PAYPAL"){
+       
+        payload = {
+            "isDefault" : isDefault,
+            "cardBrand" : selectedType ,
+            "paymentType" : "EWALLET",
+            "provider" : selectedType === "GCASH" ? "gcash" : "paypal",
+            "walletIdentifier" :  document.getElementById(selectedType === "GCASH" ?
+                                  "gcashNumber" : "paypalEmail").value
+        };
+    }
+    try{
+        const response = await fetch(`${API_URL}/settings/add-payment` , {
+                method: "POST",
+                headers: {"Authorization" : `Bearer ${token}`,
+                        "Content-Type" : "application/json"},
+                body: JSON.stringify(payload)
+        });
+        if(!response.ok){
+             console.error("Failed to add payment method");
+             return;
+        }
+        saveBtn.textContent = "Saved";
+        setTimeout(() => {
+            saveBtn.textContent = "Save"
+            saveBtn.disabled = false;
+        },500)
+        document.querySelectorAll(".card-payment-input").forEach(inputBtn => inputBtn.value = "");
+        fetchPaymentMethod();
+    }catch(error){
+        console.log(error);
+    }
+})
+// load/fetch data
+async function fetchPaymentMethod(){
+    try{
+        const response = await fetch(`${API_URL}/settings/payments` , {
+            headers: {"Authorization" : `Bearer ${token}`}
+        })
+        const paymentMethods = await response.json();
+        loadPaymentMethods(paymentMethods);
+        if(paymentMethods.length === 0){
+            document.querySelector(".current-payment").innerHTML = `
+           <div class="notfound-payment">
+                <img src="/assets/images/undraw_enter-payment-info_k1yw.svg" alt="No address handler">
+                <h3 class="main-text">How would you like to pay?</h3>
+                <p class="supporting-text">Save your preferred payment methods to make checkout effortless.</p>
+            </div>`;
+             return;
+        }
+    }catch(error){
+        console.log(error);
+    }
+}
+function loadPaymentMethods(paymentMethods){
+    const paymentContainer = document.querySelector(".current-payment");
+    paymentContainer.innerHTML = "";
+
+    paymentMethods.forEach(pm => {
+        const card = document.createElement("div");
+        card.className = "payment-container";
+
+        let logoName , cardName , walletIdentifier , logoColor;
+
+        if(pm.cardBrand === "VISA" || pm.cardBrand === "MC"){
+            logoName = pm.cardBrand === "VISA" ? "VISA" : "MC";
+            cardName = pm.cardBrand === "VISA" ? "Visa" : "Master Card";
+            logoColor = pm.cardBrand === "VISA" ? "visa" : "master-card";
+            walletIdentifier = pm.cardLastFourDigits + " | " + "Expires " + pm.month + "/" + pm.year;
+        }else if(pm.cardBrand === "GCASH" || pm.cardBrand === "PAYPAL"){
+            logoName = pm.cardBrand === "GCASH" ? "G" : "PP";
+            cardName = pm.cardBrand === "GCASH" ? "Gcash" : "PayPal";
+            logoColor = pm.cardBrand === "GCASH" ? "g-cash" : "paypal";
+            walletIdentifier = pm.walletIdentifier;
+        }
+        console.log(pm.cardBrand);
+        card.innerHTML = `
+                <input type="radio" name="paymentInput">
+                <div class="logo-container ${logoColor}">
+                    <p class="logo-name">${logoName}</p>
+                </div>
+                <div class="information-container">
+                    <div class="payment-info-container">
+                        <div class="inner-info-container">
+                            <h4 class="card-name">${cardName}</h4>
+                            <span class="default-payment">Default</span>
+                        </div>
+                        <p class="payment-card-info">${walletIdentifier} </p>
+                    </div>
+                    <div class="edit-payment">
+                        <div class="edit-payment-container">
+                            <i class="ti ti-edit"></i> 
+                            <p class="edit-payment-method">Edit</p>
+                        </div>
+                        <p class="remove-payment-method">Remove</p>
+                    </div>
+                </div>
+        `
+        paymentContainer.appendChild(card);
+    });
+     addSelectedListenerPayment();
+}
 currentDefaultAddress();
 loadHistory();
 userInformation();  
