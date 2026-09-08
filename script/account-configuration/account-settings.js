@@ -166,6 +166,7 @@ pfpInput.addEventListener("change" , async (e) => {
     const success = await saveChangesPfp(file);
     if(success){
       location.reload();
+      
    }
 })
 async function saveChangesPfp(file){
@@ -480,13 +481,12 @@ function addSelectedListenerPayment(){
         if(e.target.closest(".edit-payment")){
             return;
         }
-
         const inputRadio = opt.querySelector("input[type='radio']");
         inputRadio.checked = true;
 
-        document.querySelectorAll(".payment-container").forEach(select => 
-            select.classList.remove("selected-payment"));
-
+        document.querySelectorAll(".payment-container").forEach(select => {
+            select.classList.remove("selected-payment")
+        })
             opt.classList.add("selected-payment");
     })
 })
@@ -557,6 +557,7 @@ document.getElementById("save-payment").addEventListener("click" , async () => {
                                   "gcashNumber" : "paypalEmail").value
         };
     }
+    console.log(payload);
     try{
         const response = await fetch(`${API_URL}/settings/add-payment` , {
                 method: "POST",
@@ -564,17 +565,24 @@ document.getElementById("save-payment").addEventListener("click" , async () => {
                         "Content-Type" : "application/json"},
                 body: JSON.stringify(payload)
         });
+        if(response.status === 409){
+            alert("Payment Method Already Exist");
+            saveBtn.textContent = "Save";
+            saveBtn.disabled = false;r
+            return;
+        }
         if(!response.ok){
              console.error("Failed to add payment method");
              return;
         }
+
         saveBtn.textContent = "Saved";
         setTimeout(() => {
             saveBtn.textContent = "Save"
             saveBtn.disabled = false;
         },500)
-        document.querySelectorAll(".card-payment-input").forEach(inputBtn => inputBtn.value = "");
         fetchPaymentMethod();
+        document.querySelectorAll(".card-payment-input").forEach(inputBtn => inputBtn.value = "");
     }catch(error){
         console.log(error);
     }
@@ -607,6 +615,8 @@ function loadPaymentMethods(paymentMethods){
     paymentMethods.forEach(pm => {
         const card = document.createElement("div");
         card.className = "payment-container";
+        card.dataset.id = pm.id;
+
 
         let logoName , cardName , walletIdentifier , logoColor;
 
@@ -631,7 +641,7 @@ function loadPaymentMethods(paymentMethods){
                     <div class="payment-info-container">
                         <div class="inner-info-container">
                             <h4 class="card-name">${cardName}</h4>
-                            <span class="default-payment">Default</span>
+                            <span class="default-payment" style="display:${pm.isDefault ? "flex" : "none"}">Default</span>
                         </div>
                         <p class="payment-card-info">${walletIdentifier} </p>
                     </div>
@@ -647,6 +657,32 @@ function loadPaymentMethods(paymentMethods){
         paymentContainer.appendChild(card);
     });
      addSelectedListenerPayment();
+     addDeleteListener(paymentMethods);
+}
+
+function addDeleteListener(){
+    document.querySelectorAll(".payment-container").forEach(pm => {
+        pm.addEventListener("click" , async (e) => {
+            const removeBtn = e.target.closest(".remove-payment-method");
+            const id = pm.dataset.id;
+            
+            if(!removeBtn){return;}
+
+            try{
+                const response = await fetch(`${API_URL}/settings/payment/${id}` , {
+                    method: "DELETE",
+                    headers: {"Authorization" : `Bearer ${token}`}
+                });
+
+                if(!response.ok){
+                    throw new Error("Status: " + response.status);
+                }
+                 fetchPaymentMethod();
+            }catch(error){
+                console.log(error);
+            }
+        })
+    })
 }
 currentDefaultAddress();
 loadHistory();
