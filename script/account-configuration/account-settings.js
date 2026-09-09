@@ -617,7 +617,6 @@ function loadPaymentMethods(paymentMethods){
         card.className = "payment-container";
         card.dataset.id = pm.id;
 
-
         let logoName , cardName , walletIdentifier , logoColor;
 
         if(pm.cardBrand === "VISA" || pm.cardBrand === "MC"){
@@ -631,7 +630,6 @@ function loadPaymentMethods(paymentMethods){
             logoColor = pm.cardBrand === "GCASH" ? "g-cash" : "paypal";
             walletIdentifier = pm.walletIdentifier;
         }
-        console.log(pm.cardBrand);
         card.innerHTML = `
                 <input type="radio" name="paymentInput">
                 <div class="logo-container ${logoColor}">
@@ -646,7 +644,7 @@ function loadPaymentMethods(paymentMethods){
                         <p class="payment-card-info">${walletIdentifier} </p>
                     </div>
                     <div class="edit-payment">
-                        <div class="edit-payment-container">
+                        <div class="edit-payment-container" data-brand ="${pm.cardBrand}">
                             <i class="ti ti-edit"></i> 
                             <p class="edit-payment-method">Edit</p>
                         </div>
@@ -658,6 +656,7 @@ function loadPaymentMethods(paymentMethods){
     });
      addSelectedListenerPayment();
      addDeleteListener(paymentMethods);
+     addPaymentEditListener();
 }
 
 function addDeleteListener(){
@@ -682,6 +681,57 @@ function addDeleteListener(){
                 console.log(error);
             }
         })
+    })
+}
+function addPaymentEditListener(){
+    document.querySelectorAll(".payment-container").forEach(pm => {
+        pm.addEventListener("click" ,async (e) => {
+            const editBtn = e.target.closest(".edit-payment-container");
+
+            if(!editBtn) return;
+            const cardId = pm.dataset.id;
+        
+            const editId = editBtn.dataset.brand;
+            const form = editId.toLowerCase();
+
+            document.querySelector(".hero-payment").style.display = "none";
+            document.querySelector(".payment-edit-modal").style.display = "flex";
+
+            const id = "edit-" + form + "-field"; 
+            document.getElementById(id).style.display = "flex";
+
+            try{
+                const response = await fetch(`${API_URL}/settings/payment/${cardId}` , {
+                    headers:{"Authorization" : `Bearer ${token}`}
+                });
+                if(!response.ok){
+                    throw new Error("Status: " + response.status);
+                }
+
+                const data = await response.json();
+                const card = data.cardBrand;
+
+                if(card === "GCASH" || card === "PAYPAL"){
+                   
+                   const walletIdentifier = document.getElementById(card === "GCASH" ? "editGcashNumber" : "editPaypalEmail");
+                   walletIdentifier.value = data.walletIdentifier;
+
+                }else if(card === "VISA" || card === "MC"){
+
+                    const cardHolderName = document.getElementById(card === "VISA" ? "editVisaCardHolderName" : "editMcCardHolderName");
+                    const cardNumber = document.getElementById(card === "VISA" ? "editVisaCardNumber" : "editMcCardNumber");
+                    const expiry = document.getElementById(card === "VISA" ? "editVisaCardExpiry" : "editMcCardExpiry");
+
+                    cardHolderName.value = data.cardHolderName;
+                    cardNumber.value = data.cardLastFourDigits;
+                    expiry.value = data.month + "/" + data.year;
+                }
+                 
+            
+            }catch(error){
+                console.log(error);
+            }
+        });
     })
 }
 currentDefaultAddress();

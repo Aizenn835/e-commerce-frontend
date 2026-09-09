@@ -998,6 +998,7 @@ input[type="radio"] {
     font-size:0.75rem;
     font-weight: 550;
 }
+
 .payment-choices{
     list-style: none; 
     padding: 0;      
@@ -1063,14 +1064,11 @@ input[type="radio"] {
     outline: none;
 }
 .lower-footer-payment{
-    border-top: 1px solid rgb(210, 205, 205);
-    margin-top:12px;
-}
-
-.lower-footer-payment{
     display:flex;
     justify-content: space-evenly;
     align-items: center;
+    border-top: 1px solid rgb(210, 205, 205);
+    margin-bottom: 12px;
 }
 .payment-btn{
     margin-top:12px;
@@ -1113,6 +1111,17 @@ input[type="radio"] {
     display:flex;
     width: 20%;
     justify-self: center;
+}
+.payment-edit-modal{
+    display:none;
+    margin:12px;
+    flex-direction: column;
+}
+.footer-payment-edit{
+    display:flex;
+    align-items: center;
+    margin-top:12px;
+    gap:8px;
 }
 /* Wrong credentials input */
 .wrong-credentials {
