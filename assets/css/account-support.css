@@ -1,0 +1,252 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+-webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+width: 100%;
+overflow-x: hidden; 
+}
+
+body {
+font-family: 'Plus Jakarta Sans', sans-serif;
+display:flex;
+flex-direction: column;
+padding-top: 80px; 
+}
+
+img {
+max-width: 100%;
+display: block;
+}
+
+ul {
+list-style: none;
+}
+
+a {
+text-decoration: none;
+}
+
+.header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 6vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: white;
+    border-bottom: 1px solid rgb(179, 170, 170);
+    padding: 10px clamp(16px, 4vw, 40px);
+    gap: clamp(8px, 2vw, 20px);
+}
+.logo {
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: rgb(42, 57, 122);
+    font-size: clamp(18px, 3vw, 24px);
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    justify-content: center;
+    width: 100%;
+}
+.hero{
+    margin: 10px auto;
+    height: auto;
+    width: min(90%, 640px);
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.back-arrow{
+    font-size:0.8125rem;
+    color:gray;
+    cursor: default;
+}
+.back-arrow:hover{
+    color:#10203f;
+    cursor: pointer;
+}
+.settings-head{
+    margin-top: 1rem;
+    display:flex;
+    align-items: center;
+    gap:12px;
+}
+.settings-logo{
+    padding:10px 12px;
+    background: #10203f;
+    color:white;
+    border-radius: 0.7285rem;
+    font-size: 1.1875rem;
+}
+.settings-name{
+    font-size:1.25rem;
+}
+.supporting-text{
+    font-size:0.7685rem;
+    font-weight: 500;
+    color: gray;
+}
+.settings-choice{
+    margin-top:1.25rem;
+    background-color: rgb(248, 244, 244);
+    border-radius: 0.50rem;
+    height:auto;
+    display:flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+.self-account{
+    margin:0.25rem;
+    padding:10px 12px;
+    font-size:0.9285rem;
+    font-weight: 500;
+}
+.self-account:first-child{
+    margin-top:0.50rem;
+}
+#font{margin-right:0.525rem;}
+
+.active{
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 0.7285rem;
+}
+.log-out{
+    border-top: 1px solid rgb(221, 212, 212)    ;
+    color:red;
+    display:block;
+    padding-top: 15px;
+}
+/* ask for support */
+.ask-support{
+    margin-top:12px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap:5px;
+    height:auto;
+}
+.support-container{
+    border-radius: 12px;
+    border:1px solid rgb(229, 223, 223);
+    padding:15px 17px;
+    display:flex;
+    flex-direction: column;
+    gap:12px;
+    width: 100%;
+    max-width: 200px;
+}
+.chat-support{
+    color:#10203f;
+    background-color: rgb(200, 216, 234);
+}
+.mail-support{
+    color:rgb(239, 146, 15);
+    background-color: rgb(237, 226, 206);
+}
+.call-support{
+    color:rgb(15, 168, 15);
+    background-color: rgb(202, 237, 202);
+}
+.support-logo{
+    width: 30%;
+    max-width: 100px;
+    height: auto;
+    border-radius: 15px;
+    padding:7px 10px;
+    text-align: center;
+    font-size:1rem;
+}
+.support-message{
+    display:flex;
+    flex-direction: column;
+    gap:5px;
+}
+.support-name{
+    font-size:0.825rem;
+    font-weight: 600;
+}
+.support-dsc{
+    font-size:0.75rem;
+    color:gray;
+}
+.support-btn{
+    border:none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    gap:3px;
+    color:#1c2f55;
+    font-size:0.72rem;
+    font-weight: 550;
+    margin-top:12px;
+}
+.support-btn span:hover{
+    text-decoration:underline;
+}
+/* frequently ask question */
+.frequently-question{
+    margin-top:12px;
+    border:1px solid rgb(224, 219, 219);
+    padding:10px 12px;
+    border-radius: 12px;
+}
+.question-header{
+    font-size:1rem;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    margin:12px 0 20px 0;
+}
+.question-header i{
+    font-size:1.25rem;
+    color:gray;
+}
+.questions{
+    display:flex;
+    justify-content: space-between;
+    border:1px solid rgb(224, 219, 219);
+    margin-bottom: 12px;
+    padding:10px 12px;
+    border-radius: 12px;
+}
+.message-question{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+}
+.question{
+    font-weight: 600;
+    font-size:0.875rem;
+    color:rgb(31, 30, 30);
+}
+.question-answer{
+    font-size:0.8285rem;
+    color:gray;
+    width: 100%;
+    max-width: 90%;
+    display:none
+}
+.dropdown-btn{
+    background-color: transparent;
+    border:none;
+    font-size:1.25rem;
+    color:gray;
+}
+.show-answer{
+    display:block;
+}

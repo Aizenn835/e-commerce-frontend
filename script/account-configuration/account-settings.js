@@ -258,7 +258,6 @@ function validateAddressForm(fullname, street, city, state, zipCode) {
 }
 // API Connection for Address
 // The input radio always checked the last child fix this. (let addressId = null;)
-
 let addressId = null;
 
 document.querySelector(".save").addEventListener("click" , async () => {
@@ -557,7 +556,6 @@ document.getElementById("save-payment").addEventListener("click" , async () => {
                                   "gcashNumber" : "paypalEmail").value
         };
     }
-    console.log(payload);
     try{
         const response = await fetch(`${API_URL}/settings/add-payment` , {
                 method: "POST",
@@ -623,7 +621,7 @@ function loadPaymentMethods(paymentMethods){
             logoName = pm.cardBrand === "VISA" ? "VISA" : "MC";
             cardName = pm.cardBrand === "VISA" ? "Visa" : "Master Card";
             logoColor = pm.cardBrand === "VISA" ? "visa" : "master-card";
-            walletIdentifier = pm.cardLastFourDigits + " | " + "Expires " + pm.month + "/" + pm.year;
+            walletIdentifier = "••• " + pm.cardLastFourDigits + " | " + "Expires " + pm.month + "/" + pm.year;
         }else if(pm.cardBrand === "GCASH" || pm.cardBrand === "PAYPAL"){
             logoName = pm.cardBrand === "GCASH" ? "G" : "PP";
             cardName = pm.cardBrand === "GCASH" ? "Gcash" : "PayPal";
@@ -644,10 +642,6 @@ function loadPaymentMethods(paymentMethods){
                         <p class="payment-card-info">${walletIdentifier} </p>
                     </div>
                     <div class="edit-payment">
-                        <div class="edit-payment-container" data-brand ="${pm.cardBrand}">
-                            <i class="ti ti-edit"></i> 
-                            <p class="edit-payment-method">Edit</p>
-                        </div>
                         <p class="remove-payment-method">Remove</p>
                     </div>
                 </div>
@@ -656,7 +650,8 @@ function loadPaymentMethods(paymentMethods){
     });
      addSelectedListenerPayment();
      addDeleteListener(paymentMethods);
-     addPaymentEditListener();
+     getDefaultPayment();
+
 }
 
 function addDeleteListener(){
@@ -676,6 +671,7 @@ function addDeleteListener(){
                 if(!response.ok){
                     throw new Error("Status: " + response.status);
                 }
+                 getDefaultPayment();
                  fetchPaymentMethod();
             }catch(error){
                 console.log(error);
@@ -683,57 +679,46 @@ function addDeleteListener(){
         })
     })
 }
-function addPaymentEditListener(){
-    document.querySelectorAll(".payment-container").forEach(pm => {
-        pm.addEventListener("click" ,async (e) => {
-            const editBtn = e.target.closest(".edit-payment-container");
-
-            if(!editBtn) return;
-            const cardId = pm.dataset.id;
-        
-            const editId = editBtn.dataset.brand;
-            const form = editId.toLowerCase();
-
-            document.querySelector(".hero-payment").style.display = "none";
-            document.querySelector(".payment-edit-modal").style.display = "flex";
-
-            const id = "edit-" + form + "-field"; 
-            document.getElementById(id).style.display = "flex";
-
-            try{
-                const response = await fetch(`${API_URL}/settings/payment/${cardId}` , {
-                    headers:{"Authorization" : `Bearer ${token}`}
-                });
-                if(!response.ok){
-                    throw new Error("Status: " + response.status);
-                }
-
-                const data = await response.json();
-                const card = data.cardBrand;
-
-                if(card === "GCASH" || card === "PAYPAL"){
-                   
-                   const walletIdentifier = document.getElementById(card === "GCASH" ? "editGcashNumber" : "editPaypalEmail");
-                   walletIdentifier.value = data.walletIdentifier;
-
-                }else if(card === "VISA" || card === "MC"){
-
-                    const cardHolderName = document.getElementById(card === "VISA" ? "editVisaCardHolderName" : "editMcCardHolderName");
-                    const cardNumber = document.getElementById(card === "VISA" ? "editVisaCardNumber" : "editMcCardNumber");
-                    const expiry = document.getElementById(card === "VISA" ? "editVisaCardExpiry" : "editMcCardExpiry");
-
-                    cardHolderName.value = data.cardHolderName;
-                    cardNumber.value = data.cardLastFourDigits;
-                    expiry.value = data.month + "/" + data.year;
-                }
-                 
-            
-            }catch(error){
-                console.log(error);
-            }
+async function getDefaultPayment() {
+    try{
+        const response = await fetch(`${API_URL}/settings/payment/default` , {
+            headers: {"Authorization" : `Bearer ${token}`}  
         });
-    })
+        if(response.status === 404){
+            const bold = document.getElementById("expiration-bold");
+            bold.style.fontWeight = 400;
+            bold.textContent = "No Default Payment Method";
+            document.getElementById("card-digits").textContent = " ";
+            document.querySelector(".supporting-expiration").textContent = " ";
+        }else{
+            const result = await response.json();
+            if(result.cardBrand === "VISA" || result.cardBrand === "MC"){
+                const bold = document.getElementById("expiration-bold");
+                bold.textContent = result.cardBrand + " ending in"; 
+                bold.style.marginRight = "5px";
+                bold.style.marginBottom = "5px";
+
+                document.getElementById("card-digits").textContent = result.cardLastFourDigits;
+                document.querySelector(".supporting-expiration").textContent = "Expires " +  result.month + "/" + result.year;
+            }
+            else if(result.cardBrand === "GCASH" || result.cardBrand === "PAYPAL"){
+                const bold = document.getElementById("expiration-bold");
+                bold.textContent = result.cardBrand; 
+                bold.style.marginRight = "5px";
+                bold.style.marginBottom = "5px";
+                
+                const maskNumber = "•••• " +  result.walletIdentifier.slice(-4);
+                document.getElementById("card-digits").textContent = maskNumber;
+                document.querySelector(".supporting-expiration").textContent = "Linked on " + result.createdAt.slice(0, 7);
+            }
+        }
+    }catch(error){
+        console.log(error);
+    }
 }
+
+
+getDefaultPayment();
 currentDefaultAddress();
 loadHistory();
 userInformation();  

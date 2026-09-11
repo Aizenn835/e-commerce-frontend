@@ -33,7 +33,7 @@
              <div class="self-account" onclick="window.location.href='/pages/pages-settings/account-privacy.html'">
                <span><i class="ti ti-shield-cog" id="font"></i> Privacy & Security</span>
             </div> 
-             <div class="self-account">
+             <div class="self-account" onclick="window.location.href='/pages/pages-settings/account-support.html'">
                <span><i class="ti ti-help-hexagon" id="font"></i> Help & Support</span>
             </div> 
             <div class="self-account log-out">
@@ -115,10 +115,13 @@
             <div class="user-head">
                 <i class="ti ti-credit-card"></i>
                 <span>Payment Methods</span>
-            </div>
+            </div> 
             <div class="user-address">
-                <p class="expiration-text">No Default Payment Method</p>
-                <p class="supporting-expiration">--</p>
+                <p class="expiration-text" style="display: flex;"> 
+                    <b id="expiration-bold"></b> 
+                    <span id="card-digits"></span>
+                </p>
+                <p class="supporting-expiration"></p>
             </div>
             <div class="user-address-footer" style="margin-top: 5px;">
                 <button class="add-info payments">Manage Payment Methods</button>
@@ -279,7 +282,7 @@
             <div class="main-modal-payment">
               <div class="payment-head">
                 <div class="payment-back">
-                    <span class="payment-arrow" style="display: none;"><i class="ti ti-arrow-narrow-left"></i></span>
+                    <span class="payment-arrow" id="payment-arrow" style="display: none;"><i class="ti ti-arrow-narrow-left"></i></span>
                     <h3 class="payment-text"> Manage Payment Method </h3>
                 </div>
                 <span class="exit-payment">X</span>
@@ -370,73 +373,6 @@
                     </div>
                 </div>
              </div>
-
-
-             <!-- Edit payment modal -->
-            <div class="payment-edit-modal">
-                <div class="inner-form visa-card" id="edit-visa-field">
-                    <div class="card-payment-container">
-                        <p class="card-text">CardHolder Name</p>
-                        <input type="text" class="card-payment-input" placeholder="e.g Juan Dela Cruz" id="editVisaCardHolderName">
-                    </div>
-                    <div class="card-payment-container">
-                        <p class="card-text">Card Number</p>
-                        <input type="text" class="card-payment-input" placeholder="4242-4242-4242" id="editVisaCardNumber">
-                    </div>
-                    <div class="payment-form-container">
-                        <div class="card-payment-container">
-                            <p class="card-text">Expiry (MM / YYYY)</p>
-                            <input type="text" class="card-payment-input" placeholder="08/2026" id="editVisaCardExpiry">
-                        </div>
-                        <div class="card-payment-container">
-                            <p class="card-text">Cvv</p>
-                            <input type="text" class="card-payment-input" placeholder="●●●" id="editVisaCardCvv">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="inner-form mc-card" id="edit-mc-field">
-                    <div class="card-payment-container">
-                        <p class="card-text">CardHolder Name</p>
-                        <input type="text" class="card-payment-input" placeholder="e.g Juan Dela Cruz" id="editMcCardHolderName">
-                    </div>
-                    <div class="card-payment-container">
-                        <p class="card-text">Card Number</p>
-                        <input type="text" class="card-payment-input" placeholder="4242-4242-4242" id="editMcCardNumber">
-                    </div>
-                    <div class="payment-form-container">
-                        <div class="card-payment-container">
-                            <p class="card-text">Expiry (MM / YYYY)</p>
-                            <input type="text" class="card-payment-input" placeholder="08/2026" id="editMcCardExpiry">
-                        </div>
-                        <div class="card-payment-container">
-                            <p class="card-text">Cvv</p>
-                            <input type="text" class="card-payment-input" placeholder="●●●" id="editMcCardCvv">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="inner-form gcash" id="edit-gcash-field">
-                    <div class="card-payment-container">
-                        <p class="card-text">GCash Mobile Number</p>
-                        <input type="text" class="card-payment-input" placeholder="09XX XXX XXXX" id="editGcashNumber">
-                    </div>
-                </div>
-
-                <div class="inner-form pay-pal" id="edit-paypal-field">
-                    <div class="card-payment-container">
-                        <p class="card-text">PayPal Email</p>
-                        <input type="text" class="card-payment-input" placeholder="you@paypal.com" id="editPaypalEmail">
-                    </div>
-                </div>
-
-                <div class="footer-payment-edit" >
-                    <div class="checkbox-payment">
-                        <input type="checkbox" id="payment-checkbox-edit">
-                    </div>
-                    <p class="supporting-footer">Set as default address</p>
-                </div>
-            </div>
 
             <div class="lower-footer-payment">
                 <button class="payment-btn cancel-payment" id="cancel-payment">Cancel</button>

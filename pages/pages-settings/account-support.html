@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/account-support.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+<body>
+    <nav class="header">
+        <div class="logo"><i class="ti ti-garden-cart"></i> SwiftCart</div>
+    </nav>
+
+    <section class="hero">
+       <div class="back-arrow" id="back">
+         <span><i class="ti ti-arrow-narrow-left"></i> Back to store</span>
+       </div>
+
+       <div class="settings-head">
+            <div class="settings-logo"><i class="ti ti-settings"></i></div>
+            <div>
+                <h3 class="settings-name">Settings</h3>
+                <span class="supporting-text">Manage your account and preferences</span>
+            </div>
+       </div>
+
+       <div class="settings-choice">
+            <div class="self-account"  onclick="window.location.href='/pages/pages-settings/account-settings.html'">
+               <span><i class="ti ti-user" id="font"></i> Account</span>
+            </div>  
+             <div class="self-account" onclick="window.location.href='/pages/pages-settings/account-privacy.html'">
+               <span><i class="ti ti-shield-cog" id="font"></i> Privacy & Security</span>
+            </div> 
+             <div class="self-account active">
+               <span><i class="ti ti-help-hexagon" id="font"></i> Help & Support</span>
+            </div> 
+            <div class="self-account log-out">
+                <span><i class="ti ti-logout"></i> Log out</span>
+            </div>
+       </div>
+
+       <div class="ask-support">
+            <div class="support-container">
+                <div class="support-logo chat-support">
+                    <i class="ti ti-brand-line"></i>
+                </div>
+                <div class="support-message">
+                    <p class="support-name">Live Chat</p>
+                    <p class="support-dsc">Available 9am–9pm EST</p>
+                </div>
+                <button class="support-btn">
+                    <span>Start chat</span>
+                    <i class="ti ti-arrow-narrow-right"></i>
+                </button>
+            </div>
+
+            <div class="support-container">
+                <div class="support-logo mail-support">
+                    <i class="ti ti-mail"></i>
+                </div>
+                <div class="support-message">
+                    <p class="support-name">Email Us</p>
+                    <p class="support-dsc">Reply within 24 hours</p>
+                </div>
+                <button class="support-btn">
+                    <span>Send Email</span>
+                    <i class="ti ti-arrow-narrow-right"></i>
+                </button>
+            </div>
+
+            <div class="support-container">
+                <div class="support-logo call-support">
+                    <i class="ti ti-phone"></i>
+                </div>
+                <div class="support-message">
+                    <p class="support-name">Call Us</p>
+                    <p class="support-dsc">+1 (800) 663-3872</p>
+                </div>
+                <button class="support-btn">
+                    <span>Call now</span>
+                    <i class="ti ti-arrow-narrow-right"></i>
+                </button>
+            </div>
+       </div>
+       <div class="frequently-question">
+            <h3 class="question-header">
+                <i class="ti ti-book"></i>
+                <p>Frequently Asked Questions</p>
+            </h3>
+
+            <div class="questions">
+                <div class="message-question">
+                    <p class="question">How do i track my order?</p>
+                    <p class="question-answer">After placing an order you will receive a confirmation email with a tracking link. You can also find your order status under Account → Order History.</p>
+                </div>
+                <button class="dropdown-btn"><i class="ti ti-caret-down"></i></button>
+            </div>
+            <div class="questions">
+                <div class="message-question">
+                    <p class="question">What is your return policy?</p>
+                    <p class="question-answer">We offer hassle-free 30-day returns on all items. Products must be unused and in their original packaging. Start a return from Order History or contact support.</p>
+                </div>
+                <button class="dropdown-btn "><i class="ti ti-caret-down"></i></button>
+            </div>
+            <div class="questions">
+                <div class="message-question">
+                    <p class="question">How long does shipping take?</p>
+                    <p class="question-answer">Standard shipping takes 5–7 business days. Express is 2–3 days and overnight delivery is available for most locations.</p>
+                </div>
+                <button class="dropdown-btn"><i class="ti ti-caret-down"></i></button>
+            </div>
+            <div class="questions">
+                <div class="message-question">
+                    <p class="question">Can i change or cancel my order</p>
+                    <p class="question-answer">Orders can be modified or cancelled within 1 hour of placement. After that, the order enters fulfilment and cannot be changed.</p>
+                </div>
+                <button class="dropdown-btn"><i class="ti ti-caret-down"></i></button>
+            </div>
+            <div class="questions">
+                <div class="message-question">
+                    <p class="question">Are my payment details secure?</p>
+                    <p class="question-answer" >Yes. All transactions are encrypted with 256-bit SSL. We never store your full card number — payments are processed by a PCI-DSS certified provider.</p>
+                </div>
+                <button class="dropdown-btn"><i class="ti ti-caret-down"></i></button>
+            </div>
+       </div>
+    </section>
+
+    <script src="/script/account-configuration/account-support.js"></script>
+</body>
+</html>
