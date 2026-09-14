@@ -87,7 +87,8 @@ a {
     font-size: 1.1875rem;
 }
 .settings-name{
-    font-size:1.25rem;
+    font-size:0.9285rem;
+    font-weight: 600;
 }
 .supporting-text{
     font-size:0.7685rem;
@@ -136,6 +137,11 @@ a {
 .change-password{
     padding:15px 12px
 }
+.password-header{
+    display:flex;
+    gap:5px;
+    align-items: center;
+}
 .password-header i{
     font-size:1.1875rem;
     color:gray;
@@ -158,13 +164,13 @@ a {
     border-radius: 12px;
     border:1px solid rgb(233, 224, 224);
     outline:none;
-    width: 50%;
+    width: 70%;
 }
 .save-changes{
     background: #10203f;
     padding:10px 12px;
     width: fit-content;
-    max-width: 30%; 
+    max-width: 100%; 
     text-align: center; 
     margin:20px 12px; 
     border-radius: 12px;
@@ -175,7 +181,11 @@ a {
     font-size:0.875rem;
     font-weight: 600    ;
 }
-
+@media (max-width:900px) {
+    .grid input{
+        width: 100%;
+    }
+}
 /* Two Factor Authentication and 
    Privacy Control */
 .notification-settings{
@@ -210,7 +220,7 @@ a {
     margin-bottom:none;
     padding-bottom: none;
 }
-.settings-name{
+.settings-choices{
     font-size:0.875rem;
     font-weight: 600;
 }
@@ -245,3 +255,165 @@ a {
 .onSwitchBtn{
     background-color:#10203f;
 }
+/* Danger Zone */
+.danger-zone{
+    border:1px solid rgb(240, 190, 190);
+    margin-top:1.25rem;
+    border-radius: 0.50rem;
+    width:100%;
+    padding:15px 12px 10px 12px;
+    overflow: hidden;
+}
+.danger-header{
+    color:rgb(236, 25, 25);
+    font-size:1.1875rem;
+}
+.danger-info{
+    margin-top:5px;
+    color:gray;
+    font-size:0.825rem;
+}
+.danger{
+    margin:15px 0;
+    display:flex;
+    gap:12px;
+}
+.danger-btn{
+    padding:10px 12px;
+    background-color: white;
+    border:1.95px solid rgb(240, 190, 190);
+    border-radius: 12px;
+    font-size:0.9285rem;
+    color:rgb(221, 18, 18);
+    font-weight: 550;
+    cursor: pointer;
+}
+.danger-btn:hover{
+    background-color: rgb(245, 240, 240);
+}
+/* Delete modal */
+.delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.5s ease;
+}
+
+.delete-modal-overlay.open-modal {
+  pointer-events: auto;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.delete-modal {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 12px;
+  overflow: auto;
+  padding: 24px 20px 16px;
+  box-sizing: border-box;
+}
+
+.delete-modal .exit-delete {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.delete-modal .delete-header {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.delete-modal .delete-info {
+  color: gray;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 450;
+  margin: 10px 0;
+}
+
+.delete-modal .modal-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 0;
+}
+
+.delete-modal .modal-btn .btn {
+  flex: 1 1 120px;
+  max-width: 180px;
+  padding: 10px 12px !important;
+  background-color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85rem !important;
+  box-sizing: border-box;
+  border: 1px solid gray;
+}
+
+.delete-modal .modal-btn .cancel {
+  border: 1px solid gray;
+  color: #333;
+}
+
+.delete-modal .modal-btn .delete {
+  border: 1px solid rgb(208, 39, 39);
+  background-color: rgb(208, 39, 39);
+  color: white;
+  font-weight: 600;
+}
+
+.delete-modal .modal-btn .delete.disable {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: rgb(208, 39, 39, 0.6);
+  border:1px solid rgba(220, 150, 150, 0.6);
+}
+
+@media (max-width: 400px) {
+  .delete-modal {
+    padding: 20px 16px 14px;
+    max-width: 340px;
+  }
+  .delete-modal .delete-header {
+    font-size: 1.05rem;
+  }
+  .delete-modal .delete-info {
+    font-size: 0.8rem;
+  }
+  .delete-modal .modal-btn {
+    flex-direction: column;
+  }
+  .delete-modal .modal-btn .btn {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    padding: 12px !important;
+    font-size: 0.85rem !important;
+  }
+}
+

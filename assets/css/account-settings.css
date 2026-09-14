@@ -100,8 +100,8 @@ width: 100%;
 }
 .settings-choice{
     margin-top:1.25rem;
-    background-color: rgb(248, 244, 244);
     border-radius: 0.50rem;
+    background-color: rgb(248, 244, 244);
     height:auto;
     display:flex;
     flex-direction: column;
@@ -173,6 +173,7 @@ width: 100%;
     font-weight: 400;
     word-break: break-all;
     padding:0 5px;
+    color:gray;
 }
 .change-pfp{
     padding:0 5px;
@@ -375,7 +376,7 @@ width: 100%;
 .add-info:hover{text-decoration: underline;}
 
 .notification-settings{
-    border:1px solid rgb(221, 212, 212);
+   border:1px solid rgb(221, 212, 212);
     margin-top:1.25rem;
     border-radius: 0.50rem;
     width:100%;
@@ -406,8 +407,8 @@ width: 100%;
     margin-bottom:none;
     padding-bottom: none;
 }
-.settings-name{
-    font-size:0.875rem;
+.settings-choices{
+    font-size:0.9285rem;
     font-weight: 600;
 }
 .settings-dsc{
@@ -796,6 +797,11 @@ width: 100%;
     background-color: white;
     border-radius: 12px;
     overflow: hidden;
+}
+@media (max-width:900px) {
+    .main-modal-payment{
+        width: 90%;
+    }
 }
 .payment-head{
     border-bottom: 1px solid rgb(207, 202, 202);

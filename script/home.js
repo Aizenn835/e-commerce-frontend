@@ -56,6 +56,9 @@ document.getElementById("account-settings").addEventListener("click", () => {
 document.getElementById("account-privacy").addEventListener("click" , () => {
     window.location.href = "/pages/pages-settings/account-privacy.html"
 })
+document.getElementById("account-support").addEventListener("click" , () => {
+    window.location.href = "/pages/pages-settings/account-support.html";
+})
 /* =========================================================
    FILTERS
 ========================================================= */

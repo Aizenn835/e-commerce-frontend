@@ -67,9 +67,64 @@ document.querySelector(".save-changes").addEventListener("click", async () => {
         updatedText.textContent = "Update Password";
     }
 });
+let activeTimer = null;
+
+function startCountdown() {
+  const countElement = document.querySelector(".delete");
+
+  if (activeTimer) {
+    clearInterval(activeTimer);
+  }
+
+  let i = 5;
+  countElement.disabled = true;
+  countElement.classList.add("disable");
+  countElement.textContent = i;
+
+  activeTimer = setInterval(() => {
+    i--;
+
+    if (i < 0) {
+      clearInterval(activeTimer);
+      activeTimer = null;
+      countElement.textContent = "Delete Account";
+      countElement.classList.remove("disable");
+      countElement.disabled = false;
+    } else {
+      countElement.textContent = i;
+    }
+  }, 1000);
+}
+
+document.getElementById("delete-account").addEventListener("click", async () => {
+    startCountdown();
+    document.querySelector(".delete-modal-overlay").classList.add("open-modal");
+});
+document.querySelector(".exit-delete").addEventListener("click", () => {
+   document.querySelector(".delete-modal-overlay").classList.remove("open-modal");
+});
+document.querySelector(".cancel").addEventListener("click", () => {
+   document.querySelector(".delete-modal-overlay").classList.remove("open-modal");
+});
+// Fetch Delete Endpoint
+document.querySelector(".delete").addEventListener("click" , async () => {
+   try{ 
+    const response = await fetch(`${API_URL}/settings/user` , {
+        method: "DELETE",
+        headers:{"Authorization" : `Bearer ${token}`}
+    });
+    if(!response.ok){
+        throw new Error("Status: " + response.status);
+    }
+    localStorage.removeItem("Token");
+    localStorage.removeItem("Shipping-Method");
+    window.location.href = "/login.html";
+  }catch(error){
+    console.log(error);
+  } 
+})
 // Log out 
 document.querySelector(".log-out").addEventListener("click" , () => {
     localStorage.removeItem("Token");
-    localStorage.removeItem("Shipping-Method");
     window.location.href = "/login.html";
 })

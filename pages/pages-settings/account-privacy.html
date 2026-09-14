@@ -73,7 +73,7 @@
          <div class="notification-choices">
             <div class="ntf-container">
                 <div>
-                    <p class="settings-name">Authenticator app</p>
+                    <p class="settings-choices">Authenticator app</p>
                     <span class="settings-dsc">Use an app like Google Authenticator</span>
                 </div>
                 <div class="switch-btn">
@@ -82,7 +82,7 @@
             </div>
             <div class="ntf-container">
                 <div>
-                    <p class="settings-name">SMS verification</p>
+                    <p class="settings-choices">SMS verification</p>
                     <span class="settings-dsc">Send a code to +1 (555) 234-5678</span>
                 </div>
                 <div class="switch-btn">
@@ -91,7 +91,7 @@
             </div>
             <div class="ntf-container">
                 <div>
-                    <p class="settings-name">Email verification</p>
+                    <p class="settings-choices">Email verification</p>
                     <span class="settings-dsc">Send a code to emma.larsen@email.com</span>
                 </div>
                 <div class="switch-btn">
@@ -145,7 +145,28 @@
             </div>
          </div>
        </div>
+       <!-- Danger Zone -->
+       <div class="danger-zone">
+          <h3 class="danger-header">Account Management</h3>
+          <p class="danger-info">These changes are immediate, permanent, and cannot be undone.</p>
+          <div class="danger">
+            <button class="danger-btn">Download My Data</button>
+            <button class="danger-btn" id="delete-account">Delete Account</button>
+          </div>
+       </div>
     </section>
+
+    <div class="delete-modal-overlay">
+        <div class="delete-modal">
+            <span class="exit-delete">X</span>
+            <h3 class="delete-header">Delete Account?</h3>
+            <p class="delete-info">This will deactivate your account. You'll immediately lose access to your profile, order history, and saved shipping details, and won't be able to log back in with this account.</p>
+            <div class="modal-btn">
+                <button class="cancel btn">Cancel</button>
+                <button class="delete btn disable">Delete Account</button>
+            </div>
+        </div>
+    </div>
 
     <script src="/script/account-configuration/account-privacy.js"></script>
 </body>

@@ -2,7 +2,7 @@ document.querySelectorAll(".questions").forEach(btn => {
     const answer = btn.querySelector(".question-answer");
     const icon = btn.querySelector(".dropdown-btn i");
 
-    btn.querySelector(".dropdown-btn").addEventListener("click", () => {
+    btn.addEventListener("click", () => {
         answer.classList.toggle("show-answer");
 
         // swap icon based on new state
