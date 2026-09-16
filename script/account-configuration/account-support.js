@@ -11,3 +11,7 @@ document.querySelectorAll(".questions").forEach(btn => {
         icon.classList.toggle("ti-caret-up", isOpen);
     });
 });
+document.querySelector(".log-out").addEventListener("click" , () => {
+    localStorage.removeItem("Token");
+    window.location.href = "/login.html";
+})

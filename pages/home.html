@@ -78,7 +78,7 @@
     <header class="main-section">
         <div>
             <ul class="nav">
-                <li onclick="displayContent()">All</li>
+                <li class="all-btn">All</li>
                 <li onclick="getContentByCategory('CLOTHING')">Clothing</li>
                 <li onclick="getContentByCategory('ACCESSORIES')">Accessories</li>
                 <li onclick="getContentByCategory('HOME')">Home</li>
@@ -177,10 +177,10 @@
             </div>
         </div>
     </div>
-    
-    <div class="modal-overlay">
+    <!-- Modal for products -->
+        <div class="modal-overlay">
         <div class="main-modal">
-            <div>
+            <div class="image">
                 <img src="/assets/images/photo-1495474472287-4d71bcdd2085.avif" id="image-modal" alt="">
             </div>
             <div class="dsc">
@@ -188,8 +188,8 @@
                     <div class="category">
                         <span id="modal-category">Accessories</span>
                     </div>
-                    <div class="exit" >
-                        <span  id="exit-modal">X</span>
+                    <div class="exit">
+                        <span id="exit-modal">X</span>
                     </div>
                 </div>
                 <div class="modal-content">
@@ -197,7 +197,7 @@
                 </div>
                 <div class="rating-modal">
                     <div>⭐⭐⭐⭐⭐</div>
-                    <div>•</div>    
+                    <div>•</div>
                     <div class="sold">
                         <span>213 reviews</span>
                     </div>
@@ -232,13 +232,13 @@
                     <div class="add-cart">
                         <span id="addCart">Add to cart</span>
                     </div>
-                    <div class="modal-favorite">    
+                    <div class="modal-favorite">
                         <i class="ti ti-heart" id="modalFav"></i>
                     </div>
-               </footer>
-            </div>  
+                </footer>
+            </div>
         </div>
-    </div> 
+    </div>
 
     <div class="settings-container">
             <div class="self-container account" id="account-settings"><i class="ti ti-user"></i> Account</div>

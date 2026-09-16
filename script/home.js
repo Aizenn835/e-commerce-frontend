@@ -217,20 +217,27 @@ document.querySelector(".modal-favorite").addEventListener("click", () => {
    PRODUCT GRID
 ========================================================= */
 
-async function displayContent() {
+let currentPage = 0;
+const pageSize = 10;
+
+async function displayContent(page = 0, append = false) {
     try {
-        const response = await fetch(`${API_URL}/product/get-all`, {
+        const response = await fetch(`${API_URL}/product/get-all?page=${page}&size=${pageSize}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         });
 
-        if (!response.ok) throw new Error(`Enable to fetch content data, Status: ${response.status}`);
+        if (!response.ok) throw new Error(`Unable to fetch content data, Status: ${response.status}`);
 
-        const content = await response.json();
-        renderContent(content);
-    } catch (Error) {
-        console.log(`Error: ${Error}`);
+        const data = await response.json();
+        renderContent(data.content, append);
+        currentPage = data.number;
+
+        const loadMoreBtn = document.querySelector(".load-product");
+        loadMoreBtn.style.display = (currentPage + 1 >= data.totalPages) ? "none" : "block";
+    } catch (error) {
+        console.log(`Error: ${error}`);
     }
 }
 
@@ -254,7 +261,7 @@ async function searchContent() {
     try {
         const userInput = document.getElementById("search-input").value.trim();
         if (!userInput) {
-            displayContent();
+            displayContent(currentPage + 1 , true);
             return;
         }
         const response = await fetch(`${API_URL}/product/search?keyword=${encodeURIComponent(userInput)}`, {
@@ -280,11 +287,16 @@ async function searchContent() {
     }
 }
 
-function renderContent(products) {
-    document.querySelector(".grid").innerHTML = "";
+function renderContent(products , append = false) {
+    const grid = document.querySelector(".grid");
+
+    if(!append){
+        grid.innerHTML = "";
+    }
+    let html = "";
     products.forEach(content => {
         const isFavorited = favoritedIds.has(String(content.id));
-        document.querySelector(".grid").innerHTML += `
+        html += `
         <div class="content" data-id="${content.id}">
             <div class="image">
                 <img src="${API_URL + content.imgUrl}" alt="${content.productName}">
@@ -301,6 +313,7 @@ function renderContent(products) {
         </div>
         `;
     });
+    grid.insertAdjacentHTML("beforeend", html);
 }
 
 document.querySelector(".grid").addEventListener("click", (event) => {
@@ -319,6 +332,14 @@ document.querySelector(".grid").addEventListener("click", (event) => {
     document.querySelector(".modal-overlay").classList.add("open-modal");
 });
 
+document.querySelector(".load-product").addEventListener("click" , () => {
+    displayContent(currentPage + 1 , true);
+});
+
+document.querySelector(".all-btn").addEventListener("click", () => {
+    currentCategory = null;
+    displayContent(0, false);
+});
 /* =========================================================
    WISHLIST
 ========================================================= */
